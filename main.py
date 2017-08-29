@@ -1463,10 +1463,11 @@ class ConnectWindow(QtWidgets.QMainWindow, bakeWindow.Ui_MainWindow):
 			cmds.select(clear=1)
 			
 		def beforeAlign(o):
-			side = o.split('_')[0]
-			l = cmds.spaceLocator(n=side+'_1_th_loc')[0]
+			if not cmds.objExists(o):
+				return
+			l = cmds.spaceLocator(n=o+'_1_th_loc')[0]
 			p = cmds.listRelatives(o, parent=1)[0]
-			l2 = cmds.spaceLocator(n=side+'_2_th_loc')[0]
+			l2 = cmds.spaceLocator(n=o+'_2_th_loc')[0]
 			
 			cmds.parent(l2, p)
 			cmds.parentConstraint(l, l2, mo=0)
@@ -1475,14 +1476,16 @@ class ConnectWindow(QtWidgets.QMainWindow, bakeWindow.Ui_MainWindow):
 			cmds.setAttr(l2+'.sz', 1)
 			cmds.parent(o, l2)
 		
-		def afterAlign(o):	
-			side = o.split('_')[0]
-			p = cmds.listRelatives(o, parent=1)[0]
-			cmds.parent(o, side+'_hand_SN')
-			cmds.delete(side+'_1_th_loc', side+'_2_th_loc')				
+		def afterAlign(o, p):	
+			if not cmds.objExists(o):
+				return
+			cmds.parent(o, p)
+			cmds.delete(o+'_1_th_loc', o+'_2_th_loc')				
 		
 		beforeAlign('l_hand')
 		beforeAlign('r_hand')
+		beforeAlign('l_weapon_1_ctrl')
+		beforeAlign('r_weapon_1_ctrl')
 				
 		# Get transform
 		tr = cmds.xform( 'twoHanded_loc', q=True, t=True, ws=True)
@@ -1491,8 +1494,10 @@ class ConnectWindow(QtWidgets.QMainWindow, bakeWindow.Ui_MainWindow):
 		cmds.move( tr[0], tr[1], tr[2], 'twoHanded', rotatePivotRelative=True)
 		cmds.rotate(rt[0], rt[1], rt[2], 'twoHanded', ws=True)			
 		
-		afterAlign('l_hand')
-		afterAlign('r_hand')	
+		afterAlign('l_hand', 'l_hand_SN')
+		afterAlign('r_hand', 'r_hand_SN')	
+		afterAlign('l_weapon_1_ctrl', 'l_weapon_1_ctrl_OFFSET')
+		afterAlign('r_weapon_1_ctrl', 'r_weapon_1_ctrl_OFFSET')	
 		
 		cmds.select('twoHanded')
 		

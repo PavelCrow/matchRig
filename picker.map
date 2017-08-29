@@ -1,0 +1,6 @@
+<data>
+    <map bgColor="128,128,128" bgImage="" character="NewCharacter1" name="Map1" prefix="" size="400,400" useBgColor="1" usePrefix="0">
+        <button channel="" color="0,255,0" command="EXEC print &quot;AAA&quot;" hashcode="a9418033bb" icon="" label="" node="" position="166.00,70.00" size="20.00,20.00" type="Rectangle" value="" />
+        <button channel="" color="168,127,127" command="Reset" hashcode="b3370bc9b4" icon="" label="" node="pCube1" position="270.00,72.00" size="20.00,20.00" type="Rectangle" value="" />
+    </map>
+</data>

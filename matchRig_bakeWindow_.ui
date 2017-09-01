@@ -240,56 +240,6 @@
          <property name="sizeConstraint">
           <enum>QLayout::SetDefaultConstraint</enum>
          </property>
-         <item row="1" column="1">
-          <widget class="QToolButton" name="bakeIkFk_btn">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="minimumSize">
-            <size>
-             <width>50</width>
-             <height>24</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>1000</width>
-             <height>24</height>
-            </size>
-           </property>
-           <property name="text">
-            <string>Range</string>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="0">
-          <widget class="QToolButton" name="switchParent_btn">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="minimumSize">
-            <size>
-             <width>50</width>
-             <height>24</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>1000</width>
-             <height>24</height>
-            </size>
-           </property>
-           <property name="text">
-            <string>Switch Parent</string>
-           </property>
-          </widget>
-         </item>
          <item row="1" column="0">
           <widget class="QToolButton" name="switchIkFk_btn">
            <property name="sizePolicy">
@@ -315,8 +265,8 @@
            </property>
           </widget>
          </item>
-         <item row="2" column="1">
-          <widget class="QToolButton" name="switchParentRange_btn">
+         <item row="1" column="1">
+          <widget class="QToolButton" name="switchParent_btn">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
              <horstretch>0</horstretch>
@@ -336,11 +286,11 @@
             </size>
            </property>
            <property name="text">
-            <string>Range</string>
+            <string>Switch Parent</string>
            </property>
           </widget>
          </item>
-         <item row="3" column="0">
+         <item row="2" column="0" colspan="2">
           <widget class="QToolButton" name="alignTwoHanded_btn">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
@@ -361,12 +311,12 @@
             </size>
            </property>
            <property name="text">
-            <string>Align TwoHanded</string>
+            <string>Align TwoHanded Control</string>
            </property>
           </widget>
          </item>
-         <item row="3" column="1">
-          <widget class="QToolButton" name="alignTwoHandedRange_btn">
+         <item row="0" column="0">
+          <widget class="QToolButton" name="bakeIkFk_btn">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
              <horstretch>0</horstretch>
@@ -386,7 +336,32 @@
             </size>
            </property>
            <property name="text">
-            <string>Range</string>
+            <string>Switch Range Ik/Fk</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QToolButton" name="switchParentRange_btn">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>50</width>
+             <height>24</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>1000</width>
+             <height>24</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>Switch Range Parent</string>
            </property>
           </widget>
          </item>

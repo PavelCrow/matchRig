@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'C:\Users\Pavel\Dropbox\mayaScripts\matchRig\matchRig_mainWindow.ui'
 #
-# Created: Wed Aug 30 19:25:43 2017
+# Created: Wed Sep 13 22:39:03 2017
 #      by: pyside-uic 0.2.14 running on PySide 1.1.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -370,7 +370,7 @@ class Ui_Dialog(object):
         self.label.setText(QtGui.QApplication.translate("Dialog", "click - Set", None, QtGui.QApplication.UnicodeUTF8))
         self.label_2.setText(QtGui.QApplication.translate("Dialog", "ctrl+click - Select", None, QtGui.QApplication.UnicodeUTF8))
         self.reset_btn.setText(QtGui.QApplication.translate("Dialog", "Reset", None, QtGui.QApplication.UnicodeUTF8))
-        self.label_3.setText(QtGui.QApplication.translate("Dialog", "1. Open Sceleton T-pose file             2. Click Import Rig button                     3. Set joints                                   4. Click Match button                               5. Correct posers if needed                              6. Click Connect button                         7. Save file as match rig", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_3.setText(QtGui.QApplication.translate("Dialog", "1. Open Skeleton T-pose file             2. Click Import Rig button                     3. Set joints                                   4. Click Match button                               5. Correct posers if needed                              6. Click Connect button                         7. Save file as match rig", None, QtGui.QApplication.UnicodeUTF8))
         self.weapon_1_btn.setText(QtGui.QApplication.translate("Dialog", "Wpn", None, QtGui.QApplication.UnicodeUTF8))
         self.symWeapon_1_btn.setText(QtGui.QApplication.translate("Dialog", "Wpn", None, QtGui.QApplication.UnicodeUTF8))
         self.symWeapon_cb.setText(QtGui.QApplication.translate("Dialog", "Sym Weapon", None, QtGui.QApplication.UnicodeUTF8))

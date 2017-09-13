@@ -495,7 +495,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>1. Open Sceleton T-pose file             2. Click Import Rig button                     3. Set joints                                   4. Click Match button                               5. Correct posers if needed                              6. Click Connect button                         7. Save file as match rig</string>
+     <string>1. Open Skeleton T-pose file             2. Click Import Rig button                     3. Set joints                                   4. Click Match button                               5. Correct posers if needed                              6. Click Connect button                         7. Save file as match rig</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>

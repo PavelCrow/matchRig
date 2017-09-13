@@ -414,7 +414,7 @@
           </size>
          </property>
          <property name="text">
-          <string>Bake Sceleton</string>
+          <string>Bake Skeleton</string>
          </property>
         </widget>
        </item>

@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'C:\Users\Pavel\Dropbox\mayaScripts\matchRig\matchRig_bakeWindow.ui'
 #
-# Created: Wed Aug 30 19:25:43 2017
+# Created: Wed Sep 13 22:39:03 2017
 #      by: pyside-uic 0.2.14 running on PySide 1.1.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -310,7 +310,7 @@ class Ui_MainWindow(object):
         self.switchParentRange_btn.setText(QtGui.QApplication.translate("MainWindow", "Range", None, QtGui.QApplication.UnicodeUTF8))
         self.alignTwoHanded_btn.setText(QtGui.QApplication.translate("MainWindow", "Align TwoHanded", None, QtGui.QApplication.UnicodeUTF8))
         self.alignTwoHandedRange_btn.setText(QtGui.QApplication.translate("MainWindow", "Range", None, QtGui.QApplication.UnicodeUTF8))
-        self.bakeSceleton_btn.setText(QtGui.QApplication.translate("MainWindow", "Bake Sceleton", None, QtGui.QApplication.UnicodeUTF8))
+        self.bakeSceleton_btn.setText(QtGui.QApplication.translate("MainWindow", "Bake Skeleton", None, QtGui.QApplication.UnicodeUTF8))
         self.exclude_groupBox.setTitle(QtGui.QApplication.translate("MainWindow", "Exclude List", None, QtGui.QApplication.UnicodeUTF8))
         self.label_6.setText(QtGui.QApplication.translate("MainWindow", "This objects not clear translate keys.", None, QtGui.QApplication.UnicodeUTF8))
         self.add_btn.setText(QtGui.QApplication.translate("MainWindow", "Add", None, QtGui.QApplication.UnicodeUTF8))

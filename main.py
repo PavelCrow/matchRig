@@ -1505,44 +1505,50 @@ class ConnectWindow(QtWidgets.QMainWindow, bakeWindow.Ui_MainWindow):
 	def alignTwoHandedBake(self):
 		logger.debug("alignTwoHandedBake")
 				
-		l_hand_loc = cmds.spaceLocator(n='l_hand_bakeLoc')[0]
-		r_hand_loc = cmds.spaceLocator(n='r_hand_bakeLoc')[0]
-		l_weapon_loc = cmds.spaceLocator(n='l_weapon_bakeLoc')[0]
-		r_weapon_loc = cmds.spaceLocator(n='r_weapon_bakeLoc')[0]
-		center_loc = cmds.spaceLocator(n='center_bakeLoc')[0]
+		#l_hand_loc = cmds.spaceLocator(n='l_hand_bakeLoc')[0]
+		#r_hand_loc = cmds.spaceLocator(n='r_hand_bakeLoc')[0]
+		#l_weapon_loc = cmds.spaceLocator(n='l_weapon_bakeLoc')[0]
+		#r_weapon_loc = cmds.spaceLocator(n='r_weapon_bakeLoc')[0]
+		#center_loc = cmds.spaceLocator(n='center_bakeLoc')[0]
 		
-		cmds.parentConstraint('r_weapon_1_ctrl', r_weapon_loc, mo=0)
-		cmds.parentConstraint('l_weapon_1_ctrl', l_weapon_loc, mo=0)
-		cmds.parentConstraint('l_hand', l_hand_loc, mo=0)
-		cmds.parentConstraint('r_hand', r_hand_loc, mo=0)
-		cmds.pointConstraint(l_hand_loc, r_hand_loc, center_loc, mo=0)
-		cmds.aimConstraint(l_hand_loc, center_loc, mo=0, aimVector=(0,0,1))		
+		#cmds.parentConstraint('r_weapon_1_ctrl', r_weapon_loc, mo=0)
+		#cmds.parentConstraint('l_weapon_1_ctrl', l_weapon_loc, mo=0)
+		#cmds.parentConstraint('l_hand', l_hand_loc, mo=0)
+		#cmds.parentConstraint('r_hand', r_hand_loc, mo=0)
+		#cmds.pointConstraint(l_hand_loc, r_hand_loc, center_loc, mo=0)
+		#cmds.aimConstraint(l_hand_loc, center_loc, mo=0, aimVector=(0,0,1))		
 		
-		cmds.select(l_hand_loc, r_hand_loc, l_weapon_loc, r_weapon_loc, center_loc)
-		mel.eval("string $minTime = `playbackOptions -q -minTime`;")
-		mel.eval("string $maxTime = `playbackOptions -q -maxTime`;")
-		mel.eval('string $range = $minTime + ":" + $maxTime;')
-		mel.eval('bakeResults -simulation true -t $range -hierarchy below -sampleBy 1 -disableImplicitControl true -preserveOutsideKeys false -sparseAnimCurveBake false -removeBakedAttributeFromLayer false -bakeOnOverrideLayer false -minimizeRotation true -at "tx" -at "ty" -at "tz" -at "rx" -at "ry" -at "rz";')					
+		#cmds.select(l_hand_loc, r_hand_loc, l_weapon_loc, r_weapon_loc, center_loc)
+		#mel.eval("string $minTime = `playbackOptions -q -minTime`;")
+		#mel.eval("string $maxTime = `playbackOptions -q -maxTime`;")
+		#mel.eval('string $range = $minTime + ":" + $maxTime;')
+		#mel.eval('bakeResults -simulation true -t $range -hierarchy below -sampleBy 1 -disableImplicitControl true -preserveOutsideKeys false -sparseAnimCurveBake false -removeBakedAttributeFromLayer false -bakeOnOverrideLayer false -minimizeRotation true -at "tx" -at "ty" -at "tz" -at "rx" -at "ry" -at "rz";')					
 		
-		cmds.cutKey('l_weapon_1_ctrl')    
-		cmds.cutKey('r_weapon_1_ctrl')    
-		cmds.cutKey('l_hand')    
-		cmds.cutKey('r_hand')   		
-		cmds.cutKey('twoHanded')   		
+		#cmds.cutKey('l_weapon_1_ctrl')    
+		#cmds.cutKey('r_weapon_1_ctrl')    
+		#cmds.cutKey('l_hand')    
+		#cmds.cutKey('r_hand')   		
+		#cmds.cutKey('twoHanded')   		
 		
-		c1 = cmds.parentConstraint(l_weapon_loc, 'l_weapon_1_ctrl', mo=0)
-		c2 = cmds.parentConstraint(r_weapon_loc, 'r_weapon_1_ctrl', mo=0)
-		c3 = cmds.parentConstraint(l_hand_loc, 'l_hand', mo=0)
-		c4 = cmds.parentConstraint(r_hand_loc, 'r_hand', mo=0)
-		c5 = cmds.parentConstraint(center_loc, 'twoHanded', mo=0)
+		#c1 = cmds.parentConstraint(l_weapon_loc, 'l_weapon_1_ctrl', mo=0)
+		#c2 = cmds.parentConstraint(r_weapon_loc, 'r_weapon_1_ctrl', mo=0)
+		#c3 = cmds.parentConstraint(l_hand_loc, 'l_hand', mo=0)
+		#c4 = cmds.parentConstraint(r_hand_loc, 'r_hand', mo=0)
+		#c5 = cmds.parentConstraint(center_loc, 'twoHanded', mo=0)
 		
-		cmds.select('l_weapon_1_ctrl', 'r_weapon_1_ctrl', 'l_hand', 'r_hand', 'twoHanded')
-		mel.eval("string $minTime = `playbackOptions -q -minTime`;")
-		mel.eval("string $maxTime = `playbackOptions -q -maxTime`;")
-		mel.eval('string $range = $minTime + ":" + $maxTime;')
-		mel.eval('bakeResults -simulation true -t $range -hierarchy below -sampleBy 1 -disableImplicitControl true -preserveOutsideKeys false -sparseAnimCurveBake false -removeBakedAttributeFromLayer false -bakeOnOverrideLayer false -minimizeRotation true -at "tx" -at "ty" -at "tz" -at "rx" -at "ry" -at "rz";')					
+		#cmds.select('l_weapon_1_ctrl', 'r_weapon_1_ctrl', 'l_hand', 'r_hand', 'twoHanded')
+		#mel.eval("string $minTime = `playbackOptions -q -minTime`;")
+		#mel.eval("string $maxTime = `playbackOptions -q -maxTime`;")
+		#mel.eval('string $range = $minTime + ":" + $maxTime;')
+		#mel.eval('bakeResults -simulation true -t $range -hierarchy below -sampleBy 1 -disableImplicitControl true -preserveOutsideKeys false -sparseAnimCurveBake false -removeBakedAttributeFromLayer false -bakeOnOverrideLayer false -minimizeRotation true -at "tx" -at "ty" -at "tz" -at "rx" -at "ry" -at "rz";')					
 
-		cmds.delete(c1,c2,c3,c4,c5)
+		#cmds.delete(c1,c2,c3,c4,c5)
+		minTime = cmds.playbackOptions(q=1, minTime=1)
+		maxTime = cmds.playbackOptions(q=1, maxTime=1)
+		
+		for i in range(minTime, maxTime+1):
+			cmds.currentTime(i)		
+			self.alignTwoHanded()
 
 		
 	def switchExcludeList(self):

@@ -1,12 +1,18 @@
 //Maya ASCII 2014 scene
 //Name: match_rig_nekki.ma
-//Last modified: Sun, Jul 02, 2017 07:39:58 PM
+//Last modified: Thu, Nov 16, 2017 11:50:15 PM
 //Codeset: 1251
 requires maya "2014";
+requires -nodeType "ilrOptionsNode" -nodeType "ilrUIOptionsNode" -nodeType "ilrBakeLayerManager"
+		 -nodeType "ilrBakeLayer" -nodeType "ilrBssrdfShader" -nodeType "ilrOccSampler" -nodeType "ilrOccData"
+		 -nodeType "ilrNormalMap" -nodeType "ilrSurfaceThickness" -nodeType "ilrRaySampler"
+		 -nodeType "ilrBasicPhotonShader" -nodeType "ilrPhysicPhotonShader" -nodeType "ilrDielectricPhotonShader"
+		 -nodeType "ilrOrenNayarShader" -nodeType "ilrAshikhminShader" -nodeType "ilrDielectricShader"
+		 -nodeType "ilrLuaNode" -nodeType "ilrHwBakeVisualizer" -nodeType "ilrShadowMask"
+		 -nodeType "ilrPolyColorPerVertex" -nodeType "ilrUVMappingVisualizer" -nodeType "ilrOutputShaderBackendNode"
+		 -nodeType "ilrPointCloudShape" "Turtle" "2014.0.0";
 requires -nodeType "decomposeMatrix" -nodeType "composeMatrix" -nodeType "inverseMatrix"
 		 -nodeType "transposeMatrix" "matrixNodes" "1.0";
-requires "stereoCamera" "10.0";
-requires "matrixNodes" "1.0";
 requires "Mayatomr" "2013.0 - 3.10.1.11 ";
 currentUnit -l centimeter -a degree -t film;
 fileInfo "application" "maya";
@@ -16,7 +22,7 @@ fileInfo "cutIdentifier" "201303010241-864206";
 fileInfo "osv" "Microsoft Windows 8 , 64-bit  (Build 9200)\n";
 createNode transform -s -n "persp";
 	setAttr ".v" no;
-	setAttr ".t" -type "double3" 20.311129423744269 134.40643902953101 116.37629995910982 ;
+	setAttr ".t" -type "double3" 20.311129423744269 134.40643902953099 116.37629995910982 ;
 	setAttr ".r" -type "double3" -15.000000000000133 11.600000000000517 0 ;
 	setAttr ".rp" -type "double3" 1.7763568394002505e-015 1.4210854715202004e-014 0 ;
 	setAttr ".rpt" -type "double3" -2.1378221025996092e-015 -6.9552873618559199e-016 
@@ -3583,7 +3589,7 @@ createNode transform -n "t_tooth" -p "group33";
 	setAttr ".t" -type "double3" 0 0 -1.1102230246251563e-016 ;
 	setAttr ".r" -type "double3" -7.9513867036587919e-016 0 0 ;
 	setAttr ".s" -type "double3" 1.0000000000000002 1 1 ;
-	setAttr ".rp" -type "double3" 6.147985274872121e-031 0.04098950676671019 -0.0040610195930809063 ;
+	setAttr ".rp" -type "double3" 6.1479852748721219e-031 0.04098950676671019 -0.0040610195930809063 ;
 	setAttr ".sp" -type "double3" 6.1479852748720939e-031 0.040989506766710163 -0.0040610195930809011 ;
 	setAttr ".spt" -type "double3" 1.7516230804060208e-046 0 0 ;
 createNode nurbsCurve -n "t_toothShape" -p "t_tooth";
@@ -8785,7 +8791,7 @@ createNode transform -n "c_brow_headSpace" -p "head";
 createNode transform -n "r_arm_headSpace" -p "head";
 createNode transform -n "headEnd_twistLoc" -p "head";
 	setAttr ".v" no;
-	setAttr ".t" -type "double3" 0 2.9582283945788057e-031 -0.47180374128249336 ;
+	setAttr ".t" -type "double3" 0 2.9582283945788061e-031 -0.47180374128249336 ;
 createNode locator -n "headEnd_twistLocShape" -p "headEnd_twistLoc";
 	setAttr -k off ".v";
 	setAttr ".los" -type "double3" 0.2 0.2 0.2 ;
@@ -9536,7 +9542,7 @@ createNode ikEffector -n "neck_effector" -p "neck_end_Joint";
 createNode transform -n "spine_rig" -p "rig";
 createNode transform -n "spine_posers" -p "spine_rig";
 	setAttr ".v" no;
-createNode transform -n "spine_mainPoser" -p "|character|rig|spine_rig|spine_posers";
+createNode transform -n "spine_mainPoser" -p "spine_posers";
 	setAttr -l on -k off ".v";
 	setAttr -k on ".t" -type "double3" 3.4677308103185949e-006 1.53242015740668 -0.048871138478306896 ;
 	setAttr -k on ".t";
@@ -9544,12 +9550,12 @@ createNode transform -n "spine_mainPoser" -p "|character|rig|spine_rig|spine_pos
 	setAttr -l on -k off ".sx";
 	setAttr -l on -k off ".sy";
 	setAttr -l on -k off ".sz";
-createNode nurbsCurve -n "spine_mainPoserShape" -p "|character|rig|spine_rig|spine_posers|spine_mainPoser";
+createNode nurbsCurve -n "spine_mainPoserShape" -p "spine_mainPoser";
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
 	setAttr ".ovc" 10;
 	setAttr ".tw" yes;
-createNode transform -n "chest_mainPoser" -p "|character|rig|spine_rig|spine_posers|spine_mainPoser";
+createNode transform -n "chest_mainPoser" -p "spine_mainPoser";
 	setAttr -l on -k off ".v";
 	setAttr -k on ".t" -type "double3" -2.352978204743497e-007 0.41265333960820438 0.027703089004707655 ;
 	setAttr -k on ".t";
@@ -9559,18 +9565,18 @@ createNode transform -n "chest_mainPoser" -p "|character|rig|spine_rig|spine_pos
 	setAttr -l on -k off ".sx";
 	setAttr -l on -k off ".sy";
 	setAttr -l on -k off ".sz";
-createNode nurbsCurve -n "chest_mainPoserShape" -p "|character|rig|spine_rig|spine_posers|spine_mainPoser|chest_mainPoser";
+createNode nurbsCurve -n "chest_mainPoserShape" -p "chest_mainPoser";
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
 	setAttr ".ovc" 10;
 	setAttr ".tw" yes;
-createNode transform -n "chest_poser" -p "|character|rig|spine_rig|spine_posers|spine_mainPoser|chest_mainPoser";
+createNode transform -n "chest_poser" -p "chest_mainPoser";
 	setAttr -k off ".tx";
-createNode implicitSphere -n "chest_poserShape" -p "|character|rig|spine_rig|spine_posers|spine_mainPoser|chest_mainPoser|chest_poser";
+createNode implicitSphere -n "chest_poserShape" -p "chest_poser";
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
 	setAttr ".ovc" 12;
-createNode nurbsSurface -n "chest_poserNurbsShape" -p "|character|rig|spine_rig|spine_posers|spine_mainPoser|chest_mainPoser|chest_poser";
+createNode nurbsSurface -n "chest_poserNurbsShape" -p "chest_poser";
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
 	setAttr ".ovc" 10;
@@ -9585,12 +9591,12 @@ createNode nurbsSurface -n "chest_poserNurbsShape" -p "|character|rig|spine_rig|
 	setAttr ".cps" 1;
 	setAttr ".nufa" 4.5;
 	setAttr ".nvfa" 4.5;
-createNode locator -n "chest_poser_locShape" -p "|character|rig|spine_rig|spine_posers|spine_mainPoser|chest_mainPoser|chest_poser";
+createNode locator -n "chest_poser_locShape" -p "chest_poser";
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
 	setAttr ".ovc" 12;
 	setAttr ".los" -type "double3" 0.01 0.01 0.01 ;
-createNode transform -n "pelvis_poser" -p "|character|rig|spine_rig|spine_posers|spine_mainPoser";
+createNode transform -n "pelvis_poser" -p "spine_mainPoser";
 	setAttr -l on -k off ".v";
 	setAttr -l on -k off ".tx";
 	setAttr -l on -k off ".rx";
@@ -9599,11 +9605,11 @@ createNode transform -n "pelvis_poser" -p "|character|rig|spine_rig|spine_posers
 	setAttr -l on -k off ".sx";
 	setAttr -l on -k off ".sy";
 	setAttr -l on -k off ".sz";
-createNode implicitSphere -n "pelvis_poserShape" -p "|character|rig|spine_rig|spine_posers|spine_mainPoser|pelvis_poser";
+createNode implicitSphere -n "pelvis_poserShape" -p "pelvis_poser";
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
 	setAttr ".ovc" 12;
-createNode nurbsSurface -n "pelvis_poserNurbsShape" -p "|character|rig|spine_rig|spine_posers|spine_mainPoser|pelvis_poser";
+createNode nurbsSurface -n "pelvis_poserNurbsShape" -p "pelvis_poser";
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
 	setAttr ".ovc" 10;
@@ -9618,15 +9624,15 @@ createNode nurbsSurface -n "pelvis_poserNurbsShape" -p "|character|rig|spine_rig
 	setAttr ".cps" 1;
 	setAttr ".nufa" 4.5;
 	setAttr ".nvfa" 4.5;
-createNode locator -n "pelvis_poser_locShape" -p "|character|rig|spine_rig|spine_posers|spine_mainPoser|pelvis_poser";
+createNode locator -n "pelvis_poser_locShape" -p "pelvis_poser";
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
 	setAttr ".ovc" 12;
 	setAttr ".los" -type "double3" 0.01 0.01 0.01 ;
 createNode transform -n "spine_controls" -p "spine_rig";
 	setAttr ".ove" yes;
-createNode transform -n "pelvis_offset" -p "|character|rig|spine_rig|spine_controls";
-createNode transform -n "pelvis_PH" -p "|character|rig|spine_rig|spine_controls|pelvis_offset";
+createNode transform -n "pelvis_offset" -p "spine_controls";
+createNode transform -n "pelvis_PH" -p "pelvis_offset";
 	setAttr ".rp" -type "double3" 0 -1.1102230246251563e-016 0 ;
 	setAttr ".sp" -type "double3" 0 -1.1102230246251563e-016 0 ;
 createNode transform -n "pelvis_SN" -p "pelvis_PH";
@@ -9651,7 +9657,7 @@ createNode transform -n "pelvis" -p "pelvis_SN";
 	setAttr -l on -k off ".sy";
 	setAttr -l on -k off ".sz";
 	setAttr ".rotateZMirror" yes;
-createNode nurbsCurve -n "pelvisShape" -p "|character|rig|spine_rig|spine_controls|pelvis_offset|pelvis_PH|pelvis_SN|pelvis";
+createNode nurbsCurve -n "pelvisShape" -p "pelvis";
 	addAttr -ci true -sn "ocellarisSurfaceShaderAttrs" -ln "ocellarisSurfaceShaderAttrs" 
 		-dt "stringArray";
 	addAttr -ci true -sn "ocellarisSurfaceShaderAttrsEdit" -ln "ocellarisSurfaceShaderAttrsEdit" 
@@ -9682,17 +9688,17 @@ createNode nurbsCurve -n "pelvisShape" -p "|character|rig|spine_rig|spine_contro
 		0 -0.03329201267697357 -0.68931033164210442
 		;
 	setAttr ".ocellarisSurfaceShaderAttrs" -type "stringArray" 0  ;
-createNode transform -n "pelvis_out" -p "|character|rig|spine_rig|spine_controls|pelvis_offset|pelvis_PH|pelvis_SN|pelvis";
+createNode transform -n "pelvis_out" -p "pelvis";
 	setAttr ".v" no;
 	setAttr ".s" -type "double3" 0.60047725932571216 0.60047725932571216 0.60047725932571216 ;
 createNode locator -n "pelvis_outShape" -p "pelvis_out";
 	setAttr -k off ".v";
-createNode transform -n "l_arm_pelvisSpace" -p "|character|rig|spine_rig|spine_controls|pelvis_offset|pelvis_PH|pelvis_SN|pelvis";
-createNode transform -n "r_arm_pelvisSpace" -p "|character|rig|spine_rig|spine_controls|pelvis_offset|pelvis_PH|pelvis_SN|pelvis";
-createNode transform -n "l_arm_ik_pelvisSpace" -p "|character|rig|spine_rig|spine_controls|pelvis_offset|pelvis_PH|pelvis_SN|pelvis";
-createNode transform -n "r_arm_ik_pelvisSpace" -p "|character|rig|spine_rig|spine_controls|pelvis_offset|pelvis_PH|pelvis_SN|pelvis";
-createNode transform -n "l_leg_ik_pelvisSpace" -p "|character|rig|spine_rig|spine_controls|pelvis_offset|pelvis_PH|pelvis_SN|pelvis";
-createNode transform -n "r_leg_ik_pelvisSpace" -p "|character|rig|spine_rig|spine_controls|pelvis_offset|pelvis_PH|pelvis_SN|pelvis";
+createNode transform -n "l_arm_pelvisSpace" -p "pelvis";
+createNode transform -n "r_arm_pelvisSpace" -p "pelvis";
+createNode transform -n "l_arm_ik_pelvisSpace" -p "pelvis";
+createNode transform -n "r_arm_ik_pelvisSpace" -p "pelvis";
+createNode transform -n "l_leg_ik_pelvisSpace" -p "pelvis";
+createNode transform -n "r_leg_ik_pelvisSpace" -p "pelvis";
 createNode transform -n "spine_control_parent" -p "pelvis_SN";
 createNode transform -n "spine_control_offset" -p "spine_control_parent";
 	setAttr ".v" no;
@@ -9743,7 +9749,7 @@ createNode transform -n "spine_control" -p "spine_control_offset";
 createNode nurbsCurve -n "spine_controlShape" -p "spine_control";
 	setAttr -k off ".v";
 	setAttr ".tw" yes;
-createNode transform -n "spine_parented" -p "|character|rig|spine_rig|spine_controls";
+createNode transform -n "spine_parented" -p "spine_controls";
 	setAttr -k off ".v";
 	setAttr ".uoc" yes;
 	setAttr ".oc" 6;
@@ -9834,7 +9840,7 @@ createNode transform -n "waist_parent" -p "spine_parent";
 	setAttr ".s" -type "double3" 1.0000000000000002 1.0000000000000002 1.0000000000000002 ;
 createNode transform -n "waist_offset" -p "waist_parent";
 	setAttr ".t" -type "double3" 0 -2.2204460492503126e-016 0.033487371162228614 ;
-createNode transform -n "waist" -p "|character|rig|spine_rig|spine_controls|spine_parented|spine_offset|spine_parent|waist_parent|waist_offset";
+createNode transform -n "waist" -p "waist_offset";
 	addAttr -ci true -sn "weight" -ln "weight" -min 0 -max 1 -at "double";
 	addAttr -ci true -sn "spine_correct" -ln "spine_correct" -min 0 -max 10 -at "double";
 	addAttr -ci true -sn "mirrored" -ln "mirrored" -min 0 -max 1 -at "bool";
@@ -9854,7 +9860,7 @@ createNode transform -n "waist" -p "|character|rig|spine_rig|spine_controls|spin
 	setAttr ".translateXMirror" yes;
 	setAttr ".rotateYMirror" yes;
 	setAttr ".rotateZMirror" yes;
-createNode nurbsCurve -n "waistShape" -p "|character|rig|spine_rig|spine_controls|spine_parented|spine_offset|spine_parent|waist_parent|waist_offset|waist";
+createNode nurbsCurve -n "waistShape" -p "waist";
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
 	setAttr ".ovc" 17;
@@ -9874,7 +9880,7 @@ createNode nurbsCurve -n "waistShape" -p "|character|rig|spine_rig|spine_control
 		-6.4555899641663173e-019 0.045751871802365715 -0.32142811541028554
 		-0.29793298958651981 0.045300792569997535 -0.24262848701709225
 		;
-createNode transform -n "waist_out" -p "|character|rig|spine_rig|spine_controls|spine_parented|spine_offset|spine_parent|waist_parent|waist_offset|waist";
+createNode transform -n "waist_out" -p "waist";
 createNode parentConstraint -n "waist_parent_parentConstraint1" -p "waist_parent";
 	addAttr -ci true -k true -sn "w0" -ln "pelvisWaist_aimW0" -dv 1 -min 0 -at "double";
 	addAttr -ci true -k true -sn "w1" -ln "chestWaist_aimW1" -dv 1 -min 0 -at "double";
@@ -9896,7 +9902,7 @@ createNode parentConstraint -n "waist_parent_parentConstraint1" -p "waist_parent
 	setAttr -k on ".w1";
 createNode transform -n "hip_offset" -p "spine_parent";
 	setAttr ".t" -type "double3" 0 8.8817841970012523e-016 -2.2204460492503131e-016 ;
-createNode transform -n "hip" -p "|character|rig|spine_rig|spine_controls|spine_parented|spine_offset|spine_parent|hip_offset";
+createNode transform -n "hip" -p "hip_offset";
 	addAttr -ci true -sn "bottom_size" -ln "bottom_size" -min 0 -max 10 -at "double";
 	addAttr -ci true -sn "mirrored" -ln "mirrored" -min 0 -max 1 -at "bool";
 	addAttr -ci true -sn "translateXMirror" -ln "translateXMirror" -min 0 -max 1 -at "bool";
@@ -9916,7 +9922,7 @@ createNode transform -n "hip" -p "|character|rig|spine_rig|spine_controls|spine_
 	setAttr ".translateXMirror" yes;
 	setAttr ".rotateYMirror" yes;
 	setAttr ".rotateZMirror" yes;
-createNode nurbsCurve -n "hipShape" -p "|character|rig|spine_rig|spine_controls|spine_parented|spine_offset|spine_parent|hip_offset|hip";
+createNode nurbsCurve -n "hipShape" -p "hip";
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
 	setAttr ".ovc" 17;
@@ -9936,16 +9942,16 @@ createNode nurbsCurve -n "hipShape" -p "|character|rig|spine_rig|spine_controls|
 		-0.0045320976228830192 0.11954703200477831 -0.39396246687557329
 		-0.31788146375306459 0.1176581839533791 -0.30199465837463468
 		;
-createNode transform -n "pelvisWaist_aim" -p "|character|rig|spine_rig|spine_controls|spine_parented|spine_offset|spine_parent|hip_offset|hip";
+createNode transform -n "pelvisWaist_aim" -p "hip";
 	setAttr ".t" -type "double3" 0 0.20632666349411011 2.2204460492503121e-016 ;
-createNode transform -n "hip_out" -p "|character|rig|spine_rig|spine_controls|spine_parented|spine_offset|spine_parent|hip_offset|hip";
-createNode transform -n "twistEnd_loc" -p "|character|rig|spine_rig|spine_controls|spine_parented|spine_offset|spine_parent|hip_offset|hip";
+createNode transform -n "hip_out" -p "hip";
+createNode transform -n "twistEnd_loc" -p "hip";
 	setAttr ".v" no;
 	setAttr ".t" -type "double3" 9.8607613152626498e-032 -8.8817841970012504e-016 3.9237869544772912 ;
 	setAttr ".s" -type "double3" 1.0000000000000002 1.0000000000000002 1.0000000000000002 ;
 createNode locator -n "twistEnd_locShape" -p "twistEnd_loc";
 	setAttr -k off ".v";
-createNode transform -n "hipBendClusterAim" -p "|character|rig|spine_rig|spine_controls|spine_parented|spine_offset|spine_parent|hip_offset|hip";
+createNode transform -n "hipBendClusterAim" -p "hip";
 	setAttr ".v" no;
 	setAttr ".t" -type "double3" 0 0.05 1.110223024625156e-016 ;
 createNode locator -n "hipBendClusterAimShape" -p "hipBendClusterAim";
@@ -9953,7 +9959,7 @@ createNode locator -n "hipBendClusterAimShape" -p "hipBendClusterAim";
 	setAttr ".ove" yes;
 	setAttr ".ovc" 6;
 	setAttr ".los" -type "double3" 0.1 0.1 0.1 ;
-createNode joint -n "spine_1_joint_combinedAim" -p "|character|rig|spine_rig|spine_controls|spine_parented|spine_offset|spine_parent|hip_offset|hip";
+createNode joint -n "spine_1_joint_combinedAim" -p "hip";
 	setAttr ".v" no;
 	setAttr ".uoc" yes;
 	setAttr ".oc" 6;
@@ -9962,11 +9968,11 @@ createNode joint -n "spine_1_joint_combinedAim" -p "|character|rig|spine_rig|spi
 	setAttr ".mnrl" -type "double3" -360 -360 -360 ;
 	setAttr ".mxrl" -type "double3" 360 360 360 ;
 	setAttr ".radi" 0.2;
-createNode transform -n "l_arm_hipSpace" -p "|character|rig|spine_rig|spine_controls|spine_parented|spine_offset|spine_parent|hip_offset|hip";
+createNode transform -n "l_arm_hipSpace" -p "hip";
 	setAttr ".s" -type "double3" 1.0000000000000002 1.0000000000000004 1.0000000000000004 ;
-createNode transform -n "r_arm_hipSpace" -p "|character|rig|spine_rig|spine_controls|spine_parented|spine_offset|spine_parent|hip_offset|hip";
+createNode transform -n "r_arm_hipSpace" -p "hip";
 	setAttr ".s" -type "double3" 1.0000000000000002 1.0000000000000004 1.0000000000000004 ;
-createNode transform -n "l_leg_connectorRot" -p "|character|rig|spine_rig|spine_controls|spine_parented|spine_offset|spine_parent|hip_offset|hip";
+createNode transform -n "l_leg_connectorRot" -p "hip";
 	setAttr ".v" no;
 	setAttr ".t" -type "double3" 0 0 5.5511151231257827e-016 ;
 	setAttr ".s" -type "double3" 1.0000000000000004 1.0000000000000009 1.0000000000000004 ;
@@ -9976,7 +9982,7 @@ createNode locator -n "l_leg_connectorRotShape" -p "l_leg_connectorRot";
 	setAttr ".ove" yes;
 	setAttr ".ovc" 13;
 	setAttr ".los" -type "double3" 0.2 0.2 0.2 ;
-createNode transform -n "r_leg_connectorRot" -p "|character|rig|spine_rig|spine_controls|spine_parented|spine_offset|spine_parent|hip_offset|hip";
+createNode transform -n "r_leg_connectorRot" -p "hip";
 	setAttr ".v" no;
 	setAttr ".t" -type "double3" 0 0 5.5511151231257827e-016 ;
 	setAttr ".s" -type "double3" 1.0000000000000004 1.0000000000000009 1.0000000000000004 ;
@@ -9986,12 +9992,12 @@ createNode locator -n "r_leg_connectorRotShape" -p "r_leg_connectorRot";
 	setAttr ".ove" yes;
 	setAttr ".ovc" 13;
 	setAttr ".los" -type "double3" 0.2 0.2 0.2 ;
-createNode transform -n "hip_distLoc" -p "|character|rig|spine_rig|spine_controls|spine_parented|spine_offset|spine_parent|hip_offset|hip";
+createNode transform -n "hip_distLoc" -p "hip";
 	setAttr ".v" no;
 createNode locator -n "hip_distLocShape" -p "hip_distLoc";
 	setAttr -k off ".v";
 	setAttr ".los" -type "double3" 0.1 0.1 0.1 ;
-createNode transform -n "leg_connectorsPos" -p "|character|rig|spine_rig|spine_controls|spine_parented|spine_offset|spine_parent|hip_offset|hip";
+createNode transform -n "leg_connectorsPos" -p "hip";
 	setAttr ".v" no;
 createNode transform -n "l_leg_connectorPos" -p "leg_connectorsPos";
 createNode locator -n "l_leg_connectorPosShape" -p "l_leg_connectorPos";
@@ -10042,7 +10048,7 @@ createNode nurbsCurve -n "r_leg_connectorPosShape1" -p "r_leg_connectorPos";
 		-0.014729309432919151 -0.014729309432919502 0.014729309432919474 -0.014729309432919151 
 		0.014729309432919384 0.014729309432919474 -0.014729309432919151 0.014729309432919384 
 		-0.01472930943291942;
-createNode transform -n "tail_tune" -p "|character|rig|spine_rig|spine_controls|spine_parented|spine_offset|spine_parent|hip_offset|hip";
+createNode transform -n "tail_tune" -p "hip";
 	setAttr -k off ".v" no;
 	setAttr -l on -k off ".sx";
 	setAttr -l on -k off ".sy";
@@ -10078,14 +10084,14 @@ createNode nurbsCurve -n "l_foot_pos26Shape" -p "tail_tune";
 		0.0114121544545433 -0.01141215445454366 -0.01141215445454366
 		0.0114121544545433 -0.01141215445454366 0.01141215445454366
 		;
-createNode transform -n "l_leg_limb_a_1_joint_v2_loc" -p "|character|rig|spine_rig|spine_controls|spine_parented|spine_offset|spine_parent|hip_offset|hip";
+createNode transform -n "l_leg_limb_a_1_joint_v2_loc" -p "hip";
 	setAttr ".v" no;
 	setAttr ".t" -type "double3" 0.18134717265515751 0.3727629298133186 -0.017335700608750712 ;
 	setAttr ".s" -type "double3" 1.0000000000000002 1.0000000000000009 1.0000000000000009 ;
 createNode locator -n "l_leg_limb_a_1_joint_v2_locShape" -p "l_leg_limb_a_1_joint_v2_loc";
 	setAttr -k off ".v";
 	setAttr ".los" -type "double3" 0.1 0.1 0.1 ;
-createNode transform -n "l_leg_limb_a_1_joint_v2_loc1" -p "|character|rig|spine_rig|spine_controls|spine_parented|spine_offset|spine_parent|hip_offset|hip";
+createNode transform -n "l_leg_limb_a_1_joint_v2_loc1" -p "hip";
 	setAttr ".v" no;
 	setAttr ".t" -type "double3" -0.181 0.3727629298133186 -0.017335700608750712 ;
 	setAttr ".s" -type "double3" 1.0000000000000002 1.0000000000000009 1.0000000000000009 ;
@@ -10229,7 +10235,7 @@ createNode transform -n "chest_rotate_parent" -p "chest_rotate_offset";
 createNode transform -n "chest_parent" -p "chest_rotate_parent";
 createNode transform -n "chest_offset" -p "chest_parent";
 	setAttr ".t" -type "double3" -2.352978204743497e-007 -2.2204460492503136e-016 0.027703089004707651 ;
-createNode transform -n "chest" -p "|character|rig|spine_rig|spine_controls|spine_parented|spine_offset|spine_parent|chest_rotate_offset|chest_rotate_parent|chest_parent|chest_offset";
+createNode transform -n "chest" -p "chest_offset";
 	addAttr -ci true -sn "mirrored" -ln "mirrored" -min 0 -max 1 -at "bool";
 	addAttr -ci true -sn "translateXMirror" -ln "translateXMirror" -min 0 -max 1 -at "bool";
 	addAttr -ci true -sn "translateYMirror" -ln "translateYMirror" -min 0 -max 1 -at "bool";
@@ -10247,7 +10253,7 @@ createNode transform -n "chest" -p "|character|rig|spine_rig|spine_controls|spin
 	setAttr ".translateXMirror" yes;
 	setAttr ".rotateYMirror" yes;
 	setAttr ".rotateZMirror" yes;
-createNode nurbsCurve -n "chestShape" -p "|character|rig|spine_rig|spine_controls|spine_parented|spine_offset|spine_parent|chest_rotate_offset|chest_rotate_parent|chest_parent|chest_offset|chest";
+createNode nurbsCurve -n "chestShape" -p "chest";
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
 	setAttr ".ovc" 17;
@@ -10267,15 +10273,15 @@ createNode nurbsCurve -n "chestShape" -p "|character|rig|spine_rig|spine_control
 		-5.2932055871226334e-008 0.031916969844641166 -0.33146765422397068
 		-0.27961413331913143 0.0033795419449378734 -0.26127191391633769
 		;
-createNode transform -n "chestWaist_aim" -p "|character|rig|spine_rig|spine_controls|spine_parented|spine_offset|spine_parent|chest_rotate_offset|chest_rotate_parent|chest_parent|chest_offset|chest";
-createNode transform -n "twistStart_loc" -p "|character|rig|spine_rig|spine_controls|spine_parented|spine_offset|spine_parent|chest_rotate_offset|chest_rotate_parent|chest_parent|chest_offset|chest";
+createNode transform -n "chestWaist_aim" -p "chest";
+createNode transform -n "twistStart_loc" -p "chest";
 	setAttr ".v" no;
 	setAttr ".t" -type "double3" 0 0 0.62008088347087109 ;
 	setAttr ".s" -type "double3" 1.0000000000000002 1.0000000000000009 1.0000000000000009 ;
 createNode locator -n "twistStart_locShape" -p "twistStart_loc";
 	setAttr -k off ".v";
 	setAttr ".los" -type "double3" 0.1 0.1 0.1 ;
-createNode transform -n "chestBendClusterAim" -p "|character|rig|spine_rig|spine_controls|spine_parented|spine_offset|spine_parent|chest_rotate_offset|chest_rotate_parent|chest_parent|chest_offset|chest";
+createNode transform -n "chestBendClusterAim" -p "chest";
 	setAttr ".v" no;
 	setAttr ".t" -type "double3" 0 -0.05 -3.4694469519536119e-018 ;
 createNode locator -n "chestBendClusterAimShape" -p "chestBendClusterAim";
@@ -10283,10 +10289,10 @@ createNode locator -n "chestBendClusterAimShape" -p "chestBendClusterAim";
 	setAttr ".ove" yes;
 	setAttr ".ovc" 6;
 	setAttr ".los" -type "double3" 0.1 0.1 0.1 ;
-createNode transform -n "chest_out" -p "|character|rig|spine_rig|spine_controls|spine_parented|spine_offset|spine_parent|chest_rotate_offset|chest_rotate_parent|chest_parent|chest_offset|chest";
+createNode transform -n "chest_out" -p "chest";
 	setAttr ".t" -type "double3" 7.3600540396480864e-016 0 -2.2204460492503136e-016 ;
 	setAttr ".s" -type "double3" 1.0000000000000002 1.0000000000000009 1.0000000000000009 ;
-createNode joint -n "spine_endJoint_combinedAim" -p "|character|rig|spine_rig|spine_controls|spine_parented|spine_offset|spine_parent|chest_rotate_offset|chest_rotate_parent|chest_parent|chest_offset|chest";
+createNode joint -n "spine_endJoint_combinedAim" -p "chest";
 	setAttr ".v" no;
 	setAttr ".uoc" yes;
 	setAttr ".oc" 6;
@@ -10295,21 +10301,21 @@ createNode joint -n "spine_endJoint_combinedAim" -p "|character|rig|spine_rig|sp
 	setAttr ".mxrl" -type "double3" 360 360 360 ;
 	setAttr ".jo" -type "double3" 89.999999999999972 0 89.999999999999972 ;
 	setAttr ".radi" 0.2;
-createNode transform -n "l_arm_chestSpace" -p "|character|rig|spine_rig|spine_controls|spine_parented|spine_offset|spine_parent|chest_rotate_offset|chest_rotate_parent|chest_parent|chest_offset|chest";
+createNode transform -n "l_arm_chestSpace" -p "chest";
 	setAttr ".s" -type "double3" 1.0000000000000002 1.0000000000000009 1.0000000000000009 ;
-createNode transform -n "r_arm_chestSpace" -p "|character|rig|spine_rig|spine_controls|spine_parented|spine_offset|spine_parent|chest_rotate_offset|chest_rotate_parent|chest_parent|chest_offset|chest";
+createNode transform -n "r_arm_chestSpace" -p "chest";
 	setAttr ".s" -type "double3" 1.0000000000000002 1.0000000000000009 1.0000000000000009 ;
-createNode transform -n "l_arm_ik_chestSpace" -p "|character|rig|spine_rig|spine_controls|spine_parented|spine_offset|spine_parent|chest_rotate_offset|chest_rotate_parent|chest_parent|chest_offset|chest";
+createNode transform -n "l_arm_ik_chestSpace" -p "chest";
 	setAttr ".s" -type "double3" 1.0000000000000002 1.0000000000000009 1.0000000000000009 ;
-createNode transform -n "r_arm_ik_chestSpace" -p "|character|rig|spine_rig|spine_controls|spine_parented|spine_offset|spine_parent|chest_rotate_offset|chest_rotate_parent|chest_parent|chest_offset|chest";
+createNode transform -n "r_arm_ik_chestSpace" -p "chest";
 	setAttr ".s" -type "double3" 1.0000000000000002 1.0000000000000009 1.0000000000000009 ;
-createNode transform -n "chest_distLoc" -p "|character|rig|spine_rig|spine_controls|spine_parented|spine_offset|spine_parent|chest_rotate_offset|chest_rotate_parent|chest_parent|chest_offset|chest";
+createNode transform -n "chest_distLoc" -p "chest";
 	setAttr ".v" no;
 	setAttr ".t" -type "double3" 7.3600540396480864e-016 0 0 ;
 createNode locator -n "chest_distLocShape" -p "chest_distLoc";
 	setAttr -k off ".v";
 	setAttr ".los" -type "double3" 0.1 0.1 0.1 ;
-createNode transform -n "l_shoulder_connector" -p "|character|rig|spine_rig|spine_controls|spine_parented|spine_offset|spine_parent|chest_rotate_offset|chest_rotate_parent|chest_parent|chest_offset|chest";
+createNode transform -n "l_shoulder_connector" -p "chest";
 	setAttr ".v" no;
 	setAttr ".uoc" yes;
 	setAttr ".oc" 6;
@@ -10327,7 +10333,7 @@ createNode nurbsCurve -n "l_foot_pos2Shape" -p "l_shoulder_connector";
 	setAttr ".ove" yes;
 	setAttr ".ovc" 14;
 	setAttr ".tw" yes;
-createNode transform -n "r_shoulder_connector" -p "|character|rig|spine_rig|spine_controls|spine_parented|spine_offset|spine_parent|chest_rotate_offset|chest_rotate_parent|chest_parent|chest_offset|chest";
+createNode transform -n "r_shoulder_connector" -p "chest";
 	setAttr ".v" no;
 	setAttr ".uoc" yes;
 	setAttr ".oc" 6;
@@ -10346,7 +10352,7 @@ createNode nurbsCurve -n "l_foot_pos3Shape" -p "r_shoulder_connector";
 	setAttr ".ove" yes;
 	setAttr ".ovc" 14;
 	setAttr ".tw" yes;
-createNode transform -n "neck_connector" -p "|character|rig|spine_rig|spine_controls|spine_parented|spine_offset|spine_parent|chest_rotate_offset|chest_rotate_parent|chest_parent|chest_offset|chest";
+createNode transform -n "neck_connector" -p "chest";
 	setAttr ".v" no;
 	setAttr ".uoc" yes;
 	setAttr ".oc" 6;
@@ -10365,7 +10371,7 @@ createNode nurbsCurve -n "l_foot_pos1Shape1" -p "neck_connector";
 	setAttr ".ove" yes;
 	setAttr ".ovc" 14;
 	setAttr ".tw" yes;
-createNode transform -n "nech_target" -p "|character|rig|spine_rig|spine_controls|spine_parented|spine_offset|spine_parent|chest_rotate_offset|chest_rotate_parent|chest_parent|chest_offset|chest";
+createNode transform -n "nech_target" -p "chest";
 	setAttr ".s" -type "double3" 1.0000000000000002 1.0000000000000009 1.0000000000000009 ;
 createNode parentConstraint -n "pelvis_parent_parentConstraint1" -p "spine_parented";
 	addAttr -ci true -k true -sn "w0" -ln "pelvisW0" -dv 1 -min 0 -at "double";
@@ -10384,15 +10390,15 @@ createNode parentConstraint -n "pelvis_parent_parentConstraint1" -p "spine_paren
 	setAttr -k on ".w0";
 createNode transform -n "spine_system" -p "spine_rig";
 	setAttr ".v" no;
-createNode transform -n "spine_connectors" -p "|character|rig|spine_rig|spine_system";
+createNode transform -n "spine_connectors" -p "spine_system";
 	setAttr ".v" no;
-createNode transform -n "spine_connector_start" -p "|character|rig|spine_rig|spine_system|spine_connectors";
-createNode locator -n "spine_connector_startShape" -p "|character|rig|spine_rig|spine_system|spine_connectors|spine_connector_start";
+createNode transform -n "spine_connector_start" -p "spine_connectors";
+createNode locator -n "spine_connector_startShape" -p "spine_connector_start";
 	setAttr -k off ".v" no;
 	setAttr ".ove" yes;
 	setAttr ".ovc" 14;
 	setAttr ".los" -type "double3" 0.5 0.5 0.5 ;
-createNode transform -n "spine_connector_end" -p "|character|rig|spine_rig|spine_system|spine_connectors|spine_connector_start";
+createNode transform -n "spine_connector_end" -p "spine_connector_start";
 	setAttr -l on -k off ".tx";
 	setAttr -l on -k off ".tz";
 	setAttr -l on -k off ".rx";
@@ -10401,16 +10407,16 @@ createNode transform -n "spine_connector_end" -p "|character|rig|spine_rig|spine
 	setAttr -l on -k off ".sx";
 	setAttr -l on -k off ".sy";
 	setAttr -l on -k off ".sz";
-createNode locator -n "spine_connector_endShape" -p "|character|rig|spine_rig|spine_system|spine_connectors|spine_connector_start|spine_connector_end";
+createNode locator -n "spine_connector_endShape" -p "spine_connector_end";
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
 	setAttr ".ovc" 14;
-createNode nurbsCurve -n "spine_connector_endShape1" -p "|character|rig|spine_rig|spine_system|spine_connectors|spine_connector_start|spine_connector_end";
+createNode nurbsCurve -n "spine_connector_endShape1" -p "spine_connector_end";
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
 	setAttr ".ovc" 14;
 	setAttr ".tw" yes;
-createNode parentConstraint -n "spine_connector_start_parentConstraint1" -p "|character|rig|spine_rig|spine_system|spine_connectors|spine_connector_start";
+createNode parentConstraint -n "spine_connector_start_parentConstraint1" -p "spine_connector_start";
 	addAttr -ci true -k true -sn "w0" -ln "spine_posW0" -dv 1 -min 0 -at "double";
 	setAttr -k on ".nds";
 	setAttr -k off ".v";
@@ -10426,7 +10432,7 @@ createNode parentConstraint -n "spine_connector_start_parentConstraint1" -p "|ch
 	setAttr ".erp" yes;
 	setAttr ".rst" -type "double3" 0.019802274175722001 11.341122933182492 0.89072682248691681 ;
 	setAttr -k on ".w0";
-createNode ikHandle -n "spine_ikHandle" -p "|character|rig|spine_rig|spine_system";
+createNode ikHandle -n "spine_ikHandle" -p "spine_system";
 	setAttr ".v" no;
 	setAttr ".t" -type "double3" 0.00020761876831979655 124.94199132931226 -1.3596266342388754 ;
 	setAttr ".r" -type "double3" 89.999999742397506 2.3709670054400864 90.000019002619467 ;
@@ -10434,7 +10440,7 @@ createNode ikHandle -n "spine_ikHandle" -p "|character|rig|spine_rig|spine_syste
 	setAttr ".dwut" 2;
 	setAttr ".dtvt" 2;
 	setAttr ".dtce" yes;
-createNode transform -n "spine_curve" -p "|character|rig|spine_rig|spine_system";
+createNode transform -n "spine_curve" -p "spine_system";
 createNode nurbsCurve -n "spine_curveShape" -p "spine_curve";
 	setAttr -k off ".v";
 	setAttr -s 12 ".iog[0].og";
@@ -10452,7 +10458,7 @@ createNode nurbsCurve -n "spine_curveShapeOrig" -p "spine_curve";
 		1.1635137236402256e-013 4.9999999982269561 -1.332267629550193e-015
 		-1.1546319456101617e-014 6.0000000000000231 -1.332267629550193e-015
 		;
-createNode transform -n "spine_clusters" -p "|character|rig|spine_rig|spine_system";
+createNode transform -n "spine_clusters" -p "spine_system";
 createNode transform -n "spine_1_clusterHandle" -p "spine_clusters";
 	setAttr ".rp" -type "double3" -1.1546319456101628e-014 -3.2756705628756724e-016 
 		2.4521449863692881e-032 ;
@@ -10575,7 +10581,7 @@ createNode pointConstraint -n "cluster5Handle_pointConstraint1" -p "spine_5_clus
 	setAttr -k on ".w0";
 createNode transform -n "spine_skinJoints" -p "spine_rig";
 	setAttr ".ove" yes;
-createNode joint -n "spine_1_joint" -p "|character|rig|spine_rig|spine_skinJoints";
+createNode joint -n "spine_1_joint" -p "spine_skinJoints";
 	addAttr -ci true -sn "liw" -ln "lockInfluenceWeights" -min 0 -max 1 -at "bool";
 	setAttr ".uoc" yes;
 	setAttr ".oc" 6;
@@ -10587,7 +10593,7 @@ createNode joint -n "spine_1_joint" -p "|character|rig|spine_rig|spine_skinJoint
 		 2.179361113190437e-016 -0.22325999291966489 1.2894777682605914 0 1.3086626529693599 -1.1623259270349001e-015 -2.9058148175872497e-016 0
 		 0 1.4394240068577149 -0.053282215027789577 1;
 	setAttr ".radi" 0.2;
-createNode joint -n "spine_2_joint" -p "|character|rig|spine_rig|spine_skinJoints|spine_1_joint";
+createNode joint -n "spine_2_joint" -p "spine_1_joint";
 	addAttr -ci true -sn "liw" -ln "lockInfluenceWeights" -min 0 -max 1 -at "bool";
 	setAttr ".uoc" yes;
 	setAttr ".oc" 6;
@@ -10599,7 +10605,7 @@ createNode joint -n "spine_2_joint" -p "|character|rig|spine_rig|spine_skinJoint
 		 1.5331421322671112e-016 -0.27935146843168546 1.2757453238973815 0 1.305972195094893 -1.1599363204116859e-015 -2.8998408010292148e-016 0
 		 -1.0586284375730028e-016 1.603364651419495 -0.024897555714522807 1;
 	setAttr ".radi" 0.2;
-createNode joint -n "spine_3_joint" -p "|character|rig|spine_rig|spine_skinJoints|spine_1_joint|spine_2_joint";
+createNode joint -n "spine_3_joint" -p "spine_2_joint";
 	addAttr -ci true -sn "liw" -ln "lockInfluenceWeights" -min 0 -max 1 -at "bool";
 	setAttr ".uoc" yes;
 	setAttr ".oc" 6;
@@ -10611,7 +10617,7 @@ createNode joint -n "spine_3_joint" -p "|character|rig|spine_rig|spine_skinJoint
 		 2.0993278450438062e-016 -0.22847356248571621 1.2825524698148878 0 1.3027436457658057 -1.1570687925706531e-015 -2.8926719814266326e-016 0
 		 9.4985051781377825e-016 1.7658935313382629 0.010691586112907525 1;
 	setAttr ".radi" 0.2;
-createNode joint -n "spine_4_joint" -p "|character|rig|spine_rig|spine_skinJoints|spine_1_joint|spine_2_joint|spine_3_joint";
+createNode joint -n "spine_4_joint" -p "spine_3_joint";
 	addAttr -ci true -sn "liw" -ln "lockInfluenceWeights" -min 0 -max 1 -at "bool";
 	setAttr ".uoc" yes;
 	setAttr ".oc" 6;
@@ -10671,7 +10677,7 @@ createNode transform -n "stomach_mass_loc" -p "spine_4_joint";
 createNode locator -n "stomach_mass_locShape" -p "stomach_mass_loc";
 	setAttr -k off ".v";
 	setAttr ".los" -type "double3" 0.1 0.1 0.1 ;
-createNode transform -n "pelvis_mass_loc" -p "|character|rig|spine_rig|spine_skinJoints|spine_1_joint";
+createNode transform -n "pelvis_mass_loc" -p "spine_1_joint";
 	setAttr ".v" no;
 	setAttr ".ove" yes;
 	setAttr ".ovc" 6;
@@ -10682,7 +10688,7 @@ createNode transform -n "pelvis_mass_loc" -p "|character|rig|spine_rig|spine_ski
 createNode locator -n "pelvis_mass_locShape" -p "pelvis_mass_loc";
 	setAttr -k off ".v";
 	setAttr ".los" -type "double3" 0.1 0.1 0.1 ;
-createNode joint -n "chest_joint" -p "|character|rig|spine_rig|spine_skinJoints";
+createNode joint -n "chest_joint" -p "spine_skinJoints";
 	addAttr -ci true -sn "liw" -ln "lockInfluenceWeights" -min 0 -max 1 -at "bool";
 	setAttr ".uoc" yes;
 	setAttr ".oc" 6;
@@ -10693,7 +10699,7 @@ createNode joint -n "chest_joint" -p "|character|rig|spine_rig|spine_skinJoints"
 	setAttr ".bps" -type "matrix" 5.0083313344102273e-016 1.3086626529693606 0 0 -5.0083313344102253e-016 0 1.3086626529693604 0
 		 1.1277759565698935 -5.8116296351744994e-016 5.8116296351744994e-016 0 1.28255683619515e-015 2.4287496299346061 0.065118794613545639 1;
 	setAttr ".radi" 0.2;
-createNode pointConstraint -n "spine_endJoint_combined_pointConstraint1" -p "|character|rig|spine_rig|spine_skinJoints|chest_joint";
+createNode pointConstraint -n "spine_endJoint_combined_pointConstraint1" -p "chest_joint";
 	addAttr -ci true -k true -sn "w0" -ln "spine_endJoint_combinedAimW0" -dv 1 -min 
 		0 -at "double";
 	setAttr -k on ".nds";
@@ -10713,7 +10719,7 @@ createNode pointConstraint -n "spine_endJoint_combined_pointConstraint1" -p "|ch
 	setAttr ".o" -type "double3" 0 0.001 0 ;
 	setAttr ".rst" -type "double3" 1.0306344462005503 0.00040157851932509647 -0.0012700757557935205 ;
 	setAttr -k on ".w0";
-createNode orientConstraint -n "spine_endJoint_combined_orientConstraint1" -p "|character|rig|spine_rig|spine_skinJoints|chest_joint";
+createNode orientConstraint -n "spine_endJoint_combined_orientConstraint1" -p "chest_joint";
 	addAttr -ci true -k true -sn "w0" -ln "spine_endJoint_combinedAimW0" -dv 1 -min 
 		0 -at "double";
 	addAttr -ci true -k true -sn "w1" -ln "spine_endJointW1" -dv 1 -min 0 -at "double";
@@ -10738,9 +10744,9 @@ createNode orientConstraint -n "spine_endJoint_combined_orientConstraint1" -p "|
 	setAttr ".int" 2;
 	setAttr -k on ".w0";
 	setAttr -k on ".w1";
-createNode transform -n "l_chest_joint_move" -p "|character|rig|spine_rig|spine_skinJoints|chest_joint";
-createNode transform -n "r_chest_joint_move" -p "|character|rig|spine_rig|spine_skinJoints|chest_joint";
-createNode joint -n "l_chest_joint" -p "|character|rig|spine_rig|spine_skinJoints|chest_joint";
+createNode transform -n "l_chest_joint_move" -p "chest_joint";
+createNode transform -n "r_chest_joint_move" -p "chest_joint";
+createNode joint -n "l_chest_joint" -p "chest_joint";
 	addAttr -ci true -sn "liw" -ln "lockInfluenceWeights" -min 0 -max 1 -at "bool";
 	setAttr ".uoc" yes;
 	setAttr ".oc" 6;
@@ -10768,7 +10774,7 @@ createNode pointConstraint -n "l_chest_joint_pointConstraint1" -p "l_chest_joint
 	setAttr ".rst" -type "double3" -0.11968517961591618 0 0.17819155172793374 ;
 	setAttr -k on ".w0";
 	setAttr -k on ".w1";
-createNode joint -n "r_chest_joint" -p "|character|rig|spine_rig|spine_skinJoints|chest_joint";
+createNode joint -n "r_chest_joint" -p "chest_joint";
 	addAttr -ci true -sn "liw" -ln "lockInfluenceWeights" -min 0 -max 1 -at "bool";
 	setAttr ".uoc" yes;
 	setAttr ".oc" 6;
@@ -10796,7 +10802,7 @@ createNode pointConstraint -n "r_chest_joint_pointConstraint1" -p "r_chest_joint
 	setAttr ".rst" -type "double3" -0.10301792621612547 0.8198234438896177 0.048466220498085022 ;
 	setAttr -k on ".w0";
 	setAttr -k on ".w1";
-createNode transform -n "chear_mass_loc" -p "|character|rig|spine_rig|spine_skinJoints|chest_joint";
+createNode transform -n "chear_mass_loc" -p "chest_joint";
 	setAttr ".v" no;
 	setAttr ".ove" yes;
 	setAttr ".ovc" 6;
@@ -10804,9 +10810,9 @@ createNode transform -n "chear_mass_loc" -p "|character|rig|spine_rig|spine_skin
 createNode locator -n "chear_mass_locShape" -p "chear_mass_loc";
 	setAttr -k off ".v";
 	setAttr ".los" -type "double3" 0.1 0.1 0.1 ;
-createNode transform -n "pelvis_joint_offset" -p "|character|rig|spine_rig|spine_skinJoints";
+createNode transform -n "pelvis_joint_offset" -p "spine_skinJoints";
 	setAttr ".t" -type "double3" 0 -0.001 0 ;
-createNode joint -n "pelvis_joint" -p "|character|rig|spine_rig|spine_skinJoints|pelvis_joint_offset";
+createNode joint -n "pelvis_joint" -p "pelvis_joint_offset";
 	addAttr -ci true -sn "liw" -ln "lockInfluenceWeights" -min 0 -max 1 -at "bool";
 	setAttr ".uoc" yes;
 	setAttr ".oc" 6;
@@ -10816,7 +10822,7 @@ createNode joint -n "pelvis_joint" -p "|character|rig|spine_rig|spine_skinJoints
 		 -4.3587222263808726e-016 0 1.3086626529693604 0 1.3086626529693604 -4.3587222263808726e-016 5.8116296351744994e-016 0
 		 0 1.4381153442047454 -0.053282215027789577 1;
 	setAttr ".radi" 0.2;
-createNode orientConstraint -n "spine_1_joint_combined_orientConstraint1" -p "|character|rig|spine_rig|spine_skinJoints|pelvis_joint_offset|pelvis_joint";
+createNode orientConstraint -n "spine_1_joint_combined_orientConstraint1" -p "pelvis_joint";
 	addAttr -ci true -k true -sn "w0" -ln "spine_1_joint_combinedAimW0" -dv 1 -min 
 		0 -at "double";
 	addAttr -ci true -k true -sn "w1" -ln "spine_1_jointW1" -dv 1 -min 0 -at "double";
@@ -10840,11 +10846,11 @@ createNode orientConstraint -n "spine_1_joint_combined_orientConstraint1" -p "|c
 	setAttr ".int" 2;
 	setAttr -k on ".w0";
 	setAttr -k on ".w1";
-createNode transform -n "spineFk_rig" -p "rig";
+createNode transform -n "_spineFk_rig" -p "rig";
 	setAttr ".v" no;
-createNode transform -n "spine_posers" -p "spineFk_rig";
+createNode transform -n "_spine_posers" -p "_spineFk_rig";
 	setAttr ".s" -type "double3" 64.230129811565021 64.230129811565021 64.230129811565021 ;
-createNode transform -n "spine_mainPoser" -p "|character|rig|spineFk_rig|spine_posers";
+createNode transform -n "_spine_mainPoser" -p "_spine_posers";
 	setAttr -l on -k off ".v";
 	setAttr -k on ".t" -type "double3" 3.4677308103185949e-006 1.53242015740668 -0.048871138478306896 ;
 	setAttr -k on ".t";
@@ -10852,7 +10858,7 @@ createNode transform -n "spine_mainPoser" -p "|character|rig|spineFk_rig|spine_p
 	setAttr -l on -k off ".sx";
 	setAttr -l on -k off ".sy";
 	setAttr -l on -k off ".sz";
-createNode nurbsCurve -n "spine_mainPoserShape" -p "|character|rig|spineFk_rig|spine_posers|spine_mainPoser";
+createNode nurbsCurve -n "_spine_mainPoserShape" -p "_spine_mainPoser";
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
 	setAttr ".ovc" 10;
@@ -10878,7 +10884,7 @@ createNode nurbsCurve -n "spine_mainPoserShape" -p "|character|rig|spineFk_rig|s
 		0.055450197537087687 -0.055450197537087693 -0.055450197537087693
 		0.055450197537087687 -0.055450197537087693 0.055450197537087693
 		;
-createNode transform -n "chest_mainPoser" -p "|character|rig|spineFk_rig|spine_posers|spine_mainPoser";
+createNode transform -n "_chest_mainPoser" -p "_spine_mainPoser";
 	setAttr -l on -k off ".v";
 	setAttr -k on ".t" -type "double3" -2.352978204743497e-007 0.41265333960820438 0.027703089004707655 ;
 	setAttr -k on ".t";
@@ -10888,7 +10894,7 @@ createNode transform -n "chest_mainPoser" -p "|character|rig|spineFk_rig|spine_p
 	setAttr -l on -k off ".sx";
 	setAttr -l on -k off ".sy";
 	setAttr -l on -k off ".sz";
-createNode nurbsCurve -n "chest_mainPoserShape" -p "|character|rig|spineFk_rig|spine_posers|spine_mainPoser|chest_mainPoser";
+createNode nurbsCurve -n "_chest_mainPoserShape" -p "_chest_mainPoser";
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
 	setAttr ".ovc" 10;
@@ -10914,13 +10920,13 @@ createNode nurbsCurve -n "chest_mainPoserShape" -p "|character|rig|spineFk_rig|s
 		0.055450197537087687 -0.055450197537087693 -0.055450197537087693
 		0.055450197537087687 -0.055450197537087693 0.055450197537087693
 		;
-createNode transform -n "chest_poser" -p "|character|rig|spineFk_rig|spine_posers|spine_mainPoser|chest_mainPoser";
+createNode transform -n "_chest_poser" -p "_chest_mainPoser";
 	setAttr -k off ".tx";
-createNode implicitSphere -n "chest_poserShape" -p "|character|rig|spineFk_rig|spine_posers|spine_mainPoser|chest_mainPoser|chest_poser";
+createNode implicitSphere -n "_chest_poserShape" -p "_chest_poser";
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
 	setAttr ".ovc" 12;
-createNode nurbsSurface -n "chest_poserNurbsShape" -p "|character|rig|spineFk_rig|spine_posers|spine_mainPoser|chest_mainPoser|chest_poser";
+createNode nurbsSurface -n "_chest_poserNurbsShape" -p "_chest_poser";
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
 	setAttr ".ovc" 10;
@@ -10987,7 +10993,7 @@ createNode nurbsSurface -n "chest_poserNurbsShape" -p "|character|rig|spineFk_ri
 		0.02116478316932224 0.026904872696340398 0.021164783169322129
 		8.8438190721706908e-017 0.026904872696340398 0.0299315234027412
 		-0.021164783169322018 0.026904872696340398 0.021164783169322129
-		-0.029931523402741061 0.026904872696340398 5.1751533839264467e-018
+		-0.029931523402741061 0.026904872696340398 5.1751533839264459e-018
 		-0.021164783169322035 0.026904872696340398 -0.021164783169322143
 		7.4670998610966254e-017 0.026904872696340398 -0.0299315234027412
 		0.02116478316932224 0.026904872696340398 -0.021164783169322143
@@ -11019,12 +11025,12 @@ createNode nurbsSurface -n "chest_poserNurbsShape" -p "|character|rig|spineFk_ri
 		;
 	setAttr ".nufa" 4.5;
 	setAttr ".nvfa" 4.5;
-createNode locator -n "chest_poser_locShape" -p "|character|rig|spineFk_rig|spine_posers|spine_mainPoser|chest_mainPoser|chest_poser";
+createNode locator -n "_chest_poser_locShape" -p "_chest_poser";
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
 	setAttr ".ovc" 12;
 	setAttr ".los" -type "double3" 0.01 0.01 0.01 ;
-createNode transform -n "pelvis_poser" -p "|character|rig|spineFk_rig|spine_posers|spine_mainPoser";
+createNode transform -n "_pelvis_poser" -p "_spine_mainPoser";
 	setAttr -l on -k off ".v";
 	setAttr -l on -k off ".tx";
 	setAttr -l on -k off ".rx";
@@ -11033,11 +11039,11 @@ createNode transform -n "pelvis_poser" -p "|character|rig|spineFk_rig|spine_pose
 	setAttr -l on -k off ".sx";
 	setAttr -l on -k off ".sy";
 	setAttr -l on -k off ".sz";
-createNode implicitSphere -n "pelvis_poserShape" -p "|character|rig|spineFk_rig|spine_posers|spine_mainPoser|pelvis_poser";
+createNode implicitSphere -n "_pelvis_poserShape" -p "_pelvis_poser";
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
 	setAttr ".ovc" 12;
-createNode nurbsSurface -n "pelvis_poserNurbsShape" -p "|character|rig|spineFk_rig|spine_posers|spine_mainPoser|pelvis_poser";
+createNode nurbsSurface -n "_pelvis_poserNurbsShape" -p "_pelvis_poser";
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
 	setAttr ".ovc" 10;
@@ -11104,7 +11110,7 @@ createNode nurbsSurface -n "pelvis_poserNurbsShape" -p "|character|rig|spineFk_r
 		0.02116478316932224 0.026904872696340398 0.021164783169322129
 		8.8438190721706908e-017 0.026904872696340398 0.0299315234027412
 		-0.021164783169322018 0.026904872696340398 0.021164783169322129
-		-0.029931523402741061 0.026904872696340398 5.1751533839264467e-018
+		-0.029931523402741061 0.026904872696340398 5.1751533839264459e-018
 		-0.021164783169322035 0.026904872696340398 -0.021164783169322143
 		7.4670998610966254e-017 0.026904872696340398 -0.0299315234027412
 		0.02116478316932224 0.026904872696340398 -0.021164783169322143
@@ -11136,17 +11142,17 @@ createNode nurbsSurface -n "pelvis_poserNurbsShape" -p "|character|rig|spineFk_r
 		;
 	setAttr ".nufa" 4.5;
 	setAttr ".nvfa" 4.5;
-createNode locator -n "pelvis_poser_locShape" -p "|character|rig|spineFk_rig|spine_posers|spine_mainPoser|pelvis_poser";
+createNode locator -n "_pelvis_poser_locShape" -p "_pelvis_poser";
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
 	setAttr ".ovc" 12;
 	setAttr ".los" -type "double3" 0.01 0.01 0.01 ;
-createNode transform -n "spine_controls" -p "spineFk_rig";
+createNode transform -n "_spine_controls" -p "_spineFk_rig";
 	setAttr ".ove" yes;
 	setAttr ".t" -type "double3" 0.00022273281135137558 98.427550608909229 -3.1389997270911612 ;
 	setAttr ".s" -type "double3" 64.230133056640625 64.230133056640625 64.230133056640625 ;
-createNode transform -n "pelvis_offset" -p "|character|rig|spineFk_rig|spine_controls";
-createNode transform -n "pelvis" -p "|character|rig|spineFk_rig|spine_controls|pelvis_offset";
+createNode transform -n "_pelvis_offset" -p "_spine_controls";
+createNode transform -n "_pelvis" -p "_pelvis_offset";
 	addAttr -ci true -sn "mirrored" -ln "mirrored" -min 0 -max 1 -at "bool";
 	addAttr -ci true -sn "translateXMirror" -ln "translateXMirror" -min 0 -max 1 -at "bool";
 	addAttr -ci true -sn "translateYMirror" -ln "translateYMirror" -min 0 -max 1 -at "bool";
@@ -11163,7 +11169,7 @@ createNode transform -n "pelvis" -p "|character|rig|spineFk_rig|spine_controls|p
 	setAttr -l on -k off ".sy";
 	setAttr -l on -k off ".sz";
 	setAttr ".rotateZMirror" yes;
-createNode nurbsCurve -n "pelvisShape" -p "|character|rig|spineFk_rig|spine_controls|pelvis_offset|pelvis";
+createNode nurbsCurve -n "_pelvisShape" -p "_pelvis";
 	addAttr -ci true -sn "ocellarisSurfaceShaderAttrs" -ln "ocellarisSurfaceShaderAttrs" 
 		-dt "stringArray";
 	addAttr -ci true -sn "ocellarisSurfaceShaderAttrsEdit" -ln "ocellarisSurfaceShaderAttrsEdit" 
@@ -11194,10 +11200,10 @@ createNode nurbsCurve -n "pelvisShape" -p "|character|rig|spineFk_rig|spine_cont
 		0 -0.03329201267697357 -0.68931033164210442
 		;
 	setAttr ".ocellarisSurfaceShaderAttrs" -type "stringArray" 0  ;
-createNode transform -n "hip_offset" -p "|character|rig|spineFk_rig|spine_controls|pelvis_offset|pelvis";
+createNode transform -n "_hip_offset" -p "_pelvis";
 	setAttr ".t" -type "double3" 0 0 2.2204460492503131e-016 ;
 	setAttr ".s" -type "double3" 0.99999999999999989 0.99999999999999956 0.99999999999999956 ;
-createNode transform -n "hip" -p "|character|rig|spineFk_rig|spine_controls|pelvis_offset|pelvis|hip_offset";
+createNode transform -n "_hip" -p "_hip_offset";
 	addAttr -ci true -sn "bottom_size" -ln "bottom_size" -min 0 -max 10 -at "double";
 	addAttr -ci true -sn "mirrored" -ln "mirrored" -min 0 -max 1 -at "bool";
 	addAttr -ci true -sn "translateXMirror" -ln "translateXMirror" -min 0 -max 1 -at "bool";
@@ -11215,7 +11221,7 @@ createNode transform -n "hip" -p "|character|rig|spineFk_rig|spine_controls|pelv
 	setAttr ".translateXMirror" yes;
 	setAttr ".rotateYMirror" yes;
 	setAttr ".rotateZMirror" yes;
-createNode nurbsCurve -n "hipShape" -p "|character|rig|spineFk_rig|spine_controls|pelvis_offset|pelvis|hip_offset|hip";
+createNode nurbsCurve -n "_hipShape" -p "_hip";
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
 	setAttr ".ovc" 17;
@@ -11235,10 +11241,10 @@ createNode nurbsCurve -n "hipShape" -p "|character|rig|spineFk_rig|spine_control
 		-0.0045320976228830192 0.11954703200477831 -0.39396246687557329
 		-0.31788146375306459 0.1176581839533791 -0.30199465837463468
 		;
-createNode transform -n "waist_offset" -p "|character|rig|spineFk_rig|spine_controls|pelvis_offset|pelvis|hip_offset|hip";
+createNode transform -n "_waist_offset" -p "_hip";
 	setAttr ".t" -type "double3" -1.1764891060517553e-007 0.20632666980410153 0.04733891566458296 ;
 	setAttr ".s" -type "double3" 1.0000000000000002 1.0000000000000002 1.0000000000000002 ;
-createNode transform -n "waist" -p "|character|rig|spineFk_rig|spine_controls|pelvis_offset|pelvis|hip_offset|hip|waist_offset";
+createNode transform -n "_waist" -p "_waist_offset";
 	addAttr -ci true -sn "weight" -ln "weight" -min 0 -max 1 -at "double";
 	addAttr -ci true -sn "spine_correct" -ln "spine_correct" -min 0 -max 10 -at "double";
 	addAttr -ci true -sn "mirrored" -ln "mirrored" -min 0 -max 1 -at "bool";
@@ -11258,7 +11264,7 @@ createNode transform -n "waist" -p "|character|rig|spineFk_rig|spine_controls|pe
 	setAttr ".translateXMirror" yes;
 	setAttr ".rotateYMirror" yes;
 	setAttr ".rotateZMirror" yes;
-createNode nurbsCurve -n "waistShape" -p "|character|rig|spineFk_rig|spine_controls|pelvis_offset|pelvis|hip_offset|hip|waist_offset|waist";
+createNode nurbsCurve -n "_waistShape" -p "_waist";
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
 	setAttr ".ovc" 17;
@@ -11278,10 +11284,10 @@ createNode nurbsCurve -n "waistShape" -p "|character|rig|spineFk_rig|spine_contr
 		-6.4555899641663173e-019 0.045751871802365715 -0.32142811541028554
 		-0.29793298958651981 0.045300792569997535 -0.24262848701709225
 		;
-createNode transform -n "chest_offset" -p "|character|rig|spineFk_rig|spine_controls|pelvis_offset|pelvis|hip_offset|hip|waist_offset|waist";
+createNode transform -n "_chest_offset" -p "_waist";
 	setAttr ".t" -type "double3" -1.1764891060517976e-007 0.20632666980410219 -0.019635826659874431 ;
 	setAttr ".s" -type "double3" 0.99999999999999989 0.99999999999999933 0.99999999999999933 ;
-createNode transform -n "chest" -p "|character|rig|spineFk_rig|spine_controls|pelvis_offset|pelvis|hip_offset|hip|waist_offset|waist|chest_offset";
+createNode transform -n "_chest" -p "_chest_offset";
 	addAttr -ci true -sn "mirrored" -ln "mirrored" -min 0 -max 1 -at "bool";
 	addAttr -ci true -sn "translateXMirror" -ln "translateXMirror" -min 0 -max 1 -at "bool";
 	addAttr -ci true -sn "translateYMirror" -ln "translateYMirror" -min 0 -max 1 -at "bool";
@@ -11299,7 +11305,7 @@ createNode transform -n "chest" -p "|character|rig|spineFk_rig|spine_controls|pe
 	setAttr ".translateXMirror" yes;
 	setAttr ".rotateYMirror" yes;
 	setAttr ".rotateZMirror" yes;
-createNode nurbsCurve -n "chestShape" -p "|character|rig|spineFk_rig|spine_controls|pelvis_offset|pelvis|hip_offset|hip|waist_offset|waist|chest_offset|chest";
+createNode nurbsCurve -n "_chestShape" -p "_chest";
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
 	setAttr ".ovc" 17;
@@ -11319,18 +11325,18 @@ createNode nurbsCurve -n "chestShape" -p "|character|rig|spineFk_rig|spine_contr
 		-5.2932055871226334e-008 0.031916969844641166 -0.33146765422397068
 		-0.27961413331913143 0.0033795419449378734 -0.26127191391633769
 		;
-createNode transform -n "spine_system" -p "spineFk_rig";
-createNode transform -n "spine_connectors" -p "|character|rig|spineFk_rig|spine_system";
+createNode transform -n "_spine_system" -p "_spineFk_rig";
+createNode transform -n "_spine_connectors" -p "_spine_system";
 	setAttr ".v" no;
-createNode transform -n "spine_connector_start" -p "|character|rig|spineFk_rig|spine_system|spine_connectors";
+createNode transform -n "_spine_connector_start" -p "_spine_connectors";
 	setAttr ".t" -type "double3" 0.00022273281135137558 98.427550608909229 -3.1389997270911612 ;
 	setAttr ".s" -type "double3" 64.230133056640625 64.230133056640625 64.230133056640625 ;
-createNode locator -n "spine_connector_startShape" -p "|character|rig|spineFk_rig|spine_system|spine_connectors|spine_connector_start";
+createNode locator -n "_spine_connector_startShape" -p "_spine_connector_start";
 	setAttr -k off ".v" no;
 	setAttr ".ove" yes;
 	setAttr ".ovc" 14;
 	setAttr ".los" -type "double3" 0.5 0.5 0.5 ;
-createNode transform -n "spine_connector_end" -p "|character|rig|spineFk_rig|spine_system|spine_connectors|spine_connector_start";
+createNode transform -n "_spine_connector_end" -p "_spine_connector_start";
 	setAttr ".t" -type "double3" 0 0.41265333960820438 0 ;
 	setAttr -l on -k off ".tx";
 	setAttr -l on -k off ".tz";
@@ -11340,11 +11346,11 @@ createNode transform -n "spine_connector_end" -p "|character|rig|spineFk_rig|spi
 	setAttr -l on -k off ".sx";
 	setAttr -l on -k off ".sy";
 	setAttr -l on -k off ".sz";
-createNode locator -n "spine_connector_endShape" -p "|character|rig|spineFk_rig|spine_system|spine_connectors|spine_connector_start|spine_connector_end";
+createNode locator -n "_spine_connector_endShape" -p "_spine_connector_end";
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
 	setAttr ".ovc" 14;
-createNode nurbsCurve -n "spine_connector_endShape2" -p "|character|rig|spineFk_rig|spine_system|spine_connectors|spine_connector_start|spine_connector_end";
+createNode nurbsCurve -n "_spine_connector_endShape1" -p "_spine_connector_end";
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
 	setAttr ".ovc" 14;
@@ -11370,7 +11376,7 @@ createNode nurbsCurve -n "spine_connector_endShape2" -p "|character|rig|spineFk_
 		0.020809938256445781 -0.020809938256446121 -0.020809938256446121
 		0.020809938256445781 -0.020809938256446121 0.020809938256446121
 		;
-createNode parentConstraint -n "spine_connector_start_parentConstraint1" -p "|character|rig|spineFk_rig|spine_system|spine_connectors|spine_connector_start";
+createNode parentConstraint -n "_spine_connector_start_parentConstraint1" -p "_spine_connector_start";
 	addAttr -ci true -k true -sn "w0" -ln "spine_posW0" -dv 1 -min 0 -at "double";
 	setAttr -k on ".nds";
 	setAttr -k off ".v";
@@ -11389,12 +11395,12 @@ createNode parentConstraint -n "spine_connector_start_parentConstraint1" -p "|ch
 	setAttr ".tg[0].tt" -type "double3" 3.4677308103185949e-006 1.53242015740668 -0.048871138478306896 ;
 	setAttr ".cpim" -type "matrix" 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1;
 	setAttr ".rst" -type "double3" 0.019802274175722001 11.341122933182492 0.89072682248691681 ;
-createNode transform -n "spine_skinJoints" -p "spineFk_rig";
+createNode transform -n "_spine_skinJoints" -p "_spineFk_rig";
 	setAttr ".ove" yes;
 	setAttr ".s" -type "double3" 64.230133056640625 64.230133056640625 64.230133056640625 ;
-createNode transform -n "pelvis_joint_offset" -p "|character|rig|spineFk_rig|spine_skinJoints";
+createNode transform -n "_pelvis_joint_offset" -p "_spine_skinJoints";
 	setAttr ".t" -type "double3" 0 -0.001 0 ;
-createNode joint -n "pelvis_joint" -p "|character|rig|spineFk_rig|spine_skinJoints|pelvis_joint_offset";
+createNode joint -n "_pelvis_joint" -p "_pelvis_joint_offset";
 	addAttr -ci true -sn "liw" -ln "lockInfluenceWeights" -min 0 -max 1 -at "bool";
 	setAttr ".uoc" yes;
 	setAttr ".oc" 6;
@@ -11406,11 +11412,11 @@ createNode joint -n "pelvis_joint" -p "|character|rig|spineFk_rig|spine_skinJoin
 		 -4.3587222263808726e-016 0 1.3086626529693604 0 1.3086626529693604 -4.3587222263808726e-016 5.8116296351744994e-016 0
 		 0 1.4381153442047454 -0.053282215027789577 1;
 	setAttr ".radi" 0.2;
-createNode joint -n "spine_1_joint" -p "|character|rig|spineFk_rig|spine_skinJoints|pelvis_joint_offset|pelvis_joint";
+createNode joint -n "_spine_1_joint" -p "_pelvis_joint";
 	addAttr -ci true -sn "liw" -ln "lockInfluenceWeights" -min 0 -max 1 -at "bool";
 	setAttr ".uoc" yes;
 	setAttr ".oc" 6;
-	setAttr ".t" -type "double3" 0.0010000000000001119 0 -4.4426878083488062e-019 ;
+	setAttr ".t" -type "double3" 0.0010000000000001119 0 -4.4426878083488072e-019 ;
 	setAttr ".r" -type "double3" 90.000000000000014 -6.8151879241595141 90.000018995192107 ;
 	setAttr ".s" -type "double3" 1.0063796043395996 1 1 ;
 	setAttr ".mnrl" -type "double3" -360 -360 -360 ;
@@ -11420,12 +11426,12 @@ createNode joint -n "spine_1_joint" -p "|character|rig|spineFk_rig|spine_skinJoi
 		 2.179361113190437e-016 -0.22325999291966489 1.2894777682605914 0 1.3086626529693599 -1.1623259270349001e-015 -2.9058148175872497e-016 0
 		 0 1.4394240068577149 -0.053282215027789577 1;
 	setAttr ".radi" 0.2;
-createNode joint -n "spine_2_joint" -p "|character|rig|spineFk_rig|spine_skinJoints|pelvis_joint_offset|pelvis_joint|spine_1_joint";
+createNode joint -n "_spine_2_joint" -p "_spine_1_joint";
 	addAttr -ci true -sn "liw" -ln "lockInfluenceWeights" -min 0 -max 1 -at "bool";
 	setAttr ".uoc" yes;
 	setAttr ".oc" 6;
 	setAttr ".t" -type "double3" 0.068775556981563568 0 -2.2204460492503121e-016 ;
-	setAttr ".r" -type "double3" 3.1310389059116486e-006 1.7321862247290439e-005 3.7675711597360282 ;
+	setAttr ".r" -type "double3" 3.131038905911649e-006 1.7321862247290439e-005 3.7675711597360282 ;
 	setAttr ".s" -type "double3" 1.0063796043395996 0.99873217342394849 0.99873217342394849 ;
 	setAttr ".mnrl" -type "double3" -360 -360 -360 ;
 	setAttr ".mxrl" -type "double3" 360 360 360 ;
@@ -11433,7 +11439,7 @@ createNode joint -n "spine_2_joint" -p "|character|rig|spineFk_rig|spine_skinJoi
 		 1.5331421322671112e-016 -0.27935146843168546 1.2757453238973815 0 1.305972195094893 -1.1599363204116859e-015 -2.8998408010292148e-016 0
 		 -1.0586284375730028e-016 1.603364651419495 -0.024897555714522807 1;
 	setAttr ".radi" 0.2;
-createNode joint -n "spine_3_joint" -p "|character|rig|spineFk_rig|spine_skinJoints|pelvis_joint_offset|pelvis_joint|spine_1_joint|spine_2_joint";
+createNode joint -n "_spine_3_joint" -p "_spine_2_joint";
 	addAttr -ci true -sn "liw" -ln "lockInfluenceWeights" -min 0 -max 1 -at "bool";
 	setAttr ".uoc" yes;
 	setAttr ".oc" 6;
@@ -11446,7 +11452,7 @@ createNode joint -n "spine_3_joint" -p "|character|rig|spineFk_rig|spine_skinJoi
 		 2.0993278450438062e-016 -0.22847356248571621 1.2825524698148878 0 1.3027436457658057 -1.1570687925706531e-015 -2.8926719814266326e-016 0
 		 9.4985051781377825e-016 1.7658935313382629 0.010691586112907525 1;
 	setAttr ".radi" 0.2;
-createNode joint -n "chest_joint" -p "|character|rig|spineFk_rig|spine_skinJoints|pelvis_joint_offset|pelvis_joint|spine_1_joint|spine_2_joint|spine_3_joint";
+createNode joint -n "_chest_joint" -p "_spine_3_joint";
 	addAttr -ci true -sn "liw" -ln "lockInfluenceWeights" -min 0 -max 1 -at "bool";
 	setAttr ".uoc" yes;
 	setAttr ".oc" 6;
@@ -13348,7 +13354,7 @@ createNode transform -n "l_arm_mass_loc" -p "l_arm_limb_a_3_joint";
 	setAttr ".v" no;
 	setAttr ".ove" yes;
 	setAttr ".ovc" 6;
-	setAttr ".sh" -type "double3" -3.1954362094601101e-005 4.3778300900327687e-006 5.8743109211651502e-006 ;
+	setAttr ".sh" -type "double3" -3.1954362094601101e-005 4.3778300900327695e-006 5.874310921165151e-006 ;
 createNode locator -n "l_arm_mass_locShape" -p "l_arm_mass_loc";
 	setAttr -k off ".v";
 	setAttr ".los" -type "double3" 0.1 0.1 0.1 ;
@@ -21967,12 +21973,12 @@ createNode nurbsCurve -n "r_legShape" -p "r_leg";
 	setAttr ".ove" yes;
 	setAttr ".ovc" 6;
 	setAttr ".tw" yes;
-	setAttr -s 11 ".cp[0:10]" -type "double3" 2.9582283945788057e-031 0.0014246387801216537 
-		-0.0097144055158794457 2.9582283945788057e-031 0.0014246387801217448 -0.0097144055158793902 
-		2.9582283945788057e-031 0.0014246387801216814 -0.0097144055158794457 2.9582283945788057e-031 
-		0.0014246387801217231 -0.0097144055158794387 2.9582283945788057e-031 0.0014246387801216814 
-		-0.0097144055158794318 2.9582283945788057e-031 0.0014246387801217448 -0.0097144055158794457 
-		2.9582283945788057e-031 0.0014246387801216537 -0.0097144055158794318 2.9582283945788057e-031 
+	setAttr -s 11 ".cp[0:10]" -type "double3" 2.9582283945788061e-031 0.0014246387801216537 
+		-0.0097144055158794457 2.9582283945788061e-031 0.0014246387801217448 -0.0097144055158793902 
+		2.9582283945788061e-031 0.0014246387801216814 -0.0097144055158794457 2.9582283945788061e-031 
+		0.0014246387801217231 -0.0097144055158794387 2.9582283945788061e-031 0.0014246387801216814 
+		-0.0097144055158794318 2.9582283945788061e-031 0.0014246387801217448 -0.0097144055158794457 
+		2.9582283945788061e-031 0.0014246387801216537 -0.0097144055158794318 2.9582283945788061e-031 
 		0.0014246387801215704 -0.0097144055158794387 0 0 0 0 0 0 0 0 0;
 createNode transform -n "r_upLeg" -p "r_leg_fk_limbA_mirror";
 	addAttr -ci true -sn "mirrored" -ln "mirrored" -min 0 -max 1 -at "bool";
@@ -23385,7 +23391,7 @@ createNode transform -n "r_hip_mass_loc" -p "r_leg_limb_a_3_joint";
 	setAttr ".v" no;
 	setAttr ".ove" yes;
 	setAttr ".ovc" 6;
-	setAttr ".sh" -type "double3" 6.6159737753286184e-006 0.00055900888624743552 1.2777074920158891e-005 ;
+	setAttr ".sh" -type "double3" 6.6159737753286184e-006 0.00055900888624743552 1.2777074920158893e-005 ;
 createNode locator -n "r_hip_mass_locShape" -p "r_hip_mass_loc";
 	setAttr -k off ".v";
 	setAttr ".los" -type "double3" 0.1 0.1 0.1 ;
@@ -24940,7 +24946,7 @@ createNode parentConstraint -n "r_ear_cluster85Handle_parentConstraint1" -p "r_e
 		0 ;
 	setAttr ".lr" -type "double3" 89.999999999999986 20.388715387295562 114.45822277877916 ;
 	setAttr ".rst" -type "double3" -2.2204460492503131e-016 -4.4408920985006262e-016 
-		2.9582283945788057e-031 ;
+		2.9582283945788061e-031 ;
 	setAttr -k on ".w0";
 createNode transform -n "r_ear_cluster86Handle" -p "r_ear_clusters_gr";
 	setAttr ".rp" -type "double3" 3.6666667461395281 2.2332849621395847 4.4408920985006252e-016 ;
@@ -24993,7 +24999,7 @@ createNode parentConstraint -n "r_ear_cluster87Handle_parentConstraint1" -p "r_e
 	setAttr ".tg[0].tot" -type "double3" 2.3841858087791934e-007 -4.4408920985006262e-016 
 		-4.3659520443384281e-014 ;
 	setAttr ".lr" -type "double3" 89.999999999999986 20.388715387295562 114.45822277877916 ;
-	setAttr ".rst" -type "double3" 0 4.4408920985006262e-016 -5.9164567891576104e-031 ;
+	setAttr ".rst" -type "double3" 0 4.4408920985006262e-016 -5.9164567891576113e-031 ;
 	setAttr -k on ".w0";
 createNode ikHandle -n "r_ear_ikHandle" -p "r_ear_system";
 	setAttr ".t" -type "double3" -59.53256046979606 293.71402049146184 -40.067606186666943 ;
@@ -25201,7 +25207,7 @@ createNode transform -n "l_b_eyeLid_inverse" -p "l_b_eyeLid_xform";
 	setAttr ".rp" -type "double3" -1.1102230246251493e-016 8.8817841970012484e-016 1.3322676295501882e-015 ;
 	setAttr ".sp" -type "double3" -1.1102230246251563e-016 8.8817841970012523e-016 1.3322676295501878e-015 ;
 	setAttr ".spt" -type "double3" 7.3955709864469909e-031 -3.9443045261050244e-031 
-		4.9303806576313693e-031 ;
+		4.9303806576313702e-031 ;
 createNode transform -n "l_b_eyeLid" -p "l_b_eyeLid_inverse";
 	setAttr -l on -k off ".v";
 	setAttr -l on -k off ".tz";
@@ -29243,7 +29249,7 @@ createNode scaleConstraint -n "twoHanded_parent_scaleConstraint1" -p "twoHanded_
 createNode transform -n "mass_loc_14" -p "rig";
 	setAttr ".ove" yes;
 	setAttr ".ovc" 6;
-	setAttr ".r" -type "double3" -178.72109194089381 -4.74863573435072 -91.161794792159768 ;
+	setAttr ".r" -type "double3" -178.72109194089381 -4.74863573435072 -91.161794792159782 ;
 	setAttr ".s" -type "double3" 106.84097616231338 106.84097616231338 106.84097616231338 ;
 	setAttr ".sh" -type "double3" 6.6159737753436202e-006 0.00055900888624742912 1.2777074920197011e-005 ;
 createNode locator -n "mass_loc_Shape14" -p "mass_loc_14";
@@ -43314,7 +43320,7 @@ createNode unitConversion -n "unitConversion1311";
 createNode unitConversion -n "unitConversion28";
 	setAttr ".cf" 0.017453292519943295;
 createNode decomposeMatrix -n "decomposeMatrix9";
-	setAttr ".or" -type "double3" 0.22050152719020558 0 -3.975693351829396e-016 ;
+	setAttr ".or" -type "double3" 0.2205015271902056 0 -3.975693351829396e-016 ;
 	setAttr ".os" -type "double3" 1 1 0.99999999999999989 ;
 	setAttr ".oqx" 0.0019242376400943949;
 	setAttr ".oqw" 0.9999981486530386;
@@ -53972,19 +53978,28 @@ createNode script -n "uiConfigurationScriptNode";
 		+ "\t\t}\n\t} else {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Render View\")) -mbv $menusOkayInPanels  $panelName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextPanel \"blendShapePanel\" (localizedPanelLabel(\"Blend Shape\")) `;\n\tif (\"\" == $panelName) {\n\t\tif ($useSceneConfig) {\n\t\t\tblendShapePanel -unParent -l (localizedPanelLabel(\"Blend Shape\")) -mbv $menusOkayInPanels ;\n\t\t}\n\t} else {\n\t\t$label = `panel -q -label $panelName`;\n\t\tblendShapePanel -edit -l (localizedPanelLabel(\"Blend Shape\")) -mbv $menusOkayInPanels  $panelName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"dynRelEdPanel\" (localizedPanelLabel(\"Dynamic Relationships\")) `;\n\tif (\"\" == $panelName) {\n\t\tif ($useSceneConfig) {\n\t\t\t$panelName = `scriptedPanel -unParent  -type \"dynRelEdPanel\" -l (localizedPanelLabel(\"Dynamic Relationships\")) -mbv $menusOkayInPanels `;\n\t\t}\n\t} else {\n"
 		+ "\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Dynamic Relationships\")) -mbv $menusOkayInPanels  $panelName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"relationshipPanel\" (localizedPanelLabel(\"Relationship Editor\")) `;\n\tif (\"\" == $panelName) {\n\t\tif ($useSceneConfig) {\n\t\t\t$panelName = `scriptedPanel -unParent  -type \"relationshipPanel\" -l (localizedPanelLabel(\"Relationship Editor\")) -mbv $menusOkayInPanels `;\n\t\t}\n\t} else {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Relationship Editor\")) -mbv $menusOkayInPanels  $panelName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"referenceEditorPanel\" (localizedPanelLabel(\"Reference Editor\")) `;\n\tif (\"\" == $panelName) {\n\t\tif ($useSceneConfig) {\n\t\t\t$panelName = `scriptedPanel -unParent  -type \"referenceEditorPanel\" -l (localizedPanelLabel(\"Reference Editor\")) -mbv $menusOkayInPanels `;\n"
 		+ "\t\t}\n\t} else {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Reference Editor\")) -mbv $menusOkayInPanels  $panelName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"componentEditorPanel\" (localizedPanelLabel(\"Component Editor\")) `;\n\tif (\"\" == $panelName) {\n\t\tif ($useSceneConfig) {\n\t\t\t$panelName = `scriptedPanel -unParent  -type \"componentEditorPanel\" -l (localizedPanelLabel(\"Component Editor\")) -mbv $menusOkayInPanels `;\n\t\t}\n\t} else {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Component Editor\")) -mbv $menusOkayInPanels  $panelName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"dynPaintScriptedPanelType\" (localizedPanelLabel(\"Paint Effects\")) `;\n\tif (\"\" == $panelName) {\n\t\tif ($useSceneConfig) {\n\t\t\t$panelName = `scriptedPanel -unParent  -type \"dynPaintScriptedPanelType\" -l (localizedPanelLabel(\"Paint Effects\")) -mbv $menusOkayInPanels `;\n"
-		+ "\t\t}\n\t} else {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Paint Effects\")) -mbv $menusOkayInPanels  $panelName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"scriptEditorPanel\" (localizedPanelLabel(\"Script Editor\")) `;\n\tif (\"\" == $panelName) {\n\t\tif ($useSceneConfig) {\n\t\t\t$panelName = `scriptedPanel -unParent  -type \"scriptEditorPanel\" -l (localizedPanelLabel(\"Script Editor\")) -mbv $menusOkayInPanels `;\n\t\t}\n\t} else {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Script Editor\")) -mbv $menusOkayInPanels  $panelName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"Stereo\" (localizedPanelLabel(\"Stereo\")) `;\n\tif (\"\" == $panelName) {\n\t\tif ($useSceneConfig) {\n\t\t\t$panelName = `scriptedPanel -unParent  -type \"Stereo\" -l (localizedPanelLabel(\"Stereo\")) -mbv $menusOkayInPanels `;\nstring $editorName = ($panelName+\"Editor\");\n"
-		+ "            stereoCameraView -e \n                -camera \"persp\" \n                -useInteractiveMode 0\n                -displayLights \"default\" \n                -displayAppearance \"wireframe\" \n                -activeOnly 0\n                -ignorePanZoom 0\n                -wireframeOnShaded 0\n                -headsUpDisplay 1\n                -selectionHiliteDisplay 1\n                -useDefaultMaterial 0\n                -bufferMode \"double\" \n                -twoSidedLighting 1\n                -backfaceCulling 0\n                -xray 0\n                -jointXray 0\n                -activeComponentsXray 0\n                -displayTextures 0\n                -smoothWireframe 0\n                -lineWidth 1\n                -textureAnisotropic 0\n                -textureHilight 1\n                -textureSampling 2\n                -textureDisplay \"modulate\" \n                -textureMaxSize 16384\n                -fogging 0\n                -fogSource \"fragment\" \n                -fogMode \"linear\" \n                -fogStart 0\n"
-		+ "                -fogEnd 100\n                -fogDensity 0.1\n                -fogColor 0.5 0.5 0.5 1 \n                -maxConstantTransparency 1\n                -objectFilterShowInHUD 1\n                -isFiltered 0\n                -colorResolution 4 4 \n                -bumpResolution 4 4 \n                -textureCompression 0\n                -transparencyAlgorithm \"frontAndBackCull\" \n                -transpInShadows 0\n                -cullingOverride \"none\" \n                -lowQualityLighting 0\n                -maximumNumHardwareLights 0\n                -occlusionCulling 0\n                -shadingModel 0\n                -useBaseRenderer 0\n                -useReducedRenderer 0\n                -smallObjectCulling 0\n                -smallObjectThreshold -1 \n                -interactiveDisableShadows 0\n                -interactiveBackFaceCull 0\n                -sortTransparent 1\n                -nurbsCurves 1\n                -nurbsSurfaces 1\n                -polymeshes 1\n                -subdivSurfaces 1\n                -planes 1\n"
-		+ "                -lights 1\n                -cameras 1\n                -controlVertices 1\n                -hulls 1\n                -grid 1\n                -imagePlane 1\n                -joints 1\n                -ikHandles 1\n                -deformers 1\n                -dynamics 1\n                -fluids 1\n                -hairSystems 1\n                -follicles 1\n                -nCloths 1\n                -nParticles 1\n                -nRigids 1\n                -dynamicConstraints 1\n                -locators 1\n                -manipulators 1\n                -pluginShapes 1\n                -dimensions 1\n                -handles 1\n                -pivots 1\n                -textures 1\n                -strokes 1\n                -motionTrails 1\n                -clipGhosts 1\n                -greasePencils 1\n                -shadows 0\n                -displayMode \"centerEye\" \n                -viewColor 0 0 0 1 \n                -useCustomBackground 1\n                $editorName;\n            stereoCameraView -e -viewSelected 0 $editorName;\n"
-		+ "\t\t}\n\t} else {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Stereo\")) -mbv $menusOkayInPanels  $panelName;\nstring $editorName = ($panelName+\"Editor\");\n            stereoCameraView -e \n                -camera \"persp\" \n                -useInteractiveMode 0\n                -displayLights \"default\" \n                -displayAppearance \"wireframe\" \n                -activeOnly 0\n                -ignorePanZoom 0\n                -wireframeOnShaded 0\n                -headsUpDisplay 1\n                -selectionHiliteDisplay 1\n                -useDefaultMaterial 0\n                -bufferMode \"double\" \n                -twoSidedLighting 1\n                -backfaceCulling 0\n                -xray 0\n                -jointXray 0\n                -activeComponentsXray 0\n                -displayTextures 0\n                -smoothWireframe 0\n                -lineWidth 1\n                -textureAnisotropic 0\n                -textureHilight 1\n                -textureSampling 2\n                -textureDisplay \"modulate\" \n"
-		+ "                -textureMaxSize 16384\n                -fogging 0\n                -fogSource \"fragment\" \n                -fogMode \"linear\" \n                -fogStart 0\n                -fogEnd 100\n                -fogDensity 0.1\n                -fogColor 0.5 0.5 0.5 1 \n                -maxConstantTransparency 1\n                -objectFilterShowInHUD 1\n                -isFiltered 0\n                -colorResolution 4 4 \n                -bumpResolution 4 4 \n                -textureCompression 0\n                -transparencyAlgorithm \"frontAndBackCull\" \n                -transpInShadows 0\n                -cullingOverride \"none\" \n                -lowQualityLighting 0\n                -maximumNumHardwareLights 0\n                -occlusionCulling 0\n                -shadingModel 0\n                -useBaseRenderer 0\n                -useReducedRenderer 0\n                -smallObjectCulling 0\n                -smallObjectThreshold -1 \n                -interactiveDisableShadows 0\n                -interactiveBackFaceCull 0\n                -sortTransparent 1\n"
-		+ "                -nurbsCurves 1\n                -nurbsSurfaces 1\n                -polymeshes 1\n                -subdivSurfaces 1\n                -planes 1\n                -lights 1\n                -cameras 1\n                -controlVertices 1\n                -hulls 1\n                -grid 1\n                -imagePlane 1\n                -joints 1\n                -ikHandles 1\n                -deformers 1\n                -dynamics 1\n                -fluids 1\n                -hairSystems 1\n                -follicles 1\n                -nCloths 1\n                -nParticles 1\n                -nRigids 1\n                -dynamicConstraints 1\n                -locators 1\n                -manipulators 1\n                -pluginShapes 1\n                -dimensions 1\n                -handles 1\n                -pivots 1\n                -textures 1\n                -strokes 1\n                -motionTrails 1\n                -clipGhosts 1\n                -greasePencils 1\n                -shadows 0\n                -displayMode \"centerEye\" \n"
-		+ "                -viewColor 0 0 0 1 \n                -useCustomBackground 1\n                $editorName;\n            stereoCameraView -e -viewSelected 0 $editorName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\tif ($useSceneConfig) {\n        string $configName = `getPanel -cwl (localizedPanelLabel(\"Current Layout\"))`;\n        if (\"\" != $configName) {\n\t\t\tpanelConfiguration -edit -label (localizedPanelLabel(\"Current Layout\")) \n\t\t\t\t-defaultImage \"vacantCell.xP:/\"\n\t\t\t\t-image \"\"\n\t\t\t\t-sc false\n\t\t\t\t-configString \"global string $gMainPane; paneLayout -e -cn \\\"vertical2\\\" -ps 1 38 100 -ps 2 62 100 $gMainPane;\"\n\t\t\t\t-removeAllPanels\n\t\t\t\t-ap false\n\t\t\t\t\t(localizedPanelLabel(\"Outliner\")) \n\t\t\t\t\t\"outlinerPanel\"\n"
-		+ "\t\t\t\t\t\"$panelName = `outlinerPanel -unParent -l (localizedPanelLabel(\\\"Outliner\\\")) -mbv $menusOkayInPanels `;\\n$editorName = $panelName;\\noutlinerEditor -e \\n    -docTag \\\"isolOutln_fromSeln\\\" \\n    -showShapes 0\\n    -showReferenceNodes 0\\n    -showReferenceMembers 0\\n    -showAttributes 0\\n    -showConnected 0\\n    -showAnimCurvesOnly 0\\n    -showMuteInfo 0\\n    -organizeByLayer 1\\n    -showAnimLayerWeight 1\\n    -autoExpandLayers 1\\n    -autoExpand 0\\n    -showDagOnly 1\\n    -showAssets 1\\n    -showContainedOnly 1\\n    -showPublishedAsConnected 0\\n    -showContainerContents 1\\n    -ignoreDagHierarchy 0\\n    -expandConnections 0\\n    -showUpstreamCurves 1\\n    -showUnitlessCurves 1\\n    -showCompounds 1\\n    -showLeafs 1\\n    -showNumericAttrsOnly 0\\n    -highlightActive 1\\n    -autoSelectNewObjects 0\\n    -doNotSelectNewObjects 0\\n    -dropIsParent 1\\n    -transmitFilters 0\\n    -setFilter \\\"defaultSetFilter\\\" \\n    -showSetMembers 1\\n    -allowMultiSelection 1\\n    -alwaysToggleSelect 0\\n    -directSelect 0\\n    -displayMode \\\"DAG\\\" \\n    -expandObjects 0\\n    -setsIgnoreFilters 1\\n    -containersIgnoreFilters 0\\n    -editAttrName 0\\n    -showAttrValues 0\\n    -highlightSecondary 0\\n    -showUVAttrsOnly 0\\n    -showTextureNodesOnly 0\\n    -attrAlphaOrder \\\"default\\\" \\n    -animLayerFilterOptions \\\"allAffecting\\\" \\n    -sortOrder \\\"none\\\" \\n    -longNames 0\\n    -niceNames 1\\n    -showNamespace 1\\n    -showPinIcons 0\\n    -mapMotionTrails 0\\n    $editorName\"\n"
-		+ "\t\t\t\t\t\"outlinerPanel -edit -l (localizedPanelLabel(\\\"Outliner\\\")) -mbv $menusOkayInPanels  $panelName;\\n$editorName = $panelName;\\noutlinerEditor -e \\n    -docTag \\\"isolOutln_fromSeln\\\" \\n    -showShapes 0\\n    -showReferenceNodes 0\\n    -showReferenceMembers 0\\n    -showAttributes 0\\n    -showConnected 0\\n    -showAnimCurvesOnly 0\\n    -showMuteInfo 0\\n    -organizeByLayer 1\\n    -showAnimLayerWeight 1\\n    -autoExpandLayers 1\\n    -autoExpand 0\\n    -showDagOnly 1\\n    -showAssets 1\\n    -showContainedOnly 1\\n    -showPublishedAsConnected 0\\n    -showContainerContents 1\\n    -ignoreDagHierarchy 0\\n    -expandConnections 0\\n    -showUpstreamCurves 1\\n    -showUnitlessCurves 1\\n    -showCompounds 1\\n    -showLeafs 1\\n    -showNumericAttrsOnly 0\\n    -highlightActive 1\\n    -autoSelectNewObjects 0\\n    -doNotSelectNewObjects 0\\n    -dropIsParent 1\\n    -transmitFilters 0\\n    -setFilter \\\"defaultSetFilter\\\" \\n    -showSetMembers 1\\n    -allowMultiSelection 1\\n    -alwaysToggleSelect 0\\n    -directSelect 0\\n    -displayMode \\\"DAG\\\" \\n    -expandObjects 0\\n    -setsIgnoreFilters 1\\n    -containersIgnoreFilters 0\\n    -editAttrName 0\\n    -showAttrValues 0\\n    -highlightSecondary 0\\n    -showUVAttrsOnly 0\\n    -showTextureNodesOnly 0\\n    -attrAlphaOrder \\\"default\\\" \\n    -animLayerFilterOptions \\\"allAffecting\\\" \\n    -sortOrder \\\"none\\\" \\n    -longNames 0\\n    -niceNames 1\\n    -showNamespace 1\\n    -showPinIcons 0\\n    -mapMotionTrails 0\\n    $editorName\"\n"
-		+ "\t\t\t\t-ap false\n\t\t\t\t\t(localizedPanelLabel(\"Persp View\")) \n\t\t\t\t\t\"modelPanel\"\n"
+		+ "\t\t}\n\t} else {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Paint Effects\")) -mbv $menusOkayInPanels  $panelName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"scriptEditorPanel\" (localizedPanelLabel(\"Script Editor\")) `;\n\tif (\"\" == $panelName) {\n\t\tif ($useSceneConfig) {\n\t\t\t$panelName = `scriptedPanel -unParent  -type \"scriptEditorPanel\" -l (localizedPanelLabel(\"Script Editor\")) -mbv $menusOkayInPanels `;\n\t\t}\n\t} else {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Script Editor\")) -mbv $menusOkayInPanels  $panelName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextPanel \"blendShapePanel\" (localizedPanelLabel(\"\")) `;\n\tif (\"\" == $panelName) {\n\t\tif ($useSceneConfig) {\n\t\t\tblendShapePanel -unParent -l (localizedPanelLabel(\"\")) -mbv $menusOkayInPanels ;\n\t\t}\n\t} else {\n\t\t$label = `panel -q -label $panelName`;\n"
+		+ "\t\tblendShapePanel -edit -l (localizedPanelLabel(\"\")) -mbv $menusOkayInPanels  $panelName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextPanel \"blendShapePanel\" (localizedPanelLabel(\"\")) `;\n\tif (\"\" == $panelName) {\n\t\tif ($useSceneConfig) {\n\t\t\tblendShapePanel -unParent -l (localizedPanelLabel(\"\")) -mbv $menusOkayInPanels ;\n\t\t}\n\t} else {\n\t\t$label = `panel -q -label $panelName`;\n\t\tblendShapePanel -edit -l (localizedPanelLabel(\"\")) -mbv $menusOkayInPanels  $panelName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextPanel \"blendShapePanel\" (localizedPanelLabel(\"\")) `;\n\tif (\"\" == $panelName) {\n\t\tif ($useSceneConfig) {\n\t\t\tblendShapePanel -unParent -l (localizedPanelLabel(\"\")) -mbv $menusOkayInPanels ;\n\t\t}\n\t} else {\n\t\t$label = `panel -q -label $panelName`;\n\t\tblendShapePanel -edit -l (localizedPanelLabel(\"\")) -mbv $menusOkayInPanels  $panelName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n"
+		+ "\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextPanel \"blendShapePanel\" (localizedPanelLabel(\"\")) `;\n\tif (\"\" == $panelName) {\n\t\tif ($useSceneConfig) {\n\t\t\tblendShapePanel -unParent -l (localizedPanelLabel(\"\")) -mbv $menusOkayInPanels ;\n\t\t}\n\t} else {\n\t\t$label = `panel -q -label $panelName`;\n\t\tblendShapePanel -edit -l (localizedPanelLabel(\"\")) -mbv $menusOkayInPanels  $panelName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextPanel \"blendShapePanel\" (localizedPanelLabel(\"\")) `;\n\tif (\"\" == $panelName) {\n\t\tif ($useSceneConfig) {\n\t\t\tblendShapePanel -unParent -l (localizedPanelLabel(\"\")) -mbv $menusOkayInPanels ;\n\t\t}\n\t} else {\n\t\t$label = `panel -q -label $panelName`;\n\t\tblendShapePanel -edit -l (localizedPanelLabel(\"\")) -mbv $menusOkayInPanels  $panelName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextPanel \"blendShapePanel\" (localizedPanelLabel(\"\")) `;\n\tif (\"\" == $panelName) {\n\t\tif ($useSceneConfig) {\n"
+		+ "\t\t\tblendShapePanel -unParent -l (localizedPanelLabel(\"\")) -mbv $menusOkayInPanels ;\n\t\t}\n\t} else {\n\t\t$label = `panel -q -label $panelName`;\n\t\tblendShapePanel -edit -l (localizedPanelLabel(\"\")) -mbv $menusOkayInPanels  $panelName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextPanel \"blendShapePanel\" (localizedPanelLabel(\"\")) `;\n\tif (\"\" == $panelName) {\n\t\tif ($useSceneConfig) {\n\t\t\tblendShapePanel -unParent -l (localizedPanelLabel(\"\")) -mbv $menusOkayInPanels ;\n\t\t}\n\t} else {\n\t\t$label = `panel -q -label $panelName`;\n\t\tblendShapePanel -edit -l (localizedPanelLabel(\"\")) -mbv $menusOkayInPanels  $panelName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextPanel \"blendShapePanel\" (localizedPanelLabel(\"\")) `;\n\tif (\"\" == $panelName) {\n\t\tif ($useSceneConfig) {\n\t\t\tblendShapePanel -unParent -l (localizedPanelLabel(\"\")) -mbv $menusOkayInPanels ;\n\t\t}\n\t} else {\n\t\t$label = `panel -q -label $panelName`;\n"
+		+ "\t\tblendShapePanel -edit -l (localizedPanelLabel(\"\")) -mbv $menusOkayInPanels  $panelName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextPanel \"blendShapePanel\" (localizedPanelLabel(\"\")) `;\n\tif (\"\" == $panelName) {\n\t\tif ($useSceneConfig) {\n\t\t\tblendShapePanel -unParent -l (localizedPanelLabel(\"\")) -mbv $menusOkayInPanels ;\n\t\t}\n\t} else {\n\t\t$label = `panel -q -label $panelName`;\n\t\tblendShapePanel -edit -l (localizedPanelLabel(\"\")) -mbv $menusOkayInPanels  $panelName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextPanel \"blendShapePanel\" (localizedPanelLabel(\"\")) `;\n\tif (\"\" == $panelName) {\n\t\tif ($useSceneConfig) {\n\t\t\tblendShapePanel -unParent -l (localizedPanelLabel(\"\")) -mbv $menusOkayInPanels ;\n\t\t}\n\t} else {\n\t\t$label = `panel -q -label $panelName`;\n\t\tblendShapePanel -edit -l (localizedPanelLabel(\"\")) -mbv $menusOkayInPanels  $panelName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n"
+		+ "\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextPanel \"blendShapePanel\" (localizedPanelLabel(\"\")) `;\n\tif (\"\" == $panelName) {\n\t\tif ($useSceneConfig) {\n\t\t\tblendShapePanel -unParent -l (localizedPanelLabel(\"\")) -mbv $menusOkayInPanels ;\n\t\t}\n\t} else {\n\t\t$label = `panel -q -label $panelName`;\n\t\tblendShapePanel -edit -l (localizedPanelLabel(\"\")) -mbv $menusOkayInPanels  $panelName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextPanel \"blendShapePanel\" (localizedPanelLabel(\"\")) `;\n\tif (\"\" == $panelName) {\n\t\tif ($useSceneConfig) {\n\t\t\tblendShapePanel -unParent -l (localizedPanelLabel(\"\")) -mbv $menusOkayInPanels ;\n\t\t}\n\t} else {\n\t\t$label = `panel -q -label $panelName`;\n\t\tblendShapePanel -edit -l (localizedPanelLabel(\"\")) -mbv $menusOkayInPanels  $panelName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextPanel \"blendShapePanel\" (localizedPanelLabel(\"\")) `;\n\tif (\"\" == $panelName) {\n\t\tif ($useSceneConfig) {\n"
+		+ "\t\t\tblendShapePanel -unParent -l (localizedPanelLabel(\"\")) -mbv $menusOkayInPanels ;\n\t\t}\n\t} else {\n\t\t$label = `panel -q -label $panelName`;\n\t\tblendShapePanel -edit -l (localizedPanelLabel(\"\")) -mbv $menusOkayInPanels  $panelName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextPanel \"blendShapePanel\" (localizedPanelLabel(\"\")) `;\n\tif (\"\" == $panelName) {\n\t\tif ($useSceneConfig) {\n\t\t\tblendShapePanel -unParent -l (localizedPanelLabel(\"\")) -mbv $menusOkayInPanels ;\n\t\t}\n\t} else {\n\t\t$label = `panel -q -label $panelName`;\n\t\tblendShapePanel -edit -l (localizedPanelLabel(\"\")) -mbv $menusOkayInPanels  $panelName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextPanel \"blendShapePanel\" (localizedPanelLabel(\"\")) `;\n\tif (\"\" == $panelName) {\n\t\tif ($useSceneConfig) {\n\t\t\tblendShapePanel -unParent -l (localizedPanelLabel(\"\")) -mbv $menusOkayInPanels ;\n\t\t}\n\t} else {\n\t\t$label = `panel -q -label $panelName`;\n"
+		+ "\t\tblendShapePanel -edit -l (localizedPanelLabel(\"\")) -mbv $menusOkayInPanels  $panelName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextPanel \"blendShapePanel\" (localizedPanelLabel(\"\")) `;\n\tif (\"\" == $panelName) {\n\t\tif ($useSceneConfig) {\n\t\t\tblendShapePanel -unParent -l (localizedPanelLabel(\"\")) -mbv $menusOkayInPanels ;\n\t\t}\n\t} else {\n\t\t$label = `panel -q -label $panelName`;\n\t\tblendShapePanel -edit -l (localizedPanelLabel(\"\")) -mbv $menusOkayInPanels  $panelName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"createNodePanel\" (localizedPanelLabel(\"Create Node\")) `;\n\tif (\"\" == $panelName) {\n\t\tif ($useSceneConfig) {\n\t\t\t$panelName = `scriptedPanel -unParent  -type \"createNodePanel\" -l (localizedPanelLabel(\"Create Node\")) -mbv $menusOkayInPanels `;\n\t\t}\n\t} else {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Create Node\")) -mbv $menusOkayInPanels  $panelName;\n"
+		+ "\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"nodeEditorPanel\" (localizedPanelLabel(\"Node Editor\")) `;\n\tif (\"\" == $panelName) {\n\t\tif ($useSceneConfig) {\n\t\t\t$panelName = `scriptedPanel -unParent  -type \"nodeEditorPanel\" -l (localizedPanelLabel(\"Node Editor\")) -mbv $menusOkayInPanels `;\n\n\t\t\t$editorName = ($panelName+\"NodeEditorEd\");\n            nodeEditor -e \n                -allAttributes 0\n                -allNodes 0\n                -autoSizeNodes 1\n                -createNodeCommand \"nodeEdCreateNodeCommand\" \n                -defaultPinnedState 0\n                -ignoreAssets 1\n                -additiveGraphingMode 0\n                -settingsChangedCallback \"nodeEdSyncControls\" \n                -traversalDepthLimit -1\n                -keyPressCommand \"nodeEdKeyPressCommand\" \n                -keyReleaseCommand \"nodeEdKeyReleaseCommand\" \n                -nodeTitleMode \"name\" \n                -gridSnap 0\n                -gridVisibility 1\n"
+		+ "                -popupMenuScript \"nodeEdBuildPanelMenus\" \n                -island 0\n                -showNamespace 1\n                -showShapes 1\n                -showSGShapes 0\n                -showTransforms 1\n                -syncedSelection 1\n                -extendToShapes 1\n                $editorName;\n\t\t\tif (`objExists nodeEditorPanel2Info`) nodeEditor -e -restoreInfo nodeEditorPanel2Info $editorName;\n\t\t}\n\t} else {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Node Editor\")) -mbv $menusOkayInPanels  $panelName;\n\n\t\t\t$editorName = ($panelName+\"NodeEditorEd\");\n            nodeEditor -e \n                -allAttributes 0\n                -allNodes 0\n                -autoSizeNodes 1\n                -createNodeCommand \"nodeEdCreateNodeCommand\" \n                -defaultPinnedState 0\n                -ignoreAssets 1\n                -additiveGraphingMode 0\n                -settingsChangedCallback \"nodeEdSyncControls\" \n                -traversalDepthLimit -1\n                -keyPressCommand \"nodeEdKeyPressCommand\" \n"
+		+ "                -keyReleaseCommand \"nodeEdKeyReleaseCommand\" \n                -nodeTitleMode \"name\" \n                -gridSnap 0\n                -gridVisibility 1\n                -popupMenuScript \"nodeEdBuildPanelMenus\" \n                -island 0\n                -showNamespace 1\n                -showShapes 1\n                -showSGShapes 0\n                -showTransforms 1\n                -syncedSelection 1\n                -extendToShapes 1\n                $editorName;\n\t\t\tif (`objExists nodeEditorPanel2Info`) nodeEditor -e -restoreInfo nodeEditorPanel2Info $editorName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"Stereo\" (localizedPanelLabel(\"Stereo\")) `;\n\tif (\"\" == $panelName) {\n\t\tif ($useSceneConfig) {\n\t\t\t$panelName = `scriptedPanel -unParent  -type \"Stereo\" -l (localizedPanelLabel(\"Stereo\")) -mbv $menusOkayInPanels `;\nstring $editorName = ($panelName+\"Editor\");\n            stereoCameraView -e \n                -camera \"persp\" \n                -useInteractiveMode 0\n"
+		+ "                -displayLights \"default\" \n                -displayAppearance \"wireframe\" \n                -activeOnly 0\n                -ignorePanZoom 0\n                -wireframeOnShaded 0\n                -headsUpDisplay 1\n                -selectionHiliteDisplay 1\n                -useDefaultMaterial 0\n                -bufferMode \"double\" \n                -twoSidedLighting 1\n                -backfaceCulling 0\n                -xray 0\n                -jointXray 0\n                -activeComponentsXray 0\n                -displayTextures 0\n                -smoothWireframe 0\n                -lineWidth 1\n                -textureAnisotropic 0\n                -textureHilight 1\n                -textureSampling 2\n                -textureDisplay \"modulate\" \n                -textureMaxSize 16384\n                -fogging 0\n                -fogSource \"fragment\" \n                -fogMode \"linear\" \n                -fogStart 0\n                -fogEnd 100\n                -fogDensity 0.1\n                -fogColor 0.5 0.5 0.5 1 \n                -maxConstantTransparency 1\n"
+		+ "                -objectFilterShowInHUD 1\n                -isFiltered 0\n                -colorResolution 4 4 \n                -bumpResolution 4 4 \n                -textureCompression 0\n                -transparencyAlgorithm \"frontAndBackCull\" \n                -transpInShadows 0\n                -cullingOverride \"none\" \n                -lowQualityLighting 0\n                -maximumNumHardwareLights 0\n                -occlusionCulling 0\n                -shadingModel 0\n                -useBaseRenderer 0\n                -useReducedRenderer 0\n                -smallObjectCulling 0\n                -smallObjectThreshold -1 \n                -interactiveDisableShadows 0\n                -interactiveBackFaceCull 0\n                -sortTransparent 1\n                -nurbsCurves 1\n                -nurbsSurfaces 1\n                -polymeshes 1\n                -subdivSurfaces 1\n                -planes 1\n                -lights 1\n                -cameras 1\n                -controlVertices 1\n                -hulls 1\n                -grid 1\n"
+		+ "                -imagePlane 1\n                -joints 1\n                -ikHandles 1\n                -deformers 1\n                -dynamics 1\n                -fluids 1\n                -hairSystems 1\n                -follicles 1\n                -nCloths 1\n                -nParticles 1\n                -nRigids 1\n                -dynamicConstraints 1\n                -locators 1\n                -manipulators 1\n                -pluginShapes 1\n                -dimensions 1\n                -handles 1\n                -pivots 1\n                -textures 1\n                -strokes 1\n                -motionTrails 1\n                -clipGhosts 1\n                -greasePencils 1\n                -shadows 0\n                -displayMode \"centerEye\" \n                -viewColor 0 0 0 1 \n                -useCustomBackground 1\n                $editorName;\n            stereoCameraView -e -viewSelected 0 $editorName;\n\t\t}\n\t} else {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Stereo\")) -mbv $menusOkayInPanels  $panelName;\n"
+		+ "string $editorName = ($panelName+\"Editor\");\n            stereoCameraView -e \n                -camera \"persp\" \n                -useInteractiveMode 0\n                -displayLights \"default\" \n                -displayAppearance \"wireframe\" \n                -activeOnly 0\n                -ignorePanZoom 0\n                -wireframeOnShaded 0\n                -headsUpDisplay 1\n                -selectionHiliteDisplay 1\n                -useDefaultMaterial 0\n                -bufferMode \"double\" \n                -twoSidedLighting 1\n                -backfaceCulling 0\n                -xray 0\n                -jointXray 0\n                -activeComponentsXray 0\n                -displayTextures 0\n                -smoothWireframe 0\n                -lineWidth 1\n                -textureAnisotropic 0\n                -textureHilight 1\n                -textureSampling 2\n                -textureDisplay \"modulate\" \n                -textureMaxSize 16384\n                -fogging 0\n                -fogSource \"fragment\" \n                -fogMode \"linear\" \n"
+		+ "                -fogStart 0\n                -fogEnd 100\n                -fogDensity 0.1\n                -fogColor 0.5 0.5 0.5 1 \n                -maxConstantTransparency 1\n                -objectFilterShowInHUD 1\n                -isFiltered 0\n                -colorResolution 4 4 \n                -bumpResolution 4 4 \n                -textureCompression 0\n                -transparencyAlgorithm \"frontAndBackCull\" \n                -transpInShadows 0\n                -cullingOverride \"none\" \n                -lowQualityLighting 0\n                -maximumNumHardwareLights 0\n                -occlusionCulling 0\n                -shadingModel 0\n                -useBaseRenderer 0\n                -useReducedRenderer 0\n                -smallObjectCulling 0\n                -smallObjectThreshold -1 \n                -interactiveDisableShadows 0\n                -interactiveBackFaceCull 0\n                -sortTransparent 1\n                -nurbsCurves 1\n                -nurbsSurfaces 1\n                -polymeshes 1\n                -subdivSurfaces 1\n"
+		+ "                -planes 1\n                -lights 1\n                -cameras 1\n                -controlVertices 1\n                -hulls 1\n                -grid 1\n                -imagePlane 1\n                -joints 1\n                -ikHandles 1\n                -deformers 1\n                -dynamics 1\n                -fluids 1\n                -hairSystems 1\n                -follicles 1\n                -nCloths 1\n                -nParticles 1\n                -nRigids 1\n                -dynamicConstraints 1\n                -locators 1\n                -manipulators 1\n                -pluginShapes 1\n                -dimensions 1\n                -handles 1\n                -pivots 1\n                -textures 1\n                -strokes 1\n                -motionTrails 1\n                -clipGhosts 1\n                -greasePencils 1\n                -shadows 0\n                -displayMode \"centerEye\" \n                -viewColor 0 0 0 1 \n                -useCustomBackground 1\n                $editorName;\n            stereoCameraView -e -viewSelected 0 $editorName;\n"
+		+ "\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\tif ($useSceneConfig) {\n        string $configName = `getPanel -cwl (localizedPanelLabel(\"Current Layout\"))`;\n        if (\"\" != $configName) {\n\t\t\tpanelConfiguration -edit -label (localizedPanelLabel(\"Current Layout\")) \n\t\t\t\t-defaultImage \"vacantCell.xP:/\"\n\t\t\t\t-image \"\"\n\t\t\t\t-sc false\n\t\t\t\t-configString \"global string $gMainPane; paneLayout -e -cn \\\"right3\\\" -ps 1 50 100 -ps 2 50 50 -ps 3 50 50 $gMainPane;\"\n\t\t\t\t-removeAllPanels\n\t\t\t\t-ap false\n\t\t\t\t\t(localizedPanelLabel(\"Script Editor\")) \n\t\t\t\t\t\"scriptedPanel\"\n\t\t\t\t\t\"$panelName = `scriptedPanel -unParent  -type \\\"scriptEditorPanel\\\" -l (localizedPanelLabel(\\\"Script Editor\\\")) -mbv $menusOkayInPanels `\"\n\t\t\t\t\t\"scriptedPanel -edit -l (localizedPanelLabel(\\\"Script Editor\\\")) -mbv $menusOkayInPanels  $panelName\"\n\t\t\t\t-ap false\n\t\t\t\t\t(localizedPanelLabel(\"Persp View\")) \n\t\t\t\t\t\"modelPanel\"\n"
 		+ "\t\t\t\t\t\"$panelName = `modelPanel -unParent -l (localizedPanelLabel(\\\"Persp View\\\")) -mbv $menusOkayInPanels `;\\n$editorName = $panelName;\\nmodelEditor -e \\n    -cam `findStartUpCamera persp` \\n    -useInteractiveMode 0\\n    -displayLights \\\"default\\\" \\n    -displayAppearance \\\"wireframe\\\" \\n    -activeOnly 0\\n    -ignorePanZoom 0\\n    -wireframeOnShaded 0\\n    -headsUpDisplay 1\\n    -selectionHiliteDisplay 1\\n    -useDefaultMaterial 0\\n    -bufferMode \\\"double\\\" \\n    -twoSidedLighting 1\\n    -backfaceCulling 0\\n    -xray 0\\n    -jointXray 0\\n    -activeComponentsXray 0\\n    -displayTextures 0\\n    -smoothWireframe 0\\n    -lineWidth 1\\n    -textureAnisotropic 0\\n    -textureHilight 1\\n    -textureSampling 2\\n    -textureDisplay \\\"modulate\\\" \\n    -textureMaxSize 16384\\n    -fogging 0\\n    -fogSource \\\"fragment\\\" \\n    -fogMode \\\"linear\\\" \\n    -fogStart 0\\n    -fogEnd 100\\n    -fogDensity 0.1\\n    -fogColor 0.5 0.5 0.5 1 \\n    -maxConstantTransparency 1\\n    -rendererName \\\"base_OpenGL_Renderer\\\" \\n    -objectFilterShowInHUD 1\\n    -isFiltered 0\\n    -colorResolution 256 256 \\n    -bumpResolution 512 512 \\n    -textureCompression 0\\n    -transparencyAlgorithm \\\"frontAndBackCull\\\" \\n    -transpInShadows 0\\n    -cullingOverride \\\"none\\\" \\n    -lowQualityLighting 0\\n    -maximumNumHardwareLights 1\\n    -occlusionCulling 0\\n    -shadingModel 0\\n    -useBaseRenderer 0\\n    -useReducedRenderer 0\\n    -smallObjectCulling 0\\n    -smallObjectThreshold -1 \\n    -interactiveDisableShadows 0\\n    -interactiveBackFaceCull 0\\n    -sortTransparent 1\\n    -nurbsCurves 1\\n    -nurbsSurfaces 1\\n    -polymeshes 1\\n    -subdivSurfaces 1\\n    -planes 1\\n    -lights 1\\n    -cameras 1\\n    -controlVertices 1\\n    -hulls 1\\n    -grid 1\\n    -imagePlane 1\\n    -joints 1\\n    -ikHandles 1\\n    -deformers 1\\n    -dynamics 1\\n    -fluids 1\\n    -hairSystems 1\\n    -follicles 1\\n    -nCloths 1\\n    -nParticles 1\\n    -nRigids 1\\n    -dynamicConstraints 1\\n    -locators 1\\n    -manipulators 1\\n    -pluginShapes 1\\n    -dimensions 1\\n    -handles 1\\n    -pivots 1\\n    -textures 1\\n    -strokes 1\\n    -motionTrails 1\\n    -clipGhosts 1\\n    -greasePencils 1\\n    -shadows 0\\n    $editorName;\\nmodelEditor -e -viewSelected 0 $editorName\"\n"
 		+ "\t\t\t\t\t\"modelPanel -edit -l (localizedPanelLabel(\\\"Persp View\\\")) -mbv $menusOkayInPanels  $panelName;\\n$editorName = $panelName;\\nmodelEditor -e \\n    -cam `findStartUpCamera persp` \\n    -useInteractiveMode 0\\n    -displayLights \\\"default\\\" \\n    -displayAppearance \\\"wireframe\\\" \\n    -activeOnly 0\\n    -ignorePanZoom 0\\n    -wireframeOnShaded 0\\n    -headsUpDisplay 1\\n    -selectionHiliteDisplay 1\\n    -useDefaultMaterial 0\\n    -bufferMode \\\"double\\\" \\n    -twoSidedLighting 1\\n    -backfaceCulling 0\\n    -xray 0\\n    -jointXray 0\\n    -activeComponentsXray 0\\n    -displayTextures 0\\n    -smoothWireframe 0\\n    -lineWidth 1\\n    -textureAnisotropic 0\\n    -textureHilight 1\\n    -textureSampling 2\\n    -textureDisplay \\\"modulate\\\" \\n    -textureMaxSize 16384\\n    -fogging 0\\n    -fogSource \\\"fragment\\\" \\n    -fogMode \\\"linear\\\" \\n    -fogStart 0\\n    -fogEnd 100\\n    -fogDensity 0.1\\n    -fogColor 0.5 0.5 0.5 1 \\n    -maxConstantTransparency 1\\n    -rendererName \\\"base_OpenGL_Renderer\\\" \\n    -objectFilterShowInHUD 1\\n    -isFiltered 0\\n    -colorResolution 256 256 \\n    -bumpResolution 512 512 \\n    -textureCompression 0\\n    -transparencyAlgorithm \\\"frontAndBackCull\\\" \\n    -transpInShadows 0\\n    -cullingOverride \\\"none\\\" \\n    -lowQualityLighting 0\\n    -maximumNumHardwareLights 1\\n    -occlusionCulling 0\\n    -shadingModel 0\\n    -useBaseRenderer 0\\n    -useReducedRenderer 0\\n    -smallObjectCulling 0\\n    -smallObjectThreshold -1 \\n    -interactiveDisableShadows 0\\n    -interactiveBackFaceCull 0\\n    -sortTransparent 1\\n    -nurbsCurves 1\\n    -nurbsSurfaces 1\\n    -polymeshes 1\\n    -subdivSurfaces 1\\n    -planes 1\\n    -lights 1\\n    -cameras 1\\n    -controlVertices 1\\n    -hulls 1\\n    -grid 1\\n    -imagePlane 1\\n    -joints 1\\n    -ikHandles 1\\n    -deformers 1\\n    -dynamics 1\\n    -fluids 1\\n    -hairSystems 1\\n    -follicles 1\\n    -nCloths 1\\n    -nParticles 1\\n    -nRigids 1\\n    -dynamicConstraints 1\\n    -locators 1\\n    -manipulators 1\\n    -pluginShapes 1\\n    -dimensions 1\\n    -handles 1\\n    -pivots 1\\n    -textures 1\\n    -strokes 1\\n    -motionTrails 1\\n    -clipGhosts 1\\n    -greasePencils 1\\n    -shadows 0\\n    $editorName;\\nmodelEditor -e -viewSelected 0 $editorName\"\n"
+		+ "\t\t\t\t-ap false\n\t\t\t\t\t(localizedPanelLabel(\"Outliner\")) \n\t\t\t\t\t\"outlinerPanel\"\n\t\t\t\t\t\"$panelName = `outlinerPanel -unParent -l (localizedPanelLabel(\\\"Outliner\\\")) -mbv $menusOkayInPanels `;\\n$editorName = $panelName;\\noutlinerEditor -e \\n    -docTag \\\"isolOutln_fromSeln\\\" \\n    -showShapes 0\\n    -showReferenceNodes 0\\n    -showReferenceMembers 0\\n    -showAttributes 0\\n    -showConnected 0\\n    -showAnimCurvesOnly 0\\n    -showMuteInfo 0\\n    -organizeByLayer 1\\n    -showAnimLayerWeight 1\\n    -autoExpandLayers 1\\n    -autoExpand 0\\n    -showDagOnly 1\\n    -showAssets 1\\n    -showContainedOnly 1\\n    -showPublishedAsConnected 0\\n    -showContainerContents 1\\n    -ignoreDagHierarchy 0\\n    -expandConnections 0\\n    -showUpstreamCurves 1\\n    -showUnitlessCurves 1\\n    -showCompounds 1\\n    -showLeafs 1\\n    -showNumericAttrsOnly 0\\n    -highlightActive 1\\n    -autoSelectNewObjects 0\\n    -doNotSelectNewObjects 0\\n    -dropIsParent 1\\n    -transmitFilters 0\\n    -setFilter \\\"defaultSetFilter\\\" \\n    -showSetMembers 1\\n    -allowMultiSelection 1\\n    -alwaysToggleSelect 0\\n    -directSelect 0\\n    -displayMode \\\"DAG\\\" \\n    -expandObjects 0\\n    -setsIgnoreFilters 1\\n    -containersIgnoreFilters 0\\n    -editAttrName 0\\n    -showAttrValues 0\\n    -highlightSecondary 0\\n    -showUVAttrsOnly 0\\n    -showTextureNodesOnly 0\\n    -attrAlphaOrder \\\"default\\\" \\n    -animLayerFilterOptions \\\"allAffecting\\\" \\n    -sortOrder \\\"none\\\" \\n    -longNames 0\\n    -niceNames 1\\n    -showNamespace 1\\n    -showPinIcons 0\\n    -mapMotionTrails 0\\n    $editorName\"\n"
+		+ "\t\t\t\t\t\"outlinerPanel -edit -l (localizedPanelLabel(\\\"Outliner\\\")) -mbv $menusOkayInPanels  $panelName;\\n$editorName = $panelName;\\noutlinerEditor -e \\n    -docTag \\\"isolOutln_fromSeln\\\" \\n    -showShapes 0\\n    -showReferenceNodes 0\\n    -showReferenceMembers 0\\n    -showAttributes 0\\n    -showConnected 0\\n    -showAnimCurvesOnly 0\\n    -showMuteInfo 0\\n    -organizeByLayer 1\\n    -showAnimLayerWeight 1\\n    -autoExpandLayers 1\\n    -autoExpand 0\\n    -showDagOnly 1\\n    -showAssets 1\\n    -showContainedOnly 1\\n    -showPublishedAsConnected 0\\n    -showContainerContents 1\\n    -ignoreDagHierarchy 0\\n    -expandConnections 0\\n    -showUpstreamCurves 1\\n    -showUnitlessCurves 1\\n    -showCompounds 1\\n    -showLeafs 1\\n    -showNumericAttrsOnly 0\\n    -highlightActive 1\\n    -autoSelectNewObjects 0\\n    -doNotSelectNewObjects 0\\n    -dropIsParent 1\\n    -transmitFilters 0\\n    -setFilter \\\"defaultSetFilter\\\" \\n    -showSetMembers 1\\n    -allowMultiSelection 1\\n    -alwaysToggleSelect 0\\n    -directSelect 0\\n    -displayMode \\\"DAG\\\" \\n    -expandObjects 0\\n    -setsIgnoreFilters 1\\n    -containersIgnoreFilters 0\\n    -editAttrName 0\\n    -showAttrValues 0\\n    -highlightSecondary 0\\n    -showUVAttrsOnly 0\\n    -showTextureNodesOnly 0\\n    -attrAlphaOrder \\\"default\\\" \\n    -animLayerFilterOptions \\\"allAffecting\\\" \\n    -sortOrder \\\"none\\\" \\n    -longNames 0\\n    -niceNames 1\\n    -showNamespace 1\\n    -showPinIcons 0\\n    -mapMotionTrails 0\\n    $editorName\"\n"
 		+ "\t\t\t\t$configName;\n\n            setNamedPanelLayout (localizedPanelLabel(\"Current Layout\"));\n        }\n\n        panelHistory -e -clear mainPanelHistory;\n        setFocus `paneLayout -q -p1 $gMainPane`;\n        sceneUIReplacement -deleteRemaining;\n        sceneUIReplacement -clear;\n\t}\n\n\ngrid -spacing 5 -size 12 -divisions 5 -displayAxes yes -displayGridLines yes -displayDivisionLines yes -displayPerspectiveLabels no -displayOrthographicLabels no -displayAxesBold yes -perspectiveLabelPosition axis -orthographicLabelPosition edge;\nviewManip -drawCompass 0 -compassAngle 0 -frontParameters \"\" -homeParameters \"\" -selectionLockParameters \"\";\n}\n");
 	setAttr ".st" 3;
 select -ne :time1;
@@ -54071,11 +54086,112 @@ select -ne :renderGlobalsList1;
 	setAttr -cb on ".bnm";
 lockNode -l 1 ;
 select -ne :defaultRenderGlobals;
-	setAttr ".ep" 1;
+	setAttr -av -k on ".cch";
+	setAttr -cb on ".ihi";
+	setAttr -av -k on ".nds";
+	setAttr -cb on ".bnm";
+	setAttr -k on ".macc";
+	setAttr -k on ".macd";
+	setAttr -k on ".macq";
+	setAttr -cb on ".ifg";
+	setAttr -k on ".clip";
+	setAttr -k on ".edm";
+	setAttr -k on ".edl";
+	setAttr -cb on ".ren";
+	setAttr -av -k on ".esr";
+	setAttr -k on ".ors";
+	setAttr -cb on ".sdf";
+	setAttr -av -k on ".outf";
+	setAttr -cb on ".imfkey";
+	setAttr -k on ".gama";
+	setAttr -k on ".an";
+	setAttr -k on ".ar";
+	setAttr -k on ".fs";
+	setAttr -k on ".ef";
+	setAttr -av -k on ".bfs";
+	setAttr -k on ".me";
+	setAttr -k on ".se";
+	setAttr -k on ".be";
+	setAttr -cb on ".ep" 1;
+	setAttr -k on ".fec";
+	setAttr -av -k on ".ofc";
+	setAttr -cb on ".ofe";
+	setAttr -cb on ".efe";
+	setAttr -k on ".oft";
+	setAttr -cb on ".umfn";
+	setAttr -cb on ".ufe";
+	setAttr -cb on ".pff";
+	setAttr -cb on ".peie";
+	setAttr -cb on ".ifp";
+	setAttr -k on ".comp";
+	setAttr -k on ".cth";
+	setAttr -k on ".soll";
+	setAttr -cb on ".sosl";
+	setAttr -k on ".rd";
+	setAttr -k on ".lp";
+	setAttr -av -k on ".sp";
+	setAttr -k on ".shs";
+	setAttr -av -k on ".lpr";
+	setAttr -cb on ".gv";
+	setAttr -cb on ".sv";
+	setAttr -k on ".mm";
+	setAttr -k on ".npu";
+	setAttr -k on ".itf";
+	setAttr -k on ".shp";
+	setAttr -cb on ".isp";
+	setAttr -k on ".uf";
+	setAttr -k on ".oi";
+	setAttr -k on ".rut";
+	setAttr -k on ".mb";
+	setAttr -av -k on ".mbf";
+	setAttr -k on ".afp";
+	setAttr -k on ".pfb";
+	setAttr -k on ".pram";
+	setAttr -k on ".poam";
+	setAttr -k on ".prlm";
+	setAttr -k on ".polm";
+	setAttr -cb on ".prm";
+	setAttr -cb on ".pom";
+	setAttr -cb on ".pfrm";
+	setAttr -cb on ".pfom";
+	setAttr -av -k on ".bll";
+	setAttr -av -k on ".bls";
+	setAttr -av -k on ".smv";
+	setAttr -k on ".ubc";
+	setAttr -k on ".mbc";
+	setAttr -cb on ".mbt";
+	setAttr -k on ".udbx";
+	setAttr -k on ".smc";
+	setAttr -k on ".kmv";
+	setAttr -cb on ".isl";
+	setAttr -cb on ".ism";
+	setAttr -cb on ".imb";
+	setAttr -k on ".rlen";
+	setAttr -av -k on ".frts";
+	setAttr -k on ".tlwd";
+	setAttr -k on ".tlht";
+	setAttr -k on ".jfc";
+	setAttr -cb on ".rsb";
+	setAttr -k on ".ope";
+	setAttr -k on ".oppf";
+	setAttr -cb on ".hbl";
 select -ne :defaultResolution;
-	setAttr ".w" 640;
-	setAttr ".h" 480;
-	setAttr ".dar" 1.3333332538604736;
+	setAttr -av -k on ".cch";
+	setAttr -k on ".ihi";
+	setAttr -av -k on ".nds";
+	setAttr -k on ".bnm";
+	setAttr -av -k on ".w" 640;
+	setAttr -av -k on ".h" 480;
+	setAttr -av -k on ".pa";
+	setAttr -av -k on ".al";
+	setAttr -av -k on ".dar" 1.3333332538604736;
+	setAttr -av -k on ".ldar";
+	setAttr -k on ".dpi";
+	setAttr -av -k on ".off";
+	setAttr -av -k on ".fld";
+	setAttr -av -k on ".zsl";
+	setAttr -k on ".isu";
+	setAttr -k on ".pdu";
 select -ne :defaultLightSet;
 	setAttr -k on ".cch";
 	setAttr -k on ".ihi";
@@ -54338,24 +54454,17 @@ connectAttr "mirror_aimGr_loc_orientConstraint1.crz" "mirror_aimGr_loc.rz";
 connectAttr "mirror_aimGr_loc.pim" "mirror_loc_pointConstraint1.cpim";
 connectAttr "mirror_aimGr_loc.rp" "mirror_loc_pointConstraint1.crp";
 connectAttr "mirror_aimGr_loc.rpt" "mirror_loc_pointConstraint1.crt";
-connectAttr "|character|rig|spine_rig|spine_controls|pelvis_offset|pelvis_PH|pelvis_SN|pelvis.t" "mirror_loc_pointConstraint1.tg[0].tt"
-		;
-connectAttr "|character|rig|spine_rig|spine_controls|pelvis_offset|pelvis_PH|pelvis_SN|pelvis.rp" "mirror_loc_pointConstraint1.tg[0].trp"
-		;
-connectAttr "|character|rig|spine_rig|spine_controls|pelvis_offset|pelvis_PH|pelvis_SN|pelvis.rpt" "mirror_loc_pointConstraint1.tg[0].trt"
-		;
-connectAttr "|character|rig|spine_rig|spine_controls|pelvis_offset|pelvis_PH|pelvis_SN|pelvis.pm" "mirror_loc_pointConstraint1.tg[0].tpm"
-		;
+connectAttr "pelvis.t" "mirror_loc_pointConstraint1.tg[0].tt";
+connectAttr "pelvis.rp" "mirror_loc_pointConstraint1.tg[0].trp";
+connectAttr "pelvis.rpt" "mirror_loc_pointConstraint1.tg[0].trt";
+connectAttr "pelvis.pm" "mirror_loc_pointConstraint1.tg[0].tpm";
 connectAttr "mirror_loc_pointConstraint1.w0" "mirror_loc_pointConstraint1.tg[0].tw"
 		;
 connectAttr "mirror_aimGr_loc.ro" "mirror_aimGr_loc_orientConstraint1.cro";
 connectAttr "mirror_aimGr_loc.pim" "mirror_aimGr_loc_orientConstraint1.cpim";
-connectAttr "|character|rig|spine_rig|spine_controls|pelvis_offset|pelvis_PH|pelvis_SN|pelvis.r" "mirror_aimGr_loc_orientConstraint1.tg[0].tr"
-		;
-connectAttr "|character|rig|spine_rig|spine_controls|pelvis_offset|pelvis_PH|pelvis_SN|pelvis.ro" "mirror_aimGr_loc_orientConstraint1.tg[0].tro"
-		;
-connectAttr "|character|rig|spine_rig|spine_controls|pelvis_offset|pelvis_PH|pelvis_SN|pelvis.pm" "mirror_aimGr_loc_orientConstraint1.tg[0].tpm"
-		;
+connectAttr "pelvis.r" "mirror_aimGr_loc_orientConstraint1.tg[0].tr";
+connectAttr "pelvis.ro" "mirror_aimGr_loc_orientConstraint1.tg[0].tro";
+connectAttr "pelvis.pm" "mirror_aimGr_loc_orientConstraint1.tg[0].tpm";
 connectAttr "mirror_aimGr_loc_orientConstraint1.w0" "mirror_aimGr_loc_orientConstraint1.tg[0].tw"
 		;
 connectAttr "head_symmetryHelper_loc_orientConstraint1.cry" "head_symmetryHelper_loc.ry"
@@ -55130,12 +55239,9 @@ connectAttr "headRot_locator.ro" "neckEnd_parent_orientConstraint1.tg[0].tro";
 connectAttr "headRot_locator.pm" "neckEnd_parent_orientConstraint1.tg[0].tpm";
 connectAttr "neckEnd_parent_orientConstraint1.w0" "neckEnd_parent_orientConstraint1.tg[0].tw"
 		;
-connectAttr "|character|rig|spine_rig|spine_controls|pelvis_offset|pelvis_PH|pelvis_SN|pelvis.r" "neckEnd_parent_orientConstraint1.tg[1].tr"
-		;
-connectAttr "|character|rig|spine_rig|spine_controls|pelvis_offset|pelvis_PH|pelvis_SN|pelvis.ro" "neckEnd_parent_orientConstraint1.tg[1].tro"
-		;
-connectAttr "|character|rig|spine_rig|spine_controls|pelvis_offset|pelvis_PH|pelvis_SN|pelvis.pm" "neckEnd_parent_orientConstraint1.tg[1].tpm"
-		;
+connectAttr "pelvis.r" "neckEnd_parent_orientConstraint1.tg[1].tr";
+connectAttr "pelvis.ro" "neckEnd_parent_orientConstraint1.tg[1].tro";
+connectAttr "pelvis.pm" "neckEnd_parent_orientConstraint1.tg[1].tpm";
 connectAttr "neckEnd_parent_orientConstraint1.w1" "neckEnd_parent_orientConstraint1.tg[1].tw"
 		;
 connectAttr "scaleCorrect.r" "neckEnd_parent_orientConstraint1.tg[2].tr";
@@ -55426,29 +55532,19 @@ connectAttr "multiplyDivide135.ox" "neck_4_joint.tx";
 connectAttr "neck_4_joint.s" "neck_end_Joint.is";
 connectAttr "multiplyDivide127.ox" "neck_end_Joint.sx";
 connectAttr "multiplyDivide135.ox" "neck_end_Joint.tx";
-connectAttr "decomposeMatrix65.ot" "|character|rig|spine_rig|spine_posers.t";
-connectAttr "decomposeMatrix65.os" "|character|rig|spine_rig|spine_posers.s";
-connectAttr "decomposeMatrix65.or" "|character|rig|spine_rig|spine_posers.r";
-connectAttr "mainPoser_scaleShape.ws" "|character|rig|spine_rig|spine_posers|spine_mainPoser|spine_mainPoserShape.cr"
-		;
-connectAttr "mainPoser_scaleShape.ws" "|character|rig|spine_rig|spine_posers|spine_mainPoser|chest_mainPoser|chest_mainPoserShape.cr"
-		;
-connectAttr "poser_scaleShape.rd" "|character|rig|spine_rig|spine_posers|spine_mainPoser|chest_mainPoser|chest_poser|chest_poserShape.rd"
-		;
-connectAttr "poser_scaleNurbsShape.ws" "|character|rig|spine_rig|spine_posers|spine_mainPoser|chest_mainPoser|chest_poser|chest_poserNurbsShape.cr"
-		;
-connectAttr "poser_scaleShape.rd" "|character|rig|spine_rig|spine_posers|spine_mainPoser|pelvis_poser|pelvis_poserShape.rd"
-		;
-connectAttr "poser_scaleNurbsShape.ws" "|character|rig|spine_rig|spine_posers|spine_mainPoser|pelvis_poser|pelvis_poserNurbsShape.cr"
-		;
-connectAttr "|character|rig|spine_rig|spine_system|spine_connectors|spine_connector_start.t" "|character|rig|spine_rig|spine_controls.t"
-		;
-connectAttr "|character|rig|spine_rig|spine_system|spine_connectors|spine_connector_start.r" "|character|rig|spine_rig|spine_controls.r"
-		;
-connectAttr "|character|rig|spine_rig|spine_system|spine_connectors|spine_connector_start.s" "|character|rig|spine_rig|spine_controls.s"
-		;
-connectAttr "character.bodyControls" "|character|rig|spine_rig|spine_controls.v"
-		;
+connectAttr "decomposeMatrix65.ot" "spine_posers.t";
+connectAttr "decomposeMatrix65.os" "spine_posers.s";
+connectAttr "decomposeMatrix65.or" "spine_posers.r";
+connectAttr "mainPoser_scaleShape.ws" "spine_mainPoserShape.cr";
+connectAttr "mainPoser_scaleShape.ws" "chest_mainPoserShape.cr";
+connectAttr "poser_scaleShape.rd" "chest_poserShape.rd";
+connectAttr "poser_scaleNurbsShape.ws" "chest_poserNurbsShape.cr";
+connectAttr "poser_scaleShape.rd" "pelvis_poserShape.rd";
+connectAttr "poser_scaleNurbsShape.ws" "pelvis_poserNurbsShape.cr";
+connectAttr "spine_connector_start.t" "spine_controls.t";
+connectAttr "spine_connector_start.r" "spine_controls.r";
+connectAttr "spine_connector_start.s" "spine_controls.s";
+connectAttr "character.bodyControls" "spine_controls.v";
 connectAttr "decomposeMatrix41.ot" "l_arm_pelvisSpace.t";
 connectAttr "l_arm_pelvisSpace.ty" "r_arm_pelvisSpace.ty";
 connectAttr "l_arm_pelvisSpace.tz" "r_arm_pelvisSpace.tz";
@@ -55459,12 +55555,9 @@ connectAttr "l_arm_ik_pelvisSpace.tz" "r_arm_ik_pelvisSpace.tz";
 connectAttr "multDoubleLinear1230.o" "r_arm_ik_pelvisSpace.tx";
 connectAttr "decomposeMatrix59.ot" "l_leg_ik_pelvisSpace.t";
 connectAttr "r_leg_connectorPos.t" "r_leg_ik_pelvisSpace.t";
-connectAttr "|character|rig|spine_rig|spine_controls|pelvis_offset|pelvis_PH|pelvis_SN|pelvis.t" "spine_control_parent.t"
-		;
-connectAttr "|character|rig|spine_rig|spine_controls|pelvis_offset|pelvis_PH|pelvis_SN|pelvis.r" "spine_control_parent.r"
-		;
-connectAttr "|character|rig|spine_rig|spine_controls|pelvis_offset|pelvis_PH|pelvis_SN|pelvis.s" "spine_control_parent.s"
-		;
+connectAttr "pelvis.t" "spine_control_parent.t";
+connectAttr "pelvis.r" "spine_control_parent.r";
+connectAttr "pelvis.s" "spine_control_parent.s";
 connectAttr "controlSourceShape.ws" "spine_controlShape.cr";
 connectAttr "pelvis_parent_parentConstraint1.ctx" "spine_parented.tx";
 connectAttr "pelvis_parent_parentConstraint1.cty" "spine_parented.ty";
@@ -55522,15 +55615,11 @@ connectAttr "tunerSourceShape1.ws" "r_leg_connectorPosShape1.cr";
 connectAttr "decomposeMatrix70.ot" "tail_tune.t";
 connectAttr "decomposeMatrix70.or" "tail_tune.r";
 connectAttr "chest_rotate.r" "chest_rotate_parent.r";
-connectAttr "|character|rig|spine_rig|spine_system|spine_connectors|spine_connector_start|spine_connector_end.ty" "chest_parent.ty"
-		;
-connectAttr "decomposeMatrix28.otx" "|character|rig|spine_rig|spine_controls|spine_parented|spine_offset|spine_parent|chest_rotate_offset|chest_rotate_parent|chest_parent|chest_offset.tx"
-		;
-connectAttr "decomposeMatrix28.otz" "|character|rig|spine_rig|spine_controls|spine_parented|spine_offset|spine_parent|chest_rotate_offset|chest_rotate_parent|chest_parent|chest_offset.tz"
-		;
+connectAttr "spine_connector_end.ty" "chest_parent.ty";
+connectAttr "decomposeMatrix28.otx" "chest_offset.tx";
+connectAttr "decomposeMatrix28.otz" "chest_offset.tz";
 connectAttr "multiplyDivide1807.ox" "chestWaist_aim.ty";
-connectAttr "|character|rig|spine_rig|spine_controls|spine_parented|spine_offset|spine_parent|waist_parent|waist_offset|waist.tz" "twistStart_loc.ty"
-		;
+connectAttr "waist.tz" "twistStart_loc.ty";
 connectAttr "multDoubleLinear826.o" "chestBendClusterAim.ty";
 connectAttr "decomposeMatrix42.ot" "l_arm_chestSpace.t";
 connectAttr "l_arm_chestSpace.ty" "r_arm_chestSpace.ty";
@@ -55568,71 +55657,51 @@ connectAttr "spine_parented.ro" "pelvis_parent_parentConstraint1.cro";
 connectAttr "spine_parented.pim" "pelvis_parent_parentConstraint1.cpim";
 connectAttr "spine_parented.rp" "pelvis_parent_parentConstraint1.crp";
 connectAttr "spine_parented.rpt" "pelvis_parent_parentConstraint1.crt";
-connectAttr "|character|rig|spine_rig|spine_controls|pelvis_offset|pelvis_PH|pelvis_SN|pelvis.t" "pelvis_parent_parentConstraint1.tg[0].tt"
-		;
-connectAttr "|character|rig|spine_rig|spine_controls|pelvis_offset|pelvis_PH|pelvis_SN|pelvis.rp" "pelvis_parent_parentConstraint1.tg[0].trp"
-		;
-connectAttr "|character|rig|spine_rig|spine_controls|pelvis_offset|pelvis_PH|pelvis_SN|pelvis.rpt" "pelvis_parent_parentConstraint1.tg[0].trt"
-		;
-connectAttr "|character|rig|spine_rig|spine_controls|pelvis_offset|pelvis_PH|pelvis_SN|pelvis.r" "pelvis_parent_parentConstraint1.tg[0].tr"
-		;
-connectAttr "|character|rig|spine_rig|spine_controls|pelvis_offset|pelvis_PH|pelvis_SN|pelvis.ro" "pelvis_parent_parentConstraint1.tg[0].tro"
-		;
-connectAttr "|character|rig|spine_rig|spine_controls|pelvis_offset|pelvis_PH|pelvis_SN|pelvis.s" "pelvis_parent_parentConstraint1.tg[0].ts"
-		;
-connectAttr "|character|rig|spine_rig|spine_controls|pelvis_offset|pelvis_PH|pelvis_SN|pelvis.pm" "pelvis_parent_parentConstraint1.tg[0].tpm"
-		;
+connectAttr "pelvis.t" "pelvis_parent_parentConstraint1.tg[0].tt";
+connectAttr "pelvis.rp" "pelvis_parent_parentConstraint1.tg[0].trp";
+connectAttr "pelvis.rpt" "pelvis_parent_parentConstraint1.tg[0].trt";
+connectAttr "pelvis.r" "pelvis_parent_parentConstraint1.tg[0].tr";
+connectAttr "pelvis.ro" "pelvis_parent_parentConstraint1.tg[0].tro";
+connectAttr "pelvis.s" "pelvis_parent_parentConstraint1.tg[0].ts";
+connectAttr "pelvis.pm" "pelvis_parent_parentConstraint1.tg[0].tpm";
 connectAttr "pelvis_parent_parentConstraint1.w0" "pelvis_parent_parentConstraint1.tg[0].tw"
 		;
-connectAttr "|character|rig|spine_rig|spine_system|spine_connectors|spine_connector_start|spine_connector_start_parentConstraint1.ctx" "|character|rig|spine_rig|spine_system|spine_connectors|spine_connector_start.tx"
+connectAttr "spine_connector_start_parentConstraint1.ctx" "spine_connector_start.tx"
 		;
-connectAttr "|character|rig|spine_rig|spine_system|spine_connectors|spine_connector_start|spine_connector_start_parentConstraint1.cty" "|character|rig|spine_rig|spine_system|spine_connectors|spine_connector_start.ty"
+connectAttr "spine_connector_start_parentConstraint1.cty" "spine_connector_start.ty"
 		;
-connectAttr "|character|rig|spine_rig|spine_system|spine_connectors|spine_connector_start|spine_connector_start_parentConstraint1.ctz" "|character|rig|spine_rig|spine_system|spine_connectors|spine_connector_start.tz"
+connectAttr "spine_connector_start_parentConstraint1.ctz" "spine_connector_start.tz"
 		;
-connectAttr "|character|rig|spine_rig|spine_system|spine_connectors|spine_connector_start|spine_connector_start_parentConstraint1.crx" "|character|rig|spine_rig|spine_system|spine_connectors|spine_connector_start.rx"
+connectAttr "spine_connector_start_parentConstraint1.crx" "spine_connector_start.rx"
 		;
-connectAttr "|character|rig|spine_rig|spine_system|spine_connectors|spine_connector_start|spine_connector_start_parentConstraint1.cry" "|character|rig|spine_rig|spine_system|spine_connectors|spine_connector_start.ry"
+connectAttr "spine_connector_start_parentConstraint1.cry" "spine_connector_start.ry"
 		;
-connectAttr "|character|rig|spine_rig|spine_system|spine_connectors|spine_connector_start|spine_connector_start_parentConstraint1.crz" "|character|rig|spine_rig|spine_system|spine_connectors|spine_connector_start.rz"
+connectAttr "spine_connector_start_parentConstraint1.crz" "spine_connector_start.rz"
 		;
-connectAttr "scaleCorrect.s" "|character|rig|spine_rig|spine_system|spine_connectors|spine_connector_start.s"
-		;
-connectAttr "decomposeMatrix28.oty" "|character|rig|spine_rig|spine_system|spine_connectors|spine_connector_start|spine_connector_end.ty"
-		;
-connectAttr "tunerSourceShape.lsx" "|character|rig|spine_rig|spine_system|spine_connectors|spine_connector_start|spine_connector_end|spine_connector_endShape.lsx"
-		;
-connectAttr "tunerSourceShape.lsy" "|character|rig|spine_rig|spine_system|spine_connectors|spine_connector_start|spine_connector_end|spine_connector_endShape.lsy"
-		;
-connectAttr "tunerSourceShape.lsz" "|character|rig|spine_rig|spine_system|spine_connectors|spine_connector_start|spine_connector_end|spine_connector_endShape.lsz"
-		;
+connectAttr "scaleCorrect.s" "spine_connector_start.s";
+connectAttr "decomposeMatrix28.oty" "spine_connector_end.ty";
+connectAttr "tunerSourceShape.lsx" "spine_connector_endShape.lsx";
+connectAttr "tunerSourceShape.lsy" "spine_connector_endShape.lsy";
+connectAttr "tunerSourceShape.lsz" "spine_connector_endShape.lsz";
 connectAttr "tunerSourceShape1.ws" "spine_connector_endShape1.cr";
-connectAttr "|character|rig|spine_rig|spine_system|spine_connectors|spine_connector_start.ro" "|character|rig|spine_rig|spine_system|spine_connectors|spine_connector_start|spine_connector_start_parentConstraint1.cro"
+connectAttr "spine_connector_start.ro" "spine_connector_start_parentConstraint1.cro"
 		;
-connectAttr "|character|rig|spine_rig|spine_system|spine_connectors|spine_connector_start.pim" "|character|rig|spine_rig|spine_system|spine_connectors|spine_connector_start|spine_connector_start_parentConstraint1.cpim"
+connectAttr "spine_connector_start.pim" "spine_connector_start_parentConstraint1.cpim"
 		;
-connectAttr "|character|rig|spine_rig|spine_system|spine_connectors|spine_connector_start.rp" "|character|rig|spine_rig|spine_system|spine_connectors|spine_connector_start|spine_connector_start_parentConstraint1.crp"
+connectAttr "spine_connector_start.rp" "spine_connector_start_parentConstraint1.crp"
 		;
-connectAttr "|character|rig|spine_rig|spine_system|spine_connectors|spine_connector_start.rpt" "|character|rig|spine_rig|spine_system|spine_connectors|spine_connector_start|spine_connector_start_parentConstraint1.crt"
+connectAttr "spine_connector_start.rpt" "spine_connector_start_parentConstraint1.crt"
 		;
-connectAttr "spine_pos.t" "|character|rig|spine_rig|spine_system|spine_connectors|spine_connector_start|spine_connector_start_parentConstraint1.tg[0].tt"
+connectAttr "spine_pos.t" "spine_connector_start_parentConstraint1.tg[0].tt";
+connectAttr "spine_pos.rp" "spine_connector_start_parentConstraint1.tg[0].trp";
+connectAttr "spine_pos.rpt" "spine_connector_start_parentConstraint1.tg[0].trt";
+connectAttr "spine_pos.r" "spine_connector_start_parentConstraint1.tg[0].tr";
+connectAttr "spine_pos.ro" "spine_connector_start_parentConstraint1.tg[0].tro";
+connectAttr "spine_pos.s" "spine_connector_start_parentConstraint1.tg[0].ts";
+connectAttr "spine_pos.pm" "spine_connector_start_parentConstraint1.tg[0].tpm";
+connectAttr "spine_connector_start_parentConstraint1.w0" "spine_connector_start_parentConstraint1.tg[0].tw"
 		;
-connectAttr "spine_pos.rp" "|character|rig|spine_rig|spine_system|spine_connectors|spine_connector_start|spine_connector_start_parentConstraint1.tg[0].trp"
-		;
-connectAttr "spine_pos.rpt" "|character|rig|spine_rig|spine_system|spine_connectors|spine_connector_start|spine_connector_start_parentConstraint1.tg[0].trt"
-		;
-connectAttr "spine_pos.r" "|character|rig|spine_rig|spine_system|spine_connectors|spine_connector_start|spine_connector_start_parentConstraint1.tg[0].tr"
-		;
-connectAttr "spine_pos.ro" "|character|rig|spine_rig|spine_system|spine_connectors|spine_connector_start|spine_connector_start_parentConstraint1.tg[0].tro"
-		;
-connectAttr "spine_pos.s" "|character|rig|spine_rig|spine_system|spine_connectors|spine_connector_start|spine_connector_start_parentConstraint1.tg[0].ts"
-		;
-connectAttr "spine_pos.pm" "|character|rig|spine_rig|spine_system|spine_connectors|spine_connector_start|spine_connector_start_parentConstraint1.tg[0].tpm"
-		;
-connectAttr "|character|rig|spine_rig|spine_system|spine_connectors|spine_connector_start|spine_connector_start_parentConstraint1.w0" "|character|rig|spine_rig|spine_system|spine_connectors|spine_connector_start|spine_connector_start_parentConstraint1.tg[0].tw"
-		;
-connectAttr "|character|rig|spine_rig|spine_skinJoints|spine_1_joint.msg" "spine_ikHandle.hsj"
-		;
+connectAttr "spine_1_joint.msg" "spine_ikHandle.hsj";
 connectAttr "spine_effector.hp" "spine_ikHandle.hee";
 connectAttr "ikSplineSolver1.msg" "spine_ikHandle.hsv";
 connectAttr "spine_curveShape.ws" "spine_ikHandle.ic";
@@ -55734,36 +55803,21 @@ connectAttr "chest_out.rpt" "cluster5Handle_pointConstraint1.tg[0].trt";
 connectAttr "chest_out.pm" "cluster5Handle_pointConstraint1.tg[0].tpm";
 connectAttr "cluster5Handle_pointConstraint1.w0" "cluster5Handle_pointConstraint1.tg[0].tw"
 		;
-connectAttr "|character|rig|spine_rig|spine_system|spine_connectors|spine_connector_start.s" "|character|rig|spine_rig|spine_skinJoints.s"
-		;
-connectAttr "multiplyDivide136.ox" "|character|rig|spine_rig|spine_skinJoints|spine_1_joint.sx"
-		;
-connectAttr "multDoubleLinear1210.o" "|character|rig|spine_rig|spine_skinJoints|spine_1_joint.sy"
-		;
-connectAttr "multDoubleLinear854.o" "|character|rig|spine_rig|spine_skinJoints|spine_1_joint.sz"
-		;
-connectAttr "|character|rig|spine_rig|spine_skinJoints|spine_1_joint.s" "|character|rig|spine_rig|spine_skinJoints|spine_1_joint|spine_2_joint.is"
-		;
-connectAttr "multiplyDivide136.ox" "|character|rig|spine_rig|spine_skinJoints|spine_1_joint|spine_2_joint.sx"
-		;
-connectAttr "multDoubleLinear1209.o" "|character|rig|spine_rig|spine_skinJoints|spine_1_joint|spine_2_joint.sy"
-		;
-connectAttr "multDoubleLinear855.o" "|character|rig|spine_rig|spine_skinJoints|spine_1_joint|spine_2_joint.sz"
-		;
-connectAttr "multiplyDivide137.ox" "|character|rig|spine_rig|spine_skinJoints|spine_1_joint|spine_2_joint.tx"
-		;
-connectAttr "|character|rig|spine_rig|spine_skinJoints|spine_1_joint|spine_2_joint.s" "|character|rig|spine_rig|spine_skinJoints|spine_1_joint|spine_2_joint|spine_3_joint.is"
-		;
-connectAttr "multDoubleLinear856.o" "|character|rig|spine_rig|spine_skinJoints|spine_1_joint|spine_2_joint|spine_3_joint.sz"
-		;
-connectAttr "multiplyDivide136.ox" "|character|rig|spine_rig|spine_skinJoints|spine_1_joint|spine_2_joint|spine_3_joint.sx"
-		;
-connectAttr "multDoubleLinear1208.o" "|character|rig|spine_rig|spine_skinJoints|spine_1_joint|spine_2_joint|spine_3_joint.sy"
-		;
-connectAttr "multiplyDivide137.ox" "|character|rig|spine_rig|spine_skinJoints|spine_1_joint|spine_2_joint|spine_3_joint.tx"
-		;
-connectAttr "|character|rig|spine_rig|spine_skinJoints|spine_1_joint|spine_2_joint|spine_3_joint.s" "spine_4_joint.is"
-		;
+connectAttr "spine_connector_start.s" "spine_skinJoints.s";
+connectAttr "multiplyDivide136.ox" "spine_1_joint.sx";
+connectAttr "multDoubleLinear1210.o" "spine_1_joint.sy";
+connectAttr "multDoubleLinear854.o" "spine_1_joint.sz";
+connectAttr "spine_1_joint.s" "spine_2_joint.is";
+connectAttr "multiplyDivide136.ox" "spine_2_joint.sx";
+connectAttr "multDoubleLinear1209.o" "spine_2_joint.sy";
+connectAttr "multDoubleLinear855.o" "spine_2_joint.sz";
+connectAttr "multiplyDivide137.ox" "spine_2_joint.tx";
+connectAttr "spine_2_joint.s" "spine_3_joint.is";
+connectAttr "multDoubleLinear856.o" "spine_3_joint.sz";
+connectAttr "multiplyDivide136.ox" "spine_3_joint.sx";
+connectAttr "multDoubleLinear1208.o" "spine_3_joint.sy";
+connectAttr "multiplyDivide137.ox" "spine_3_joint.tx";
+connectAttr "spine_3_joint.s" "spine_4_joint.is";
 connectAttr "multiplyDivide136.ox" "spine_4_joint.sx";
 connectAttr "multDoubleLinear1207.o" "spine_4_joint.sy";
 connectAttr "multDoubleLinear853.o" "spine_4_joint.sz";
@@ -55786,28 +55840,17 @@ connectAttr "multiplyDivide136.ox" "spine_endJoint.sx";
 connectAttr "spine_endJoint.tx" "spine_effector.tx";
 connectAttr "spine_endJoint.ty" "spine_effector.ty";
 connectAttr "spine_endJoint.tz" "spine_effector.tz";
-connectAttr "spine_endJoint_combined_pointConstraint1.ctx" "|character|rig|spine_rig|spine_skinJoints|chest_joint.tx"
-		;
-connectAttr "spine_endJoint_combined_pointConstraint1.cty" "|character|rig|spine_rig|spine_skinJoints|chest_joint.ty"
-		;
-connectAttr "spine_endJoint_combined_pointConstraint1.ctz" "|character|rig|spine_rig|spine_skinJoints|chest_joint.tz"
-		;
-connectAttr "spine_endJoint_combined_orientConstraint1.crx" "|character|rig|spine_rig|spine_skinJoints|chest_joint.rx"
-		;
-connectAttr "spine_endJoint_combined_orientConstraint1.cry" "|character|rig|spine_rig|spine_skinJoints|chest_joint.ry"
-		;
-connectAttr "spine_endJoint_combined_orientConstraint1.crz" "|character|rig|spine_rig|spine_skinJoints|chest_joint.rz"
-		;
-connectAttr "|character|rig|spine_rig|spine_controls|spine_parented|spine_offset|spine_parent|chest_rotate_offset|chest_rotate_parent|chest_parent|chest_offset|chest.sz" "|character|rig|spine_rig|spine_skinJoints|chest_joint.sy"
-		;
-connectAttr "|character|rig|spine_rig|spine_controls|spine_parented|spine_offset|spine_parent|chest_rotate_offset|chest_rotate_parent|chest_parent|chest_offset|chest.sx" "|character|rig|spine_rig|spine_skinJoints|chest_joint.sz"
-		;
-connectAttr "|character|rig|spine_rig|spine_skinJoints|chest_joint.pim" "spine_endJoint_combined_pointConstraint1.cpim"
-		;
-connectAttr "|character|rig|spine_rig|spine_skinJoints|chest_joint.rp" "spine_endJoint_combined_pointConstraint1.crp"
-		;
-connectAttr "|character|rig|spine_rig|spine_skinJoints|chest_joint.rpt" "spine_endJoint_combined_pointConstraint1.crt"
-		;
+connectAttr "spine_endJoint_combined_pointConstraint1.ctx" "chest_joint.tx";
+connectAttr "spine_endJoint_combined_pointConstraint1.cty" "chest_joint.ty";
+connectAttr "spine_endJoint_combined_pointConstraint1.ctz" "chest_joint.tz";
+connectAttr "spine_endJoint_combined_orientConstraint1.crx" "chest_joint.rx";
+connectAttr "spine_endJoint_combined_orientConstraint1.cry" "chest_joint.ry";
+connectAttr "spine_endJoint_combined_orientConstraint1.crz" "chest_joint.rz";
+connectAttr "chest.sz" "chest_joint.sy";
+connectAttr "chest.sx" "chest_joint.sz";
+connectAttr "chest_joint.pim" "spine_endJoint_combined_pointConstraint1.cpim";
+connectAttr "chest_joint.rp" "spine_endJoint_combined_pointConstraint1.crp";
+connectAttr "chest_joint.rpt" "spine_endJoint_combined_pointConstraint1.crt";
 connectAttr "spine_endJoint_combinedAim.t" "spine_endJoint_combined_pointConstraint1.tg[0].tt"
 		;
 connectAttr "spine_endJoint_combinedAim.rp" "spine_endJoint_combined_pointConstraint1.tg[0].trp"
@@ -55818,12 +55861,9 @@ connectAttr "spine_endJoint_combinedAim.pm" "spine_endJoint_combined_pointConstr
 		;
 connectAttr "spine_endJoint_combined_pointConstraint1.w0" "spine_endJoint_combined_pointConstraint1.tg[0].tw"
 		;
-connectAttr "|character|rig|spine_rig|spine_skinJoints|chest_joint.ro" "spine_endJoint_combined_orientConstraint1.cro"
-		;
-connectAttr "|character|rig|spine_rig|spine_skinJoints|chest_joint.pim" "spine_endJoint_combined_orientConstraint1.cpim"
-		;
-connectAttr "|character|rig|spine_rig|spine_skinJoints|chest_joint.jo" "spine_endJoint_combined_orientConstraint1.cjo"
-		;
+connectAttr "chest_joint.ro" "spine_endJoint_combined_orientConstraint1.cro";
+connectAttr "chest_joint.pim" "spine_endJoint_combined_orientConstraint1.cpim";
+connectAttr "chest_joint.jo" "spine_endJoint_combined_orientConstraint1.cjo";
 connectAttr "spine_endJoint_combinedAim.r" "spine_endJoint_combined_orientConstraint1.tg[0].tr"
 		;
 connectAttr "spine_endJoint_combinedAim.ro" "spine_endJoint_combined_orientConstraint1.tg[0].tro"
@@ -55852,8 +55892,7 @@ connectAttr "plusMinusAverage523.o3" "r_chest_joint_move.t";
 connectAttr "l_chest_joint_pointConstraint1.ctx" "l_chest_joint.tx";
 connectAttr "l_chest_joint_pointConstraint1.cty" "l_chest_joint.ty";
 connectAttr "l_chest_joint_pointConstraint1.ctz" "l_chest_joint.tz";
-connectAttr "|character|rig|spine_rig|spine_skinJoints|chest_joint.s" "l_chest_joint.is"
-		;
+connectAttr "chest_joint.s" "l_chest_joint.is";
 connectAttr "l_chest_joint.pim" "l_chest_joint_pointConstraint1.cpim";
 connectAttr "l_chest_joint.rp" "l_chest_joint_pointConstraint1.crp";
 connectAttr "l_chest_joint.rpt" "l_chest_joint_pointConstraint1.crt";
@@ -55875,8 +55914,7 @@ connectAttr "l_chest_joint_pointConstraint1.w1" "l_chest_joint_pointConstraint1.
 connectAttr "r_chest_joint_pointConstraint1.ctx" "r_chest_joint.tx";
 connectAttr "r_chest_joint_pointConstraint1.cty" "r_chest_joint.ty";
 connectAttr "r_chest_joint_pointConstraint1.ctz" "r_chest_joint.tz";
-connectAttr "|character|rig|spine_rig|spine_skinJoints|chest_joint.s" "r_chest_joint.is"
-		;
+connectAttr "chest_joint.s" "r_chest_joint.is";
 connectAttr "r_chest_joint.pim" "r_chest_joint_pointConstraint1.cpim";
 connectAttr "r_chest_joint.rp" "r_chest_joint_pointConstraint1.crp";
 connectAttr "r_chest_joint.rpt" "r_chest_joint_pointConstraint1.crt";
@@ -55895,26 +55933,16 @@ connectAttr "spine_5_joint.rpt" "r_chest_joint_pointConstraint1.tg[1].trt";
 connectAttr "spine_5_joint.pm" "r_chest_joint_pointConstraint1.tg[1].tpm";
 connectAttr "r_chest_joint_pointConstraint1.w1" "r_chest_joint_pointConstraint1.tg[1].tw"
 		;
-connectAttr "spine_1_joint_combined_orientConstraint1.crx" "|character|rig|spine_rig|spine_skinJoints|pelvis_joint_offset|pelvis_joint.rx"
-		;
-connectAttr "spine_1_joint_combined_orientConstraint1.cry" "|character|rig|spine_rig|spine_skinJoints|pelvis_joint_offset|pelvis_joint.ry"
-		;
-connectAttr "spine_1_joint_combined_orientConstraint1.crz" "|character|rig|spine_rig|spine_skinJoints|pelvis_joint_offset|pelvis_joint.rz"
-		;
-connectAttr "|character|rig|spine_rig|spine_skinJoints|spine_1_joint.t" "|character|rig|spine_rig|spine_skinJoints|pelvis_joint_offset|pelvis_joint.t"
-		;
-connectAttr "|character|rig|spine_rig|spine_controls|spine_parented|spine_offset|spine_parent|hip_offset|hip.sy" "|character|rig|spine_rig|spine_skinJoints|pelvis_joint_offset|pelvis_joint.sx"
-		;
-connectAttr "|character|rig|spine_rig|spine_controls|spine_parented|spine_offset|spine_parent|hip_offset|hip.sz" "|character|rig|spine_rig|spine_skinJoints|pelvis_joint_offset|pelvis_joint.sy"
-		;
-connectAttr "|character|rig|spine_rig|spine_controls|spine_parented|spine_offset|spine_parent|hip_offset|hip.sx" "|character|rig|spine_rig|spine_skinJoints|pelvis_joint_offset|pelvis_joint.sz"
-		;
-connectAttr "|character|rig|spine_rig|spine_skinJoints|pelvis_joint_offset|pelvis_joint.ro" "spine_1_joint_combined_orientConstraint1.cro"
-		;
-connectAttr "|character|rig|spine_rig|spine_skinJoints|pelvis_joint_offset|pelvis_joint.pim" "spine_1_joint_combined_orientConstraint1.cpim"
-		;
-connectAttr "|character|rig|spine_rig|spine_skinJoints|pelvis_joint_offset|pelvis_joint.jo" "spine_1_joint_combined_orientConstraint1.cjo"
-		;
+connectAttr "spine_1_joint_combined_orientConstraint1.crx" "pelvis_joint.rx";
+connectAttr "spine_1_joint_combined_orientConstraint1.cry" "pelvis_joint.ry";
+connectAttr "spine_1_joint_combined_orientConstraint1.crz" "pelvis_joint.rz";
+connectAttr "spine_1_joint.t" "pelvis_joint.t";
+connectAttr "hip.sy" "pelvis_joint.sx";
+connectAttr "hip.sz" "pelvis_joint.sy";
+connectAttr "hip.sx" "pelvis_joint.sz";
+connectAttr "pelvis_joint.ro" "spine_1_joint_combined_orientConstraint1.cro";
+connectAttr "pelvis_joint.pim" "spine_1_joint_combined_orientConstraint1.cpim";
+connectAttr "pelvis_joint.jo" "spine_1_joint_combined_orientConstraint1.cjo";
 connectAttr "spine_1_joint_combinedAim.r" "spine_1_joint_combined_orientConstraint1.tg[0].tr"
 		;
 connectAttr "spine_1_joint_combinedAim.ro" "spine_1_joint_combined_orientConstraint1.tg[0].tro"
@@ -55925,27 +55953,23 @@ connectAttr "spine_1_joint_combinedAim.jo" "spine_1_joint_combined_orientConstra
 		;
 connectAttr "spine_1_joint_combined_orientConstraint1.w0" "spine_1_joint_combined_orientConstraint1.tg[0].tw"
 		;
-connectAttr "|character|rig|spine_rig|spine_skinJoints|spine_1_joint.r" "spine_1_joint_combined_orientConstraint1.tg[1].tr"
+connectAttr "spine_1_joint.r" "spine_1_joint_combined_orientConstraint1.tg[1].tr"
 		;
-connectAttr "|character|rig|spine_rig|spine_skinJoints|spine_1_joint.ro" "spine_1_joint_combined_orientConstraint1.tg[1].tro"
+connectAttr "spine_1_joint.ro" "spine_1_joint_combined_orientConstraint1.tg[1].tro"
 		;
-connectAttr "|character|rig|spine_rig|spine_skinJoints|spine_1_joint.pm" "spine_1_joint_combined_orientConstraint1.tg[1].tpm"
+connectAttr "spine_1_joint.pm" "spine_1_joint_combined_orientConstraint1.tg[1].tpm"
 		;
-connectAttr "|character|rig|spine_rig|spine_skinJoints|spine_1_joint.jo" "spine_1_joint_combined_orientConstraint1.tg[1].tjo"
+connectAttr "spine_1_joint.jo" "spine_1_joint_combined_orientConstraint1.tg[1].tjo"
 		;
 connectAttr "spine_1_joint_combined_orientConstraint1.w1" "spine_1_joint_combined_orientConstraint1.tg[1].tw"
 		;
 connectAttr "spine_control.hipRotationLock" "spine_1_joint_combined_orientConstraint1.w0"
 		;
 connectAttr "reverse8.ox" "spine_1_joint_combined_orientConstraint1.w1";
-connectAttr "|character|rig|spineFk_rig|spine_skinJoints|pelvis_joint_offset|pelvis_joint.s" "|character|rig|spineFk_rig|spine_skinJoints|pelvis_joint_offset|pelvis_joint|spine_1_joint.is"
-		;
-connectAttr "|character|rig|spineFk_rig|spine_skinJoints|pelvis_joint_offset|pelvis_joint|spine_1_joint.s" "|character|rig|spineFk_rig|spine_skinJoints|pelvis_joint_offset|pelvis_joint|spine_1_joint|spine_2_joint.is"
-		;
-connectAttr "|character|rig|spineFk_rig|spine_skinJoints|pelvis_joint_offset|pelvis_joint|spine_1_joint|spine_2_joint.s" "|character|rig|spineFk_rig|spine_skinJoints|pelvis_joint_offset|pelvis_joint|spine_1_joint|spine_2_joint|spine_3_joint.is"
-		;
-connectAttr "|character|rig|spineFk_rig|spine_skinJoints|pelvis_joint_offset|pelvis_joint|spine_1_joint|spine_2_joint|spine_3_joint.s" "|character|rig|spineFk_rig|spine_skinJoints|pelvis_joint_offset|pelvis_joint|spine_1_joint|spine_2_joint|spine_3_joint|chest_joint.is"
-		;
+connectAttr "_pelvis_joint.s" "_spine_1_joint.is";
+connectAttr "_spine_1_joint.s" "_spine_2_joint.is";
+connectAttr "_spine_2_joint.s" "_spine_3_joint.is";
+connectAttr "_spine_3_joint.s" "_chest_joint.is";
 connectAttr "rig_mirrorMult.o" "l_arm_rig.mirrorMult";
 connectAttr "decomposeMatrix67.ot" "l_arm_posers.t";
 connectAttr "decomposeMatrix67.or" "l_arm_posers.r";
@@ -56496,12 +56520,9 @@ connectAttr "l_arm_offsetStart_rotationLoc_aimConstraint.w0" "l_arm_offsetStart_
 connectAttr "rootSourceShape.ws" "l_armRoot_offsetShape.cr";
 connectAttr "l_arm_root_mirror.ro" "l_arm_root_mirror_orientConstraint1.cro";
 connectAttr "l_arm_root_mirror.pim" "l_arm_root_mirror_orientConstraint1.cpim";
-connectAttr "|character|rig|spine_rig|spine_controls|spine_parented|spine_offset|spine_parent|chest_rotate_offset|chest_rotate_parent|chest_parent|chest_offset|chest.r" "l_arm_root_mirror_orientConstraint1.tg[0].tr"
-		;
-connectAttr "|character|rig|spine_rig|spine_controls|spine_parented|spine_offset|spine_parent|chest_rotate_offset|chest_rotate_parent|chest_parent|chest_offset|chest.ro" "l_arm_root_mirror_orientConstraint1.tg[0].tro"
-		;
-connectAttr "|character|rig|spine_rig|spine_controls|spine_parented|spine_offset|spine_parent|chest_rotate_offset|chest_rotate_parent|chest_parent|chest_offset|chest.pm" "l_arm_root_mirror_orientConstraint1.tg[0].tpm"
-		;
+connectAttr "chest.r" "l_arm_root_mirror_orientConstraint1.tg[0].tr";
+connectAttr "chest.ro" "l_arm_root_mirror_orientConstraint1.tg[0].tro";
+connectAttr "chest.pm" "l_arm_root_mirror_orientConstraint1.tg[0].tpm";
 connectAttr "l_arm_root_mirror_orientConstraint1.w0" "l_arm_root_mirror_orientConstraint1.tg[0].tw"
 		;
 connectAttr "l_arm_connector_1_pointConstraint1.ctx" "l_arm_connector_1.tx";
@@ -56536,12 +56557,9 @@ connectAttr "l_arm_connector_1_pointConstraint1.w0" "l_arm_connector_1_pointCons
 		;
 connectAttr "l_arm_connector_1.ro" "l_arm_connector_1_orientConstraint1.cro";
 connectAttr "l_arm_connector_1.pim" "l_arm_connector_1_orientConstraint1.cpim";
-connectAttr "|character|rig|spine_rig|spine_controls|pelvis_offset|pelvis_PH|pelvis_SN|pelvis.r" "l_arm_connector_1_orientConstraint1.tg[0].tr"
-		;
-connectAttr "|character|rig|spine_rig|spine_controls|pelvis_offset|pelvis_PH|pelvis_SN|pelvis.ro" "l_arm_connector_1_orientConstraint1.tg[0].tro"
-		;
-connectAttr "|character|rig|spine_rig|spine_controls|pelvis_offset|pelvis_PH|pelvis_SN|pelvis.pm" "l_arm_connector_1_orientConstraint1.tg[0].tpm"
-		;
+connectAttr "pelvis.r" "l_arm_connector_1_orientConstraint1.tg[0].tr";
+connectAttr "pelvis.ro" "l_arm_connector_1_orientConstraint1.tg[0].tro";
+connectAttr "pelvis.pm" "l_arm_connector_1_orientConstraint1.tg[0].tpm";
 connectAttr "l_arm_connector_1_orientConstraint1.w0" "l_arm_connector_1_orientConstraint1.tg[0].tw"
 		;
 connectAttr "l_arm_connector_1.s" "l_arm_ik_joints.s";
@@ -57579,12 +57597,9 @@ connectAttr "r_arm_offsetStart_rotationLoc_aimConstraint.w0" "r_arm_offsetStart_
 connectAttr "rootSourceShape.ws" "r_armRoot_offsetShape.cr";
 connectAttr "r_arm_root_mirror.ro" "r_arm_root_mirror_orientConstraint1.cro";
 connectAttr "r_arm_root_mirror.pim" "r_arm_root_mirror_orientConstraint1.cpim";
-connectAttr "|character|rig|spine_rig|spine_controls|spine_parented|spine_offset|spine_parent|chest_rotate_offset|chest_rotate_parent|chest_parent|chest_offset|chest.r" "r_arm_root_mirror_orientConstraint1.tg[0].tr"
-		;
-connectAttr "|character|rig|spine_rig|spine_controls|spine_parented|spine_offset|spine_parent|chest_rotate_offset|chest_rotate_parent|chest_parent|chest_offset|chest.ro" "r_arm_root_mirror_orientConstraint1.tg[0].tro"
-		;
-connectAttr "|character|rig|spine_rig|spine_controls|spine_parented|spine_offset|spine_parent|chest_rotate_offset|chest_rotate_parent|chest_parent|chest_offset|chest.pm" "r_arm_root_mirror_orientConstraint1.tg[0].tpm"
-		;
+connectAttr "chest.r" "r_arm_root_mirror_orientConstraint1.tg[0].tr";
+connectAttr "chest.ro" "r_arm_root_mirror_orientConstraint1.tg[0].tro";
+connectAttr "chest.pm" "r_arm_root_mirror_orientConstraint1.tg[0].tpm";
 connectAttr "r_arm_root_mirror_orientConstraint1.w0" "r_arm_root_mirror_orientConstraint1.tg[0].tw"
 		;
 connectAttr "r_arm_connector_1_pointConstraint2.ctx" "r_arm_connector_1.tx";
@@ -59524,8 +59539,7 @@ connectAttr "decomposeMatrix69.os" "posers_parent_2.s";
 connectAttr "posers_parent_2_pointConstraint1.ctx" "posers_parent_2.tx";
 connectAttr "posers_parent_2_pointConstraint1.cty" "posers_parent_2.ty";
 connectAttr "posers_parent_2_pointConstraint1.ctz" "posers_parent_2.tz";
-connectAttr "|character|rig|spine_rig|spine_posers|spine_mainPoser.r" "posers_parent_2.r"
-		;
+connectAttr "spine_mainPoser.r" "posers_parent_2.r";
 connectAttr "poser_scaleShape.rd" "knee_poserShape.rd";
 connectAttr "poser_scaleNurbsShape.ws" "knee_poserNurbsShape.cr";
 connectAttr "posers_parent_2.pim" "posers_parent_2_pointConstraint1.cpim";
@@ -59537,14 +59551,10 @@ connectAttr "root_mainPoser.rpt" "posers_parent_2_pointConstraint1.tg[0].trt";
 connectAttr "root_mainPoser.pm" "posers_parent_2_pointConstraint1.tg[0].tpm";
 connectAttr "posers_parent_2_pointConstraint1.w0" "posers_parent_2_pointConstraint1.tg[0].tw"
 		;
-connectAttr "|character|rig|spine_rig|spine_posers|spine_mainPoser.t" "posers_parent_2_pointConstraint1.tg[1].tt"
-		;
-connectAttr "|character|rig|spine_rig|spine_posers|spine_mainPoser.rp" "posers_parent_2_pointConstraint1.tg[1].trp"
-		;
-connectAttr "|character|rig|spine_rig|spine_posers|spine_mainPoser.rpt" "posers_parent_2_pointConstraint1.tg[1].trt"
-		;
-connectAttr "|character|rig|spine_rig|spine_posers|spine_mainPoser.pm" "posers_parent_2_pointConstraint1.tg[1].tpm"
-		;
+connectAttr "spine_mainPoser.t" "posers_parent_2_pointConstraint1.tg[1].tt";
+connectAttr "spine_mainPoser.rp" "posers_parent_2_pointConstraint1.tg[1].trp";
+connectAttr "spine_mainPoser.rpt" "posers_parent_2_pointConstraint1.tg[1].trt";
+connectAttr "spine_mainPoser.pm" "posers_parent_2_pointConstraint1.tg[1].tpm";
 connectAttr "posers_parent_2_pointConstraint1.w1" "posers_parent_2_pointConstraint1.tg[1].tw"
 		;
 connectAttr "l_leg_connector_1.t" "l_leg_controls.t";
@@ -59594,12 +59604,9 @@ connectAttr "l_leg_fk_limbA_mirror_pointConstraint1.w0" "l_leg_fk_limbA_mirror_p
 		;
 connectAttr "l_leg_fk_controls.ro" "l_leg_fk_controls_orientConstraint1.cro";
 connectAttr "l_leg_fk_controls.pim" "l_leg_fk_controls_orientConstraint1.cpim";
-connectAttr "|character|rig|spine_rig|spine_controls|pelvis_offset|pelvis_PH|pelvis_SN|pelvis.r" "l_leg_fk_controls_orientConstraint1.tg[0].tr"
-		;
-connectAttr "|character|rig|spine_rig|spine_controls|pelvis_offset|pelvis_PH|pelvis_SN|pelvis.ro" "l_leg_fk_controls_orientConstraint1.tg[0].tro"
-		;
-connectAttr "|character|rig|spine_rig|spine_controls|pelvis_offset|pelvis_PH|pelvis_SN|pelvis.pm" "l_leg_fk_controls_orientConstraint1.tg[0].tpm"
-		;
+connectAttr "pelvis.r" "l_leg_fk_controls_orientConstraint1.tg[0].tr";
+connectAttr "pelvis.ro" "l_leg_fk_controls_orientConstraint1.tg[0].tro";
+connectAttr "pelvis.pm" "l_leg_fk_controls_orientConstraint1.tg[0].tpm";
 connectAttr "l_leg_fk_controls_orientConstraint1.w0" "l_leg_fk_controls_orientConstraint1.tg[0].tw"
 		;
 connectAttr "l_leg_control.fkIk" "l_leg_ik_controls.v";
@@ -60556,12 +60563,9 @@ connectAttr "r_leg_fk_limbA_mirror_pointConstraint1.w0" "r_leg_fk_limbA_mirror_p
 		;
 connectAttr "r_leg_fk_controls.ro" "r_leg_fk_controls_orientConstraint1.cro";
 connectAttr "r_leg_fk_controls.pim" "r_leg_fk_controls_orientConstraint1.cpim";
-connectAttr "|character|rig|spine_rig|spine_controls|pelvis_offset|pelvis_PH|pelvis_SN|pelvis.r" "r_leg_fk_controls_orientConstraint1.tg[0].tr"
-		;
-connectAttr "|character|rig|spine_rig|spine_controls|pelvis_offset|pelvis_PH|pelvis_SN|pelvis.ro" "r_leg_fk_controls_orientConstraint1.tg[0].tro"
-		;
-connectAttr "|character|rig|spine_rig|spine_controls|pelvis_offset|pelvis_PH|pelvis_SN|pelvis.pm" "r_leg_fk_controls_orientConstraint1.tg[0].tpm"
-		;
+connectAttr "pelvis.r" "r_leg_fk_controls_orientConstraint1.tg[0].tr";
+connectAttr "pelvis.ro" "r_leg_fk_controls_orientConstraint1.tg[0].tro";
+connectAttr "pelvis.pm" "r_leg_fk_controls_orientConstraint1.tg[0].tpm";
 connectAttr "r_leg_fk_controls_orientConstraint1.w0" "r_leg_fk_controls_orientConstraint1.tg[0].tw"
 		;
 connectAttr "r_leg_control.fkIk" "r_leg_ik_controls.v";
@@ -61585,10 +61589,8 @@ connectAttr "l_shoulder_connector_1_parentConstraint5.w0" "l_shoulder_connector_
 		;
 connectAttr "l_shoulder_connector_1.pim" "l_shoulder_connector_1_scaleConstraint1.cpim"
 		;
-connectAttr "|character|rig|spine_rig|spine_controls|spine_parented|spine_offset|spine_parent|chest_rotate_offset|chest_rotate_parent|chest_parent|chest_offset|chest.s" "l_shoulder_connector_1_scaleConstraint1.tg[0].ts"
-		;
-connectAttr "|character|rig|spine_rig|spine_controls|spine_parented|spine_offset|spine_parent|chest_rotate_offset|chest_rotate_parent|chest_parent|chest_offset|chest.pm" "l_shoulder_connector_1_scaleConstraint1.tg[0].tpm"
-		;
+connectAttr "chest.s" "l_shoulder_connector_1_scaleConstraint1.tg[0].ts";
+connectAttr "chest.pm" "l_shoulder_connector_1_scaleConstraint1.tg[0].tpm";
 connectAttr "l_shoulder_connector_1_scaleConstraint1.w0" "l_shoulder_connector_1_scaleConstraint1.tg[0].tw"
 		;
 connectAttr "l_shoulder_autoRotate_gr_aimConstraint1.crx" "l_shoulder_autoRotate_gr.rx"
@@ -61735,10 +61737,8 @@ connectAttr "r_shoulder_connector_1_parentConstraint6.w0" "r_shoulder_connector_
 		;
 connectAttr "r_shoulder_connector_1.pim" "r_shoulder_connector_1_scaleConstraint1.cpim"
 		;
-connectAttr "|character|rig|spine_rig|spine_controls|spine_parented|spine_offset|spine_parent|chest_rotate_offset|chest_rotate_parent|chest_parent|chest_offset|chest.s" "r_shoulder_connector_1_scaleConstraint1.tg[0].ts"
-		;
-connectAttr "|character|rig|spine_rig|spine_controls|spine_parented|spine_offset|spine_parent|chest_rotate_offset|chest_rotate_parent|chest_parent|chest_offset|chest.pm" "r_shoulder_connector_1_scaleConstraint1.tg[0].tpm"
-		;
+connectAttr "chest.s" "r_shoulder_connector_1_scaleConstraint1.tg[0].ts";
+connectAttr "chest.pm" "r_shoulder_connector_1_scaleConstraint1.tg[0].tpm";
 connectAttr "r_shoulder_connector_1_scaleConstraint1.w0" "r_shoulder_connector_1_scaleConstraint1.tg[0].tw"
 		;
 connectAttr "r_shoulder_autoRotate_gr_aimConstraint1.crx" "r_shoulder_autoRotate_gr.rx"
@@ -63930,8 +63930,7 @@ connectAttr "neck_curveShape.ws" "curveInfo1.ic";
 connectAttr "neck_connector_end.ty" "multiplyDivide135.i1x";
 connectAttr "match_rig_place2dTexture1.o" "ramp1.uv";
 connectAttr "match_rig_place2dTexture1.ofs" "ramp1.fs";
-connectAttr "|character|rig|spine_rig|spine_controls|spine_parented|spine_offset|spine_parent|waist_parent|waist_offset|waist.ry" "unitConversion29.i"
-		;
+connectAttr "waist.ry" "unitConversion29.i";
 connectAttr "cluster5GroupParts1.og" "spine_5_clusterHandleCluster.ip[0].ig";
 connectAttr "cluster5GroupId1.id" "spine_5_clusterHandleCluster.ip[0].gi";
 connectAttr "spine_5_clusterHandle.wm" "spine_5_clusterHandleCluster.ma";
@@ -63984,23 +63983,18 @@ connectAttr "spine_curveShape.iog.og[1]" "tweakSet38.dsm" -na;
 connectAttr "tweak14.msg" "tweakSet38.ub[0]";
 connectAttr "spine_curveShapeOrig.ws" "match_rig_groupParts21.ig";
 connectAttr "groupId1103.id" "match_rig_groupParts21.gi";
-connectAttr "|character|rig|spine_rig|spine_system|spine_connectors|spine_connector_start|spine_connector_end.ty" "multDoubleLinear419.i1"
-		;
+connectAttr "spine_connector_end.ty" "multDoubleLinear419.i1";
 connectAttr "l_leg_connectorPos.tx" "multDoubleLinear410.i1";
-connectAttr "|character|rig|spine_rig|spine_system|spine_connectors|spine_connector_start|spine_connector_end.ty" "multDoubleLinear420.i1"
-		;
-connectAttr "|character|rig|spine_rig|spine_system|spine_connectors|spine_connector_start.sx" "multiplyDivide136.i2x"
-		;
+connectAttr "spine_connector_end.ty" "multDoubleLinear420.i1";
+connectAttr "spine_connector_start.sx" "multiplyDivide136.i2x";
 connectAttr "multiplyDivide146.ox" "multiplyDivide136.i1x";
 connectAttr "curveInfo7.al" "multiplyDivide146.i1x";
-connectAttr "|character|rig|spine_rig|spine_system|spine_connectors|spine_connector_start|spine_connector_end.ty" "multiplyDivide146.i2x"
-		;
+connectAttr "spine_connector_end.ty" "multiplyDivide146.i2x";
 connectAttr "spine_curveShape.ws" "curveInfo7.ic";
 connectAttr "multiplyDivide147.oz" "blendTwoAttr8.i[0]";
 connectAttr "multiplyDivide147.ox" "blendTwoAttr8.i[1]";
 connectAttr "multDoubleLinear425.o" "blendTwoAttr8.ab";
-connectAttr "|character|rig|spine_rig|spine_system|spine_connectors|spine_connector_start.sx" "multiplyDivide147.i1x"
-		;
+connectAttr "spine_connector_start.sx" "multiplyDivide147.i1x";
 connectAttr "multiplyDivide146.ox" "multiplyDivide147.i2x";
 connectAttr "spine_control.stretchVolume" "multDoubleLinear425.i1";
 connectAttr "spine_control.strechInfluence_1" "multDoubleLinear425.i2";
@@ -64009,8 +64003,7 @@ connectAttr "multiplyDivide147.ox" "blendTwoAttr3.i[1]";
 connectAttr "multDoubleLinear426.o" "blendTwoAttr3.ab";
 connectAttr "spine_control.stretchVolume" "multDoubleLinear426.i1";
 connectAttr "spine_control.strechInfluence_2" "multDoubleLinear426.i2";
-connectAttr "|character|rig|spine_rig|spine_system|spine_connectors|spine_connector_start|spine_connector_end.ty" "multiplyDivide137.i1x"
-		;
+connectAttr "spine_connector_end.ty" "multiplyDivide137.i1x";
 connectAttr "multiplyDivide147.oz" "blendTwoAttr4.i[0]";
 connectAttr "multiplyDivide147.ox" "blendTwoAttr4.i[1]";
 connectAttr "multDoubleLinear427.o" "blendTwoAttr4.ab";
@@ -65242,16 +65235,14 @@ connectAttr "decomposeMatrix41.msg" "hyperLayout3.hyp[9].dn";
 connectAttr "ik_limbB_objectSpace_parentConstraint1_neckEndW3.msg" "hyperLayout3.hyp[10].dn"
 		;
 connectAttr "arm_poser.msg" "hyperLayout3.hyp[11].dn";
-connectAttr "|character|rig|spine_rig|spine_posers|spine_mainPoser|pelvis_poser.msg" "hyperLayout3.hyp[12].dn"
-		;
+connectAttr "pelvis_poser.msg" "hyperLayout3.hyp[12].dn";
 connectAttr "root_mainPoser.msg" "hyperLayout3.hyp[13].dn";
 connectAttr "ik_limbB_objectSpace_parentConstraint1_worldW2.msg" "hyperLayout3.hyp[14].dn"
 		;
 connectAttr "l_arm_headSpace.msg" "hyperLayout3.hyp[15].dn";
 connectAttr "l_arm_worldSpace.msg" "hyperLayout3.hyp[16].dn";
 connectAttr "l_hand.msg" "hyperLayout3.hyp[17].dn";
-connectAttr "|character|rig|spine_rig|spine_posers|spine_mainPoser|chest_mainPoser|chest_poser.msg" "hyperLayout3.hyp[18].dn"
-		;
+connectAttr "chest_poser.msg" "hyperLayout3.hyp[18].dn";
 connectAttr "decomposeMatrix42.msg" "hyperLayout3.hyp[19].dn";
 connectAttr "l_arm_chestSpace.msg" "hyperLayout3.hyp[20].dn";
 connectAttr "multMatrix56.msg" "hyperLayout3.hyp[21].dn";
@@ -65328,11 +65319,9 @@ connectAttr "l_hand_thumbFinger.handClench" "unitConversion742.i";
 connectAttr "spine_control.hipBend" "multDoubleLinear825.i1";
 connectAttr "spine_control.chestBend" "multDoubleLinear826.i1";
 connectAttr "blendTwoAttr5.o" "multDoubleLinear853.i1";
-connectAttr "|character|rig|spine_rig|spine_controls|spine_parented|spine_offset|spine_parent|waist_parent|waist_offset|waist.sx" "multDoubleLinear853.i2"
-		;
+connectAttr "waist.sx" "multDoubleLinear853.i2";
 connectAttr "blendTwoAttr8.o" "multDoubleLinear854.i1";
-connectAttr "|character|rig|spine_rig|spine_controls|spine_parented|spine_offset|spine_parent|hip_offset|hip.sx" "multDoubleLinear854.i2"
-		;
+connectAttr "hip.sx" "multDoubleLinear854.i2";
 connectAttr "blendTwoAttr3.o" "multDoubleLinear855.i1";
 connectAttr "blendTwoAttr213.o" "multDoubleLinear855.i2";
 connectAttr "blendTwoAttr4.o" "multDoubleLinear856.i1";
@@ -65477,8 +65466,7 @@ connectAttr "ik_aim_objectSpace_parentConstraint2_ik_limbBW3.msg" "hyperLayout14
 connectAttr "l_knee.msg" "hyperLayout14.hyp[15].dn";
 connectAttr "ik_aim_objectSpace_parentConstraint2_pelvis_outW2.msg" "hyperLayout14.hyp[17].dn"
 		;
-connectAttr "|character|rig|spine_rig|spine_posers|spine_mainPoser|pelvis_poser.msg" "hyperLayout14.hyp[18].dn"
-		;
+connectAttr "pelvis_poser.msg" "hyperLayout14.hyp[18].dn";
 connectAttr "l_leg_connectorPos.msg" "hyperLayout14.hyp[19].dn";
 connectAttr "hyperView15.msg" "nodeEditorPanel15Info.b[0]";
 connectAttr "hyperLayout15.msg" "hyperView15.hl";
@@ -67292,57 +67280,37 @@ connectAttr "r_b_eyeLid.ty" "unitConversion1349.i";
 connectAttr "r_b_eyeLid.tx" "unitConversion1350.i";
 connectAttr "clamp1.op" "unitConversion12.i";
 connectAttr "multDoubleLinear420.o" "multiplyDivide1807.i1x";
-connectAttr "|character|rig|spine_rig|spine_controls|spine_parented|spine_offset|spine_parent|chest_rotate_offset|chest_rotate_parent|chest_parent|chest_offset|chest.sy" "multiplyDivide1807.i2x"
-		;
+connectAttr "chest.sy" "multiplyDivide1807.i2x";
 connectAttr "multDoubleLinear419.o" "multiplyDivide1808.i1x";
-connectAttr "|character|rig|spine_rig|spine_controls|spine_parented|spine_offset|spine_parent|hip_offset|hip.sy" "multiplyDivide1808.i2x"
-		;
-connectAttr "|character|rig|spine_rig|spine_controls|spine_parented|spine_offset|spine_parent|waist_parent|waist_offset|waist.sx" "blendTwoAttr213.i[0]"
-		;
-connectAttr "|character|rig|spine_rig|spine_controls|spine_parented|spine_offset|spine_parent|hip_offset|hip.sx" "blendTwoAttr213.i[1]"
-		;
-connectAttr "|character|rig|spine_rig|spine_controls|spine_parented|spine_offset|spine_parent|waist_parent|waist_offset|waist.sx" "blendTwoAttr214.i[0]"
-		;
-connectAttr "|character|rig|spine_rig|spine_controls|spine_parented|spine_offset|spine_parent|hip_offset|hip.sx" "blendTwoAttr214.i[1]"
-		;
-connectAttr "|character|rig|spine_rig|spine_controls|spine_parented|spine_offset|spine_parent|waist_parent|waist_offset|waist.sx" "blendTwoAttr215.i[0]"
-		;
-connectAttr "|character|rig|spine_rig|spine_controls|spine_parented|spine_offset|spine_parent|chest_rotate_offset|chest_rotate_parent|chest_parent|chest_offset|chest.sx" "blendTwoAttr215.i[1]"
-		;
-connectAttr "|character|rig|spine_rig|spine_controls|spine_parented|spine_offset|spine_parent|waist_parent|waist_offset|waist.sx" "blendTwoAttr216.i[0]"
-		;
-connectAttr "|character|rig|spine_rig|spine_controls|spine_parented|spine_offset|spine_parent|chest_rotate_offset|chest_rotate_parent|chest_parent|chest_offset|chest.sx" "blendTwoAttr216.i[1]"
-		;
+connectAttr "hip.sy" "multiplyDivide1808.i2x";
+connectAttr "waist.sx" "blendTwoAttr213.i[0]";
+connectAttr "hip.sx" "blendTwoAttr213.i[1]";
+connectAttr "waist.sx" "blendTwoAttr214.i[0]";
+connectAttr "hip.sx" "blendTwoAttr214.i[1]";
+connectAttr "waist.sx" "blendTwoAttr215.i[0]";
+connectAttr "chest.sx" "blendTwoAttr215.i[1]";
+connectAttr "waist.sx" "blendTwoAttr216.i[0]";
+connectAttr "chest.sx" "blendTwoAttr216.i[1]";
 connectAttr "blendTwoAttr7.o" "multDoubleLinear1205.i1";
 connectAttr "blendTwoAttr217.o" "multDoubleLinear1205.i2";
-connectAttr "|character|rig|spine_rig|spine_controls|spine_parented|spine_offset|spine_parent|chest_rotate_offset|chest_rotate_parent|chest_parent|chest_offset|chest.sz" "blendTwoAttr217.i[0]"
-		;
-connectAttr "|character|rig|spine_rig|spine_controls|spine_parented|spine_offset|spine_parent|waist_parent|waist_offset|waist.sz" "blendTwoAttr217.i[1]"
-		;
-connectAttr "|character|rig|spine_rig|spine_controls|spine_parented|spine_offset|spine_parent|chest_rotate_offset|chest_rotate_parent|chest_parent|chest_offset|chest.sz" "blendTwoAttr218.i[0]"
-		;
-connectAttr "|character|rig|spine_rig|spine_controls|spine_parented|spine_offset|spine_parent|waist_parent|waist_offset|waist.sz" "blendTwoAttr218.i[1]"
-		;
+connectAttr "chest.sz" "blendTwoAttr217.i[0]";
+connectAttr "waist.sz" "blendTwoAttr217.i[1]";
+connectAttr "chest.sz" "blendTwoAttr218.i[0]";
+connectAttr "waist.sz" "blendTwoAttr218.i[1]";
 connectAttr "blendTwoAttr6.o" "multDoubleLinear1206.i1";
 connectAttr "blendTwoAttr218.o" "multDoubleLinear1206.i2";
 connectAttr "blendTwoAttr5.o" "multDoubleLinear1207.i1";
-connectAttr "|character|rig|spine_rig|spine_controls|spine_parented|spine_offset|spine_parent|waist_parent|waist_offset|waist.sz" "multDoubleLinear1207.i2"
-		;
-connectAttr "|character|rig|spine_rig|spine_controls|spine_parented|spine_offset|spine_parent|waist_parent|waist_offset|waist.sz" "blendTwoAttr219.i[0]"
-		;
-connectAttr "|character|rig|spine_rig|spine_controls|spine_parented|spine_offset|spine_parent|hip_offset|hip.sz" "blendTwoAttr219.i[1]"
-		;
+connectAttr "waist.sz" "multDoubleLinear1207.i2";
+connectAttr "waist.sz" "blendTwoAttr219.i[0]";
+connectAttr "hip.sz" "blendTwoAttr219.i[1]";
 connectAttr "blendTwoAttr4.o" "multDoubleLinear1208.i1";
 connectAttr "blendTwoAttr219.o" "multDoubleLinear1208.i2";
-connectAttr "|character|rig|spine_rig|spine_controls|spine_parented|spine_offset|spine_parent|hip_offset|hip.sz" "blendTwoAttr220.i[0]"
-		;
-connectAttr "|character|rig|spine_rig|spine_controls|spine_parented|spine_offset|spine_parent|waist_parent|waist_offset|waist.sz" "blendTwoAttr220.i[1]"
-		;
+connectAttr "hip.sz" "blendTwoAttr220.i[0]";
+connectAttr "waist.sz" "blendTwoAttr220.i[1]";
 connectAttr "blendTwoAttr3.o" "multDoubleLinear1209.i1";
 connectAttr "blendTwoAttr220.o" "multDoubleLinear1209.i2";
 connectAttr "blendTwoAttr8.o" "multDoubleLinear1210.i1";
-connectAttr "|character|rig|spine_rig|spine_controls|spine_parented|spine_offset|spine_parent|hip_offset|hip.sz" "multDoubleLinear1210.i2"
-		;
+connectAttr "hip.sz" "multDoubleLinear1210.i2";
 connectAttr "unitConversion1358.o" "clamp1.ip";
 connectAttr "unitConversion8.o" "clamp1.mnr";
 connectAttr "unitConversion1359.o" "clamp1.mxr";
@@ -67381,8 +67349,7 @@ connectAttr "hyperLayout334.msg" "hyperView334.hl";
 connectAttr "posCtrl_orig.msg" "hyperLayout334.hyp[0].dn";
 connectAttr "l_leg_connectorRot.msg" "hyperLayout334.hyp[1].dn";
 connectAttr "scaleCorrect.msg" "hyperLayout334.hyp[2].dn";
-connectAttr "|character|rig|spine_rig|spine_controls|pelvis_offset|pelvis_PH|pelvis_SN|pelvis.msg" "hyperLayout334.hyp[3].dn"
-		;
+connectAttr "pelvis.msg" "hyperLayout334.hyp[3].dn";
 connectAttr "l_leg_connector_1.msg" "hyperLayout334.hyp[4].dn";
 connectAttr "l_leg_connector_Shape1.msg" "hyperLayout334.hyp[5].dn";
 connectAttr "l_leg_control.msg" "hyperLayout334.hyp[6].dn";
@@ -67759,28 +67726,22 @@ connectAttr "hyperView417.msg" "nodeEditorPanel150Info.b[0]";
 connectAttr "hyperLayout417.msg" "hyperView417.hl";
 connectAttr "hyperView418.msg" "nodeEditorPanel151Info.b[0]";
 connectAttr "hyperLayout418.msg" "hyperView418.hl";
-connectAttr "|character|rig|spine_rig|spine_posers|spine_mainPoser|pelvis_poser.wm" "multMatrix20.i[0]"
-		;
+connectAttr "pelvis_poser.wm" "multMatrix20.i[0]";
 connectAttr "root_mainPoser.wim" "multMatrix20.i[1]";
 connectAttr "multMatrix20.o" "decomposeMatrix27.imat";
 connectAttr "hyperView419.msg" "nodeEditorPanel152Info.b[0]";
 connectAttr "hyperLayout419.msg" "hyperView419.hl";
-connectAttr "|character|rig|spine_rig|spine_posers|spine_mainPoser|pelvis_poser.msg" "hyperLayout419.hyp[0].dn"
-		;
+connectAttr "pelvis_poser.msg" "hyperLayout419.hyp[0].dn";
 connectAttr "root_mainPoser.msg" "hyperLayout419.hyp[1].dn";
 connectAttr "multMatrix20.msg" "hyperLayout419.hyp[2].dn";
 connectAttr "decomposeMatrix27.msg" "hyperLayout419.hyp[3].dn";
 connectAttr "spine_pos.msg" "hyperLayout419.hyp[4].dn";
-connectAttr "|character|rig|spine_rig|spine_posers|spine_mainPoser|chest_mainPoser|chest_poser.msg" "hyperLayout419.hyp[5].dn"
-		;
+connectAttr "chest_poser.msg" "hyperLayout419.hyp[5].dn";
 connectAttr "multMatrix21.msg" "hyperLayout419.hyp[6].dn";
 connectAttr "decomposeMatrix28.msg" "hyperLayout419.hyp[7].dn";
-connectAttr "|character|rig|spine_rig|spine_system|spine_connectors|spine_connector_start|spine_connector_end.msg" "hyperLayout419.hyp[8].dn"
-		;
-connectAttr "|character|rig|spine_rig|spine_controls|spine_parented|spine_offset|spine_parent|chest_rotate_offset|chest_rotate_parent|chest_parent|chest_offset.msg" "hyperLayout419.hyp[9].dn"
-		;
-connectAttr "|character|rig|spine_rig|spine_posers|spine_mainPoser.msg" "hyperLayout419.hyp[10].dn"
-		;
+connectAttr "spine_connector_end.msg" "hyperLayout419.hyp[8].dn";
+connectAttr "chest_offset.msg" "hyperLayout419.hyp[9].dn";
+connectAttr "spine_mainPoser.msg" "hyperLayout419.hyp[10].dn";
 connectAttr "shoulder_poser.msg" "hyperLayout419.hyp[11].dn";
 connectAttr "multMatrix22.msg" "hyperLayout419.hyp[12].dn";
 connectAttr "decomposeMatrix29.msg" "hyperLayout419.hyp[13].dn";
@@ -67802,14 +67763,11 @@ connectAttr "hyperView422.msg" "nodeEditorPanel155Info.b[0]";
 connectAttr "hyperLayout422.msg" "hyperView422.hl";
 connectAttr "hyperView423.msg" "nodeEditorPanel156Info.b[0]";
 connectAttr "hyperLayout423.msg" "hyperView423.hl";
-connectAttr "|character|rig|spine_rig|spine_posers|spine_mainPoser|chest_mainPoser|chest_poser.wm" "multMatrix21.i[0]"
-		;
-connectAttr "|character|rig|spine_rig|spine_posers|spine_mainPoser.wim" "multMatrix21.i[1]"
-		;
+connectAttr "chest_poser.wm" "multMatrix21.i[0]";
+connectAttr "spine_mainPoser.wim" "multMatrix21.i[1]";
 connectAttr "multMatrix21.o" "decomposeMatrix28.imat";
 connectAttr "shoulder_poser.wm" "multMatrix22.i[0]";
-connectAttr "|character|rig|spine_rig|spine_posers|spine_mainPoser|chest_mainPoser|chest_poser.wim" "multMatrix22.i[1]"
-		;
+connectAttr "chest_poser.wim" "multMatrix22.i[1]";
 connectAttr "multMatrix22.o" "decomposeMatrix29.imat";
 connectAttr "l_shoulder_connector.rz" "unitConversion1375.i";
 connectAttr "hyperView424.msg" "nodeEditorPanel157Info.b[0]";
@@ -67831,8 +67789,7 @@ connectAttr "hip_poser.msg" "hyperLayout424.hyp[9].dn";
 connectAttr "multMatrix47.msg" "hyperLayout424.hyp[11].dn";
 connectAttr "decomposeMatrix57.msg" "hyperLayout424.hyp[12].dn";
 connectAttr "decomposeMatrix58.msg" "hyperLayout424.hyp[13].dn";
-connectAttr "|character|rig|spine_rig|spine_posers|spine_mainPoser|pelvis_poser.msg" "hyperLayout424.hyp[14].dn"
-		;
+connectAttr "pelvis_poser.msg" "hyperLayout424.hyp[14].dn";
 connectAttr "multMatrix48.msg" "hyperLayout424.hyp[15].dn";
 connectAttr "decomposeMatrix59.msg" "hyperLayout424.hyp[16].dn";
 connectAttr "hip_pos_railEnd.msg" "hyperLayout424.hyp[17].dn";
@@ -67945,8 +67902,7 @@ connectAttr "hand_poser.wm" "multMatrix31.i[0]";
 connectAttr "arm_poser.wim" "multMatrix31.i[1]";
 connectAttr "multMatrix31.o" "decomposeMatrix37.imat";
 connectAttr "neck_poser.wm" "multMatrix32.i[0]";
-connectAttr "|character|rig|spine_rig|spine_posers|spine_mainPoser|chest_mainPoser|chest_poser.wim" "multMatrix32.i[1]"
-		;
+connectAttr "chest_poser.wim" "multMatrix32.i[1]";
 connectAttr "multMatrix32.o" "decomposeMatrix38.imat";
 connectAttr "multMatrix33.o" "decomposeMatrix39.imat";
 connectAttr "head_poser.wm" "multMatrix33.i[0]";
@@ -67956,11 +67912,9 @@ connectAttr "head_poser.wim" "multMatrix34.i[1]";
 connectAttr "multMatrix34.o" "decomposeMatrix40.imat";
 connectAttr "multMatrix35.o" "decomposeMatrix41.imat";
 connectAttr "arm_poser.wm" "multMatrix35.i[0]";
-connectAttr "|character|rig|spine_rig|spine_posers|spine_mainPoser|pelvis_poser.wim" "multMatrix35.i[1]"
-		;
+connectAttr "pelvis_poser.wim" "multMatrix35.i[1]";
 connectAttr "arm_poser.wm" "multMatrix36.i[0]";
-connectAttr "|character|rig|spine_rig|spine_posers|spine_mainPoser|chest_mainPoser|chest_poser.wim" "multMatrix36.i[1]"
-		;
+connectAttr "chest_poser.wim" "multMatrix36.i[1]";
 connectAttr "multMatrix36.o" "decomposeMatrix42.imat";
 connectAttr "multMatrix56.o" "decomposeMatrix43.imat";
 connectAttr "arm_poser.wm" "multMatrix37.i[0]";
@@ -67985,8 +67939,7 @@ connectAttr "ankle_poser.wm" "multMatrix40.i[0]";
 connectAttr "hip_poser.wim" "multMatrix40.i[1]";
 connectAttr "hip_poser.wm" "decomposeMatrix46.imat";
 connectAttr "hip_poser.wm" "multMatrix43.i[0]";
-connectAttr "|character|rig|spine_rig|spine_posers|spine_mainPoser|pelvis_poser.wim" "multMatrix43.i[1]"
-		;
+connectAttr "pelvis_poser.wim" "multMatrix43.i[1]";
 connectAttr "multMatrix43.o" "decomposeMatrix51.imat";
 connectAttr "multMatrix44.o" "decomposeMatrix52.imat";
 connectAttr "knee_pos.wm" "multMatrix44.i[0]";
@@ -68001,8 +67954,7 @@ connectAttr "l_heel_poser.wim" "multMatrix47.i[1]";
 connectAttr "multMatrix47.o" "decomposeMatrix57.imat";
 connectAttr "multMatrix54.o" "decomposeMatrix58.imat";
 connectAttr "hip_poser.wm" "multMatrix48.i[0]";
-connectAttr "|character|rig|spine_rig|spine_posers|spine_mainPoser|pelvis_poser.wim" "multMatrix48.i[1]"
-		;
+connectAttr "pelvis_poser.wim" "multMatrix48.i[1]";
 connectAttr "multMatrix48.o" "decomposeMatrix59.imat";
 connectAttr "hip_pos_railEnd.wm" "multMatrix49.i[0]";
 connectAttr "hip_poser.wim" "multMatrix49.i[1]";
@@ -68035,14 +67987,11 @@ connectAttr "hip_poser.wm" "multMatrix54.i[0]";
 connectAttr "root_mainPoser.wim" "multMatrix54.i[1]";
 connectAttr "arm_poser.wm" "multMatrix56.i[0]";
 connectAttr "root_mainPoser.wim" "multMatrix56.i[1]";
-connectAttr "|character|rig|spine_rig|spine_posers|spine_mainPoser|chest_mainPoser.wm" "decomposeMatrix66.imat"
-		;
+connectAttr "chest_mainPoser.wm" "decomposeMatrix66.imat";
 connectAttr "distanceDimensionShape1.dist" "multiplyDivide1811.i1x";
 connectAttr "root_mainPoser.sx" "multiplyDivide1811.i2x";
-connectAttr "|character|rig|spine_rig|spine_posers|spine_mainPoser|chest_mainPoser.wm" "decomposeMatrix67.imat"
-		;
-connectAttr "|character|rig|spine_rig|spine_posers|spine_mainPoser.wm" "decomposeMatrix68.imat"
-		;
+connectAttr "chest_mainPoser.wm" "decomposeMatrix67.imat";
+connectAttr "spine_mainPoser.wm" "decomposeMatrix68.imat";
 connectAttr "distanceDimensionShape2.dist" "multiplyDivide1812.i1x";
 connectAttr "root_mainPoser.sx" "multiplyDivide1812.i2x";
 connectAttr "distanceDimensionShape3.dist" "multiplyDivide1813.i1x";
@@ -68390,16 +68339,14 @@ connectAttr "decomposeMatrix72.msg" "hyperLayout441.hyp[8].dn";
 connectAttr "l_ear_connector1Shape.msg" "hyperLayout441.hyp[9].dn";
 connectAttr "hyperView442.msg" "nodeEditorPanel175Info.b[0]";
 connectAttr "hyperLayout442.msg" "hyperView442.hl";
-connectAttr "|character|rig|spine_rig|spine_posers|spine_mainPoser|pelvis_poser.msg" "hyperLayout442.hyp[0].dn"
-		;
+connectAttr "pelvis_poser.msg" "hyperLayout442.hyp[0].dn";
 connectAttr "decomposeMatrix70.msg" "hyperLayout442.hyp[2].dn";
 connectAttr "scaleCorrect.msg" "hyperLayout442.hyp[3].dn";
 connectAttr "multDoubleLinear1196.msg" "hyperLayout442.hyp[6].dn";
 connectAttr "tail_tune.msg" "hyperLayout442.hyp[9].dn";
 connectAttr "multMatrix58.msg" "hyperLayout442.hyp[11].dn";
 connectAttr "reverse133.msg" "hyperLayout442.hyp[12].dn";
-connectAttr "|character|rig|spine_rig|spine_controls|pelvis_offset|pelvis_PH|pelvis_SN|pelvis.msg" "hyperLayout442.hyp[13].dn"
-		;
+connectAttr "pelvis.msg" "hyperLayout442.hyp[13].dn";
 connectAttr "hyperView443.msg" "nodeEditorPanel176Info.b[0]";
 connectAttr "hyperLayout443.msg" "hyperView443.hl";
 connectAttr "root_mainPoser.sx" "multiplyDivide1832.i2x";
@@ -68448,8 +68395,7 @@ connectAttr "multiplyDivide1829.o" "ik_limbA_posSum7.i3[0]";
 connectAttr "multiplyDivide1830.o" "ik_limbA_posSum7.i3[1]";
 connectAttr "posCtrl_orig.s" "multiplyDivide1833.i1";
 connectAttr "root_mainPoser.s" "multiplyDivide1833.i2";
-connectAttr "|character|rig|spine_rig|spine_posers|spine_mainPoser|pelvis_poser.wim" "multMatrix58.i[1]"
-		;
+connectAttr "pelvis_poser.wim" "multMatrix58.i[1]";
 connectAttr "multMatrix58.o" "decomposeMatrix70.imat";
 connectAttr "multiplyDivide1840.ox" "multiplyDivide1834.i1x";
 connectAttr "multDoubleLinear1235.o" "addDoubleLinear1119.i2";
@@ -68637,8 +68583,7 @@ connectAttr "hyperLayout454.msg" "hyperView454.hl";
 connectAttr "hyperView455.msg" "nodeEditorPanel188Info.b[0]";
 connectAttr "hyperLayout455.msg" "hyperView455.hl";
 connectAttr "multDoubleLinear1239.msg" "hyperLayout455.hyp[1].dn";
-connectAttr "|character|rig|spine_rig|spine_posers|spine_mainPoser.msg" "hyperLayout455.hyp[2].dn"
-		;
+connectAttr "spine_mainPoser.msg" "hyperLayout455.hyp[2].dn";
 connectAttr "decomposeMatrix68.msg" "hyperLayout455.hyp[7].dn";
 connectAttr "multiplyDivide1834.msg" "hyperLayout455.hyp[8].dn";
 connectAttr "multiplyDivide1840.msg" "hyperLayout455.hyp[10].dn";
@@ -68646,8 +68591,7 @@ connectAttr "multDoubleLinear1196.msg" "hyperLayout455.hyp[16].dn";
 connectAttr "hyperView456.msg" "nodeEditorPanel189Info.b[0]";
 connectAttr "hyperLayout456.msg" "hyperView456.hl";
 connectAttr "multMatrix58.msg" "hyperLayout456.hyp[1].dn";
-connectAttr "|character|rig|spine_rig|spine_posers|spine_mainPoser|pelvis_poser.msg" "hyperLayout456.hyp[2].dn"
-		;
+connectAttr "pelvis_poser.msg" "hyperLayout456.hyp[2].dn";
 connectAttr "tail_tune.msg" "hyperLayout456.hyp[3].dn";
 connectAttr "multDoubleLinear1239.msg" "hyperLayout456.hyp[6].dn";
 connectAttr "scaleCorrect.msg" "hyperLayout456.hyp[7].dn";
@@ -69110,8 +69054,7 @@ connectAttr "neck_poser.wm" "decomposeMatrix76.imat";
 connectAttr "neck_connector_start.s" "multiplyDivide1847.i1";
 connectAttr "decomposeMatrix76.os" "multiplyDivide1847.i2";
 connectAttr "neck_poser.wm" "multMatrix62.i[0]";
-connectAttr "|character|rig|spine_rig|spine_posers|spine_mainPoser|chest_mainPoser|chest_poser.wim" "multMatrix62.i[1]"
-		;
+connectAttr "chest_poser.wim" "multMatrix62.i[1]";
 connectAttr "multMatrix62.o" "decomposeMatrix77.imat";
 connectAttr "neck_mainPoser.wm" "decomposeMatrix79.imat";
 connectAttr "scaleCorrect.s" "multiplyDivide1849.i1";
@@ -69119,25 +69062,17 @@ connectAttr "ears_mainPoser.s" "multiplyDivide1849.i2";
 connectAttr "ears_mainPoser.wm" "decomposeMatrix80.imat";
 connectAttr "scaleCorrect.sx" "multiplyDivide1850.i1x";
 connectAttr "multiplyDivide1850.ox" "multDoubleLinear1245.i1";
-connectAttr "|character|rig|spine_rig|spine_controls|spine_parented|spine_offset|spine_parent|hip_offset|hip.iog" "body_local_controlSet.dsm"
-		 -na;
-connectAttr "|character|rig|spine_rig|spine_controls|spine_parented|spine_offset|spine_parent|chest_rotate_offset|chest_rotate_parent|chest_parent|chest_offset|chest.iog" "body_local_controlSet.dsm"
-		 -na;
-connectAttr "|character|rig|spine_rig|spine_controls|spine_parented|spine_offset|spine_parent|waist_parent|waist_offset|waist.iog" "body_local_controlSet.dsm"
-		 -na;
-connectAttr "|character|rig|spineFk_rig|spine_controls|pelvis_offset|pelvis|hip_offset|hip|waist_offset|waist.iog" "body_local_controlSet.dsm"
-		 -na;
-connectAttr "|character|rig|spineFk_rig|spine_controls|pelvis_offset|pelvis|hip_offset|hip.iog" "body_local_controlSet.dsm"
-		 -na;
-connectAttr "|character|rig|spineFk_rig|spine_controls|pelvis_offset|pelvis|hip_offset|hip|waist_offset|waist|chest_offset|chest.iog" "body_local_controlSet.dsm"
-		 -na;
+connectAttr "hip.iog" "body_local_controlSet.dsm" -na;
+connectAttr "chest.iog" "body_local_controlSet.dsm" -na;
+connectAttr "waist.iog" "body_local_controlSet.dsm" -na;
+connectAttr "_waist.iog" "body_local_controlSet.dsm" -na;
+connectAttr "_hip.iog" "body_local_controlSet.dsm" -na;
+connectAttr "_chest.iog" "body_local_controlSet.dsm" -na;
 connectAttr "body_local_controlSet.msg" "body_main_controlSet.dnsm" -na;
-connectAttr "|character|rig|spine_rig|spine_controls|pelvis_offset|pelvis_PH|pelvis_SN|pelvis.iog" "body_main_controlSet.dsm"
-		 -na;
+connectAttr "pelvis.iog" "body_main_controlSet.dsm" -na;
 connectAttr "spine.iog" "body_main_controlSet.dsm" -na;
 connectAttr "chest_rotate.iog" "body_main_controlSet.dsm" -na;
-connectAttr "|character|rig|spineFk_rig|spine_controls|pelvis_offset|pelvis.iog" "body_main_controlSet.dsm"
-		 -na;
+connectAttr "_pelvis.iog" "body_main_controlSet.dsm" -na;
 connectAttr "l_ear_a.iog" "l_ear_controlSet.dsm" -na;
 connectAttr "l_ear_b.iog" "l_ear_controlSet.dsm" -na;
 connectAttr "l_ear_c.iog" "l_ear_controlSet.dsm" -na;
@@ -69422,8 +69357,7 @@ connectAttr "l_leg_ik_footSpace.msg" "hyperLayout676.hyp[6].dn";
 connectAttr "decomposeMatrix57.msg" "hyperLayout676.hyp[7].dn";
 connectAttr "multMatrix48.msg" "hyperLayout676.hyp[8].dn";
 connectAttr "l_leg_ik_aim_objectSpace.msg" "hyperLayout676.hyp[9].dn";
-connectAttr "|character|rig|spine_rig|spine_posers|spine_mainPoser|pelvis_poser.msg" "hyperLayout676.hyp[11].dn"
-		;
+connectAttr "pelvis_poser.msg" "hyperLayout676.hyp[11].dn";
 connectAttr "decomposeMatrix58.msg" "hyperLayout676.hyp[12].dn";
 connectAttr "hip_poser.msg" "hyperLayout676.hyp[13].dn";
 connectAttr "multMatrix54.msg" "hyperLayout676.hyp[14].dn";
@@ -69840,8 +69774,7 @@ connectAttr "r_shoulder_connector_2.msg" "hyperLayout740.hyp[7].dn";
 connectAttr "r_arm_connector_1_pointConstraint2.msg" "hyperLayout740.hyp[8].dn";
 connectAttr "l_shoulder_connector_2.msg" "hyperLayout740.hyp[9].dn";
 connectAttr "pelvis_out.msg" "hyperLayout740.hyp[10].dn";
-connectAttr "|character|rig|spine_rig|spine_controls|spine_parented|spine_offset|spine_parent|chest_rotate_offset|chest_rotate_parent|chest_parent|chest_offset|chest.msg" "hyperLayout740.hyp[11].dn"
-		;
+connectAttr "chest.msg" "hyperLayout740.hyp[11].dn";
 connectAttr "distanceDimensionShape1.msg" "hyperLayout740.hyp[12].dn";
 connectAttr "r_arm_control.msg" "hyperLayout740.hyp[13].dn";
 connectAttr "multiplyDivide1811.msg" "hyperLayout740.hyp[14].dn";

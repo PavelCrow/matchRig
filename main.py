@@ -972,6 +972,9 @@ class ConnectWindow(QtWidgets.QMainWindow, bakeWindow.Ui_MainWindow):
 		self.data = {}
 		self.rigs = {}
 		
+		self.bakeControls_btn.setVisible(False)
+		self.clearKeys_btn.setVisible(False)
+		self.exclude_groupBox.setVisible(False)
 		self.exclude_frame.setVisible(False)
 		self.exclude_groupBox.setChecked(False)
 		self.resize(self.minimumSizeHint())
@@ -1131,6 +1134,8 @@ class ConnectWindow(QtWidgets.QMainWindow, bakeWindow.Ui_MainWindow):
 		self.bakeControls_btn.setEnabled(1)
 		
 		utils.setUserAttr('character', 'connected', 1, 'bool')
+		
+		self.bakeControls()
 
 	def bakeControls(self):
 		# bake controls

@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'C:\Users\Pavel\Dropbox\mayaScripts\matchRig\matchRig_bakeWindow.ui'
 #
-# Created: Wed Sep 13 22:39:03 2017
+# Created: Fri Nov 17 00:14:42 2017
 #      by: pyside-uic 0.2.14 running on PySide 1.1.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -12,13 +12,13 @@ from PySide import QtCore, QtGui
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(250, 593)
+        MainWindow.resize(250, 522)
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Preferred, QtGui.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(MainWindow.sizePolicy().hasHeightForWidth())
         MainWindow.setSizePolicy(sizePolicy)
-        MainWindow.setMinimumSize(QtCore.QSize(250, 420))
+        MainWindow.setMinimumSize(QtCore.QSize(250, 360))
         MainWindow.setMaximumSize(QtCore.QSize(250, 1000))
         MainWindow.setDocumentMode(False)
         MainWindow.setDockOptions(QtGui.QMainWindow.AllowTabbedDocks|QtGui.QMainWindow.AnimatedDocks)
@@ -302,7 +302,7 @@ class Ui_MainWindow(object):
         self.addRig_btn.setText(QtGui.QApplication.translate("MainWindow", "+", None, QtGui.QApplication.UnicodeUTF8))
         self.removeRig_btn.setText(QtGui.QApplication.translate("MainWindow", "-", None, QtGui.QApplication.UnicodeUTF8))
         self.importRig_btn.setText(QtGui.QApplication.translate("MainWindow", "Import", None, QtGui.QApplication.UnicodeUTF8))
-        self.connectRig_btn.setText(QtGui.QApplication.translate("MainWindow", "Connect Rig", None, QtGui.QApplication.UnicodeUTF8))
+        self.connectRig_btn.setText(QtGui.QApplication.translate("MainWindow", "Connect Rig and Bake", None, QtGui.QApplication.UnicodeUTF8))
         self.bakeControls_btn.setText(QtGui.QApplication.translate("MainWindow", "Bake Controls", None, QtGui.QApplication.UnicodeUTF8))
         self.bakeIkFk_btn.setText(QtGui.QApplication.translate("MainWindow", "Range", None, QtGui.QApplication.UnicodeUTF8))
         self.switchParent_btn.setText(QtGui.QApplication.translate("MainWindow", "Switch Parent", None, QtGui.QApplication.UnicodeUTF8))

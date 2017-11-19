@@ -1135,6 +1135,10 @@ class ConnectWindow(QtWidgets.QMainWindow, bakeWindow.Ui_MainWindow):
 		
 		utils.setUserAttr('character', 'connected', 1, 'bool')
 		
+		# disconnect twist controls from input skeleton
+		cmds.delete('l_arm_2_ctrl_parentConstraint1')
+		cmds.delete('r_arm_2_ctrl_parentConstraint1')
+		
 		self.bakeControls()
 
 	def bakeControls(self):
@@ -1344,13 +1348,14 @@ class ConnectWindow(QtWidgets.QMainWindow, bakeWindow.Ui_MainWindow):
 		
 		for f in frames:
 			cmds.currentTime(f)
-			self.switchParent()
 			cmds.setAttr(sel+'.parent', initParent)
-		
-		nextParent = initParent + 1
-		if nextParent > cmds.attributeQuery('parent',n=sel, max=1)[0]:
-			nextParent = 0
-		cmds.setAttr(sel+'.parent', nextParent)
+			self.switchParent()
+			
+		#return
+		#nextParent = initParent + 1
+		#if nextParent > cmds.attributeQuery('parent',n=sel, max=1)[0]:
+			#nextParent = 0
+		#cmds.setAttr(sel+'.parent', nextParent)
 		
 	def switchParent(self):
 		sel = cmds.ls(sl=True)

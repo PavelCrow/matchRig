@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'C:\Users\Pavel\Dropbox\mayaScripts\matchRig\matchRig_bakeWindow.ui'
+# Form implementation generated from reading ui file 'C:\Users\pkorolev\Dropbox\mayaScripts\matchRig\matchRig_bakeWindow.ui'
 #
-# Created: Fri Nov 17 00:14:42 2017
-#      by: pyside-uic 0.2.14 running on PySide 1.1.1
+# Created: Tue Dec 05 11:44:46 2017
+#      by: pyside-uic 0.2.14 running on PySide 1.2.0
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -12,7 +12,7 @@ from PySide import QtCore, QtGui
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(250, 522)
+        MainWindow.resize(250, 495)
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Preferred, QtGui.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -82,6 +82,16 @@ class Ui_MainWindow(object):
         self.importRig_btn.setMaximumSize(QtCore.QSize(1000, 16777215))
         self.importRig_btn.setObjectName("importRig_btn")
         self.verticalLayout_6.addWidget(self.importRig_btn)
+        self.importDefaultFbx_btn = QtGui.QPushButton(self.import_frame)
+        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.importDefaultFbx_btn.sizePolicy().hasHeightForWidth())
+        self.importDefaultFbx_btn.setSizePolicy(sizePolicy)
+        self.importDefaultFbx_btn.setMinimumSize(QtCore.QSize(50, 25))
+        self.importDefaultFbx_btn.setMaximumSize(QtCore.QSize(1000, 16777215))
+        self.importDefaultFbx_btn.setObjectName("importDefaultFbx_btn")
+        self.verticalLayout_6.addWidget(self.importDefaultFbx_btn)
         self.verticalLayout.addWidget(self.import_frame)
         self.line_4 = QtGui.QFrame(self.centralwidget)
         self.line_4.setFrameShape(QtGui.QFrame.HLine)
@@ -188,6 +198,15 @@ class Ui_MainWindow(object):
         self.line_3.setFrameShadow(QtGui.QFrame.Sunken)
         self.line_3.setObjectName("line_3")
         self.verticalLayout_2.addWidget(self.line_3)
+        self.horizontalLayout_5 = QtGui.QHBoxLayout()
+        self.horizontalLayout_5.setObjectName("horizontalLayout_5")
+        self.label_2 = QtGui.QLabel(self.main_frame)
+        self.label_2.setObjectName("label_2")
+        self.horizontalLayout_5.addWidget(self.label_2)
+        self.skeletonRoot_lineEdit = QtGui.QLineEdit(self.main_frame)
+        self.skeletonRoot_lineEdit.setObjectName("skeletonRoot_lineEdit")
+        self.horizontalLayout_5.addWidget(self.skeletonRoot_lineEdit)
+        self.verticalLayout_2.addLayout(self.horizontalLayout_5)
         self.bakeSceleton_btn = QtGui.QPushButton(self.main_frame)
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(0)
@@ -282,7 +301,7 @@ class Ui_MainWindow(object):
         self.import_btn.setObjectName("import_btn")
         self.horizontalLayout_2.addWidget(self.import_btn)
         self.verticalLayout_2.addLayout(self.horizontalLayout_2)
-        self.verticalLayout_2.setStretch(4, 1)
+        self.verticalLayout_2.setStretch(5, 1)
         self.verticalLayout.addWidget(self.main_frame)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtGui.QMenuBar(MainWindow)
@@ -302,6 +321,7 @@ class Ui_MainWindow(object):
         self.addRig_btn.setText(QtGui.QApplication.translate("MainWindow", "+", None, QtGui.QApplication.UnicodeUTF8))
         self.removeRig_btn.setText(QtGui.QApplication.translate("MainWindow", "-", None, QtGui.QApplication.UnicodeUTF8))
         self.importRig_btn.setText(QtGui.QApplication.translate("MainWindow", "Import", None, QtGui.QApplication.UnicodeUTF8))
+        self.importDefaultFbx_btn.setText(QtGui.QApplication.translate("MainWindow", "Import Default FBX", None, QtGui.QApplication.UnicodeUTF8))
         self.connectRig_btn.setText(QtGui.QApplication.translate("MainWindow", "Connect Rig and Bake", None, QtGui.QApplication.UnicodeUTF8))
         self.bakeControls_btn.setText(QtGui.QApplication.translate("MainWindow", "Bake Controls", None, QtGui.QApplication.UnicodeUTF8))
         self.bakeIkFk_btn.setText(QtGui.QApplication.translate("MainWindow", "Range", None, QtGui.QApplication.UnicodeUTF8))
@@ -310,6 +330,8 @@ class Ui_MainWindow(object):
         self.switchParentRange_btn.setText(QtGui.QApplication.translate("MainWindow", "Range", None, QtGui.QApplication.UnicodeUTF8))
         self.alignTwoHanded_btn.setText(QtGui.QApplication.translate("MainWindow", "Align TwoHanded", None, QtGui.QApplication.UnicodeUTF8))
         self.alignTwoHandedRange_btn.setText(QtGui.QApplication.translate("MainWindow", "Range", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_2.setText(QtGui.QApplication.translate("MainWindow", "Skeleton Root", None, QtGui.QApplication.UnicodeUTF8))
+        self.skeletonRoot_lineEdit.setText(QtGui.QApplication.translate("MainWindow", "Armature", None, QtGui.QApplication.UnicodeUTF8))
         self.bakeSceleton_btn.setText(QtGui.QApplication.translate("MainWindow", "Bake Skeleton", None, QtGui.QApplication.UnicodeUTF8))
         self.exclude_groupBox.setTitle(QtGui.QApplication.translate("MainWindow", "Exclude List", None, QtGui.QApplication.UnicodeUTF8))
         self.label_6.setText(QtGui.QApplication.translate("MainWindow", "This objects not clear translate keys.", None, QtGui.QApplication.UnicodeUTF8))

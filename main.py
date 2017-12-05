@@ -243,8 +243,11 @@ class MainWindow(QtWidgets.QMainWindow, mainWindow.Ui_Dialog):
 		utils.pyToAttr('character.r_side', self.r_name)
 		
 		if self.buttons['hand'][0] != "":
+			
 			# save prefix type
 			array = self.buttons['hand'][0].split("_")
+			if array[0] == 'input':
+				del array[0]
 			if array[0] == self.l_name:
 				self.sidePos = "prefix"
 			elif array[-1] == self.l_name:
@@ -900,6 +903,22 @@ class MainWindow(QtWidgets.QMainWindow, mainWindow.Ui_Dialog):
 		connectShape('l_leg_2_ctrlShape', 'r_leg_2_ctrlShape')
 		connectShape('l_leg_3_ctrlShape', 'r_leg_3_ctrlShape')
 		
+		connectShape('l_finger_1_1_ctrlShape', 'r_finger_1_1_ctrlShape')
+		connectShape('l_finger_1_2_ctrlShape', 'r_finger_1_2_ctrlShape')
+		connectShape('l_finger_1_3_ctrlShape', 'r_finger_1_3_ctrlShape')
+		connectShape('l_finger_2_1_ctrlShape', 'r_finger_2_1_ctrlShape')
+		connectShape('l_finger_2_2_ctrlShape', 'r_finger_2_2_ctrlShape')
+		connectShape('l_finger_2_3_ctrlShape', 'r_finger_2_3_ctrlShape')
+		connectShape('l_finger_3_1_ctrlShape', 'r_finger_3_1_ctrlShape')
+		connectShape('l_finger_3_2_ctrlShape', 'r_finger_3_2_ctrlShape')
+		connectShape('l_finger_3_3_ctrlShape', 'r_finger_3_3_ctrlShape')
+		connectShape('l_finger_4_1_ctrlShape', 'r_finger_4_1_ctrlShape')
+		connectShape('l_finger_4_2_ctrlShape', 'r_finger_4_2_ctrlShape')
+		connectShape('l_finger_4_3_ctrlShape', 'r_finger_4_3_ctrlShape')
+		connectShape('l_finger_5_1_ctrlShape', 'r_finger_5_1_ctrlShape')
+		connectShape('l_finger_5_2_ctrlShape', 'r_finger_5_2_ctrlShape')
+		connectShape('l_finger_5_3_ctrlShape', 'r_finger_5_3_ctrlShape')
+		
 		if cmds.objExists("twoHanded"):
 			connect("hand", "twoHanded", "par", True, False)
 		
@@ -1018,6 +1037,7 @@ class ConnectWindow(QtWidgets.QMainWindow, bakeWindow.Ui_MainWindow):
 		self.switchParentRange_btn.clicked.connect(self.switchParentRange)
 		
 		self.importRig_btn.clicked.connect(self.imporRig)
+		self.importDefaultFbx_btn.clicked.connect(self.importDefaultFbx)
 		self.exclude_groupBox.clicked.connect(self.switchExcludeList)
 		self.alignTwoHanded_btn.clicked.connect(self.alignTwoHanded)
 		self.alignTwoHandedRange_btn.clicked.connect(self.alignTwoHandedBake)
@@ -1136,8 +1156,10 @@ class ConnectWindow(QtWidgets.QMainWindow, bakeWindow.Ui_MainWindow):
 		utils.setUserAttr('character', 'connected', 1, 'bool')
 		
 		# disconnect twist controls from input skeleton
-		cmds.delete('l_arm_2_ctrl_parentConstraint1')
-		cmds.delete('r_arm_2_ctrl_parentConstraint1')
+		try:
+			cmds.delete('l_arm_2_ctrl_parentConstraint1')
+			cmds.delete('r_arm_2_ctrl_parentConstraint1')
+		except: pass
 		
 		self.bakeControls()
 
@@ -1172,7 +1194,9 @@ class ConnectWindow(QtWidgets.QMainWindow, bakeWindow.Ui_MainWindow):
 
 	def bakeSceleton(self):
 		orig_joints = []
-		joints = pm.listRelatives("Armature", children=1, type="joint", allDescendents=1)
+		skeletonRoot = self.skeletonRoot_lineEdit.text()
+		#joints = pm.listRelatives("Armature", children=1, type="joint", allDescendents=1)
+		joints = pm.listRelatives(skeletonRoot, children=1, type="joint", allDescendents=1)
 		for j in joints:
 			orig_joints.append(j)	
 				
@@ -1184,7 +1208,8 @@ class ConnectWindow(QtWidgets.QMainWindow, bakeWindow.Ui_MainWindow):
 			except: print "miss in connectOrigSkeletonToRig ", j	
 			
 		# bake orig sceleton
-		cmds.select('Armature')
+		#cmds.select('Armature')
+		cmds.select(skeletonRoot)
 		mel.eval("string $minTime = `playbackOptions -q -minTime`;")
 		mel.eval("string $maxTime = `playbackOptions -q -maxTime`;")
 		mel.eval('string $range = $minTime + ":" + $maxTime;')
@@ -1356,6 +1381,7 @@ class ConnectWindow(QtWidgets.QMainWindow, bakeWindow.Ui_MainWindow):
 		#if nextParent > cmds.attributeQuery('parent',n=sel, max=1)[0]:
 			#nextParent = 0
 		#cmds.setAttr(sel+'.parent', nextParent)
+		pass
 		
 	def switchParent(self):
 		sel = cmds.ls(sl=True)
@@ -1763,3 +1789,10 @@ class ConnectWindow(QtWidgets.QMainWindow, bakeWindow.Ui_MainWindow):
 			
 		# bake controls -----------------------------------------
 		self.bakeControls()
+		
+	def importDefaultFbx(self):
+		# import animation -----------------------------------------
+		app_dir = cmds.internalVar(userAppDir=True)
+		filePath = app_dir + 'projects/default/scenes/temporaryFbx.fbx'		
+		cmds.file(filePath, pr=1, i=1, type="FBX", namespace="temporaryFbx", mergeNamespacesOnClash=False, options="v=0;", ra=True)
+		

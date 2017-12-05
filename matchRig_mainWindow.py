@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'C:\Users\Pavel\Dropbox\mayaScripts\matchRig\matchRig_mainWindow.ui'
+# Form implementation generated from reading ui file 'C:\Users\pkorolev\Dropbox\mayaScripts\matchRig\matchRig_mainWindow.ui'
 #
-# Created: Fri Nov 17 00:14:42 2017
-#      by: pyside-uic 0.2.14 running on PySide 1.1.1
+# Created: Tue Dec 05 11:44:46 2017
+#      by: pyside-uic 0.2.14 running on PySide 1.2.0
 #
 # WARNING! All changes made in this file will be lost!
 

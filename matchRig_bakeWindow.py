@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'C:\Users\pkorolev\Dropbox\mayaScripts\matchRig\matchRig_bakeWindow.ui'
+# Form implementation generated from reading ui file 'C:\Users\Pavel\Dropbox\mayaScripts\matchRig\matchRig_bakeWindow.ui'
 #
-# Created: Tue Dec 05 11:44:46 2017
-#      by: pyside-uic 0.2.14 running on PySide 1.2.0
+# Created: Wed Dec 13 08:56:04 2017
+#      by: pyside-uic 0.2.14 running on PySide 1.1.1
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -12,7 +12,7 @@ from PySide import QtCore, QtGui
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(250, 495)
+        MainWindow.resize(250, 420)
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Preferred, QtGui.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -206,6 +206,16 @@ class Ui_MainWindow(object):
         self.skeletonRoot_lineEdit = QtGui.QLineEdit(self.main_frame)
         self.skeletonRoot_lineEdit.setObjectName("skeletonRoot_lineEdit")
         self.horizontalLayout_5.addWidget(self.skeletonRoot_lineEdit)
+        self.setSceletonRoot_btn = QtGui.QPushButton(self.main_frame)
+        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Fixed, QtGui.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.setSceletonRoot_btn.sizePolicy().hasHeightForWidth())
+        self.setSceletonRoot_btn.setSizePolicy(sizePolicy)
+        self.setSceletonRoot_btn.setMinimumSize(QtCore.QSize(40, 20))
+        self.setSceletonRoot_btn.setMaximumSize(QtCore.QSize(40, 16777215))
+        self.setSceletonRoot_btn.setObjectName("setSceletonRoot_btn")
+        self.horizontalLayout_5.addWidget(self.setSceletonRoot_btn)
         self.verticalLayout_2.addLayout(self.horizontalLayout_5)
         self.bakeSceleton_btn = QtGui.QPushButton(self.main_frame)
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Expanding)
@@ -332,6 +342,7 @@ class Ui_MainWindow(object):
         self.alignTwoHandedRange_btn.setText(QtGui.QApplication.translate("MainWindow", "Range", None, QtGui.QApplication.UnicodeUTF8))
         self.label_2.setText(QtGui.QApplication.translate("MainWindow", "Skeleton Root", None, QtGui.QApplication.UnicodeUTF8))
         self.skeletonRoot_lineEdit.setText(QtGui.QApplication.translate("MainWindow", "Armature", None, QtGui.QApplication.UnicodeUTF8))
+        self.setSceletonRoot_btn.setText(QtGui.QApplication.translate("MainWindow", "Set", None, QtGui.QApplication.UnicodeUTF8))
         self.bakeSceleton_btn.setText(QtGui.QApplication.translate("MainWindow", "Bake Skeleton", None, QtGui.QApplication.UnicodeUTF8))
         self.exclude_groupBox.setTitle(QtGui.QApplication.translate("MainWindow", "Exclude List", None, QtGui.QApplication.UnicodeUTF8))
         self.label_6.setText(QtGui.QApplication.translate("MainWindow", "This objects not clear translate keys.", None, QtGui.QApplication.UnicodeUTF8))

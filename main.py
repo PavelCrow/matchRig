@@ -996,7 +996,7 @@ class ConnectWindow(QtWidgets.QMainWindow, bakeWindow.Ui_MainWindow):
 		self.exclude_groupBox.setVisible(False)
 		self.exclude_frame.setVisible(False)
 		self.exclude_groupBox.setChecked(False)
-		self.resize(self.minimumSizeHint())
+		
 		
 		if not cmds.objExists('character'):
 			self.main_frame.setEnabled(0)
@@ -1010,9 +1010,26 @@ class ConnectWindow(QtWidgets.QMainWindow, bakeWindow.Ui_MainWindow):
 				self.main_frame.setEnabled(cmds.getAttr('character.backed'))
 				self.import_frame.setEnabled(0)
 			except: pass
-			
+		
+		self.addMenu()	
 		self.load()
 		self.updateRigsList()
+		#self.resize(self.minimumSizeHint())
+
+	def addMenu(self):
+		
+		def setText(text):
+			self.skeletonRoot_lineEdit.setText(text)
+		
+		menu = QtGui.QMenu(self)
+		
+		for m in ['Armature', 'skeleton']:
+			m_action = QtGui.QAction(self)
+			m_action.setText(m)
+			m_action.triggered.connect(partial(setText, m))
+			menu.addAction(m_action)	
+			
+		self.setSceletonRoot_btn.setMenu(menu)
 
 	def connectSignals(self):
 		logger.debug("Start " + inspect.stack()[0][3])

@@ -196,12 +196,15 @@ class MainWindow(QtWidgets.QMainWindow, mainWindow.Ui_Dialog):
 
 		# duplicate sceleton and rename it
 		joints = cmds.ls(type="joint")
-
-		root = cmds.listRelatives(joints[0], parent=1, fullPath=1)[0].split("|")[1]
-		root = cmds.rename(root, "skin_"+root)
+		
+		try:
+			root = cmds.listRelatives(joints[0], parent=1, fullPath=1)[0].split("|")[1]
+			root = cmds.rename(root, "skin_"+root)
+		except: root = joints[0]
+		
 		skin_root = cmds.group(root, n="skin_root")
 		for j in joints:
-			j = cmds.rename(j, "skin_"+j)		
+			j = cmds.rename(j, "skin_"+j)
 
 		input_root = cmds.duplicate(skin_root, n="input_root")
 		childs = cmds.listRelatives("input_root", children=1, allDescendents=1, f=1)
@@ -1225,6 +1228,7 @@ class ConnectWindow(QtWidgets.QMainWindow, bakeWindow.Ui_MainWindow):
 			except: print "miss in connectOrigSkeletonToRig ", j	
 			
 		# bake orig sceleton
+		return
 		#cmds.select('Armature')
 		cmds.select(skeletonRoot)
 		mel.eval("string $minTime = `playbackOptions -q -minTime`;")

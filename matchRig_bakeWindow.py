@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'C:\Users\Pavel\Dropbox\mayaScripts\matchRig\matchRig_bakeWindow.ui'
 #
-# Created: Wed Dec 13 08:56:04 2017
+# Created: Wed Jan 10 14:35:40 2018
 #      by: pyside-uic 0.2.14 running on PySide 1.1.1
 #
 # WARNING! All changes made in this file will be lost!

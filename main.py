@@ -110,6 +110,15 @@ class MainWindow(QtWidgets.QMainWindow, mainWindow.Ui_Dialog):
 		self.buttons["weapon_1"] = ["", self.weapon_1_btn]
 		self.buttons["acc_1"] = ["", self.acc_1_btn]
 		self.buttons["symWeapon_1"] = ["", self.symWeapon_1_btn]
+		self.buttons["addObject_1"] = ["", self.addObject_1_btn]
+		self.buttons["addObject_2"] = ["", self.addObject_2_btn]
+		self.buttons["addObject_3"] = ["", self.addObject_3_btn]
+		self.buttons["addObject_4"] = ["", self.addObject_4_btn]
+		self.buttons["addObject_5"] = ["", self.addObject_5_btn]
+		self.buttons["addObject_6"] = ["", self.addObject_6_btn]
+		self.buttons["addObject_7"] = ["", self.addObject_7_btn]
+		self.buttons["addObject_8"] = ["", self.addObject_8_btn]
+		self.buttons["addObject_9"] = ["", self.addObject_9_btn]
 
 		self.mainButtonsList = []
 		self.mainButtonsList.append(self.head_btn)
@@ -161,7 +170,15 @@ class MainWindow(QtWidgets.QMainWindow, mainWindow.Ui_Dialog):
 		self.addButtonsList.append(self.weapon_1_btn)
 		self.addButtonsList.append(self.acc_1_btn)
 		self.addButtonsList.append(self.symWeapon_1_btn)
-
+		self.addButtonsList.append(self.addObject_1_btn)
+		self.addButtonsList.append(self.addObject_2_btn)
+		self.addButtonsList.append(self.addObject_3_btn)
+		self.addButtonsList.append(self.addObject_4_btn)
+		self.addButtonsList.append(self.addObject_5_btn)
+		self.addButtonsList.append(self.addObject_6_btn)
+		self.addButtonsList.append(self.addObject_7_btn)
+		self.addButtonsList.append(self.addObject_8_btn)
+		self.addButtonsList.append(self.addObject_9_btn)
 
 		self.connectSignals()
 
@@ -199,11 +216,12 @@ class MainWindow(QtWidgets.QMainWindow, mainWindow.Ui_Dialog):
 		
 		try:
 			root = cmds.listRelatives(joints[0], parent=1, fullPath=1)[0].split("|")[1]
-			root = cmds.rename(root, "skin_"+root)
+			#root = cmds.rename(root, "skin_"+root)
 		except: root = joints[0]
 		
 		skin_root = cmds.group(root, n="skin_root")
 		for j in joints:
+			print j
 			j = cmds.rename(j, "skin_"+j)
 
 		input_root = cmds.duplicate(skin_root, n="input_root")
@@ -834,6 +852,16 @@ class MainWindow(QtWidgets.QMainWindow, mainWindow.Ui_Dialog):
 		makeControlAndConnect("l_shoulder_joint_1", "acc_1", 10, 15, "cube")
 		makeControlAndConnect("r_shoulder_joint_1", "acc_1", 10, 15, "cube")
 		
+		makeControlAndConnect("posCtrl", "addObject_1", 15, 15, "cube")
+		makeControlAndConnect("posCtrl", "addObject_2", 15, 15, "cube")
+		makeControlAndConnect("posCtrl", "addObject_3", 15, 15, "cube")
+		makeControlAndConnect("posCtrl", "addObject_4", 15, 15, "cube")
+		makeControlAndConnect("posCtrl", "addObject_5", 15, 15, "cube")
+		makeControlAndConnect("posCtrl", "addObject_6", 15, 15, "cube")
+		makeControlAndConnect("posCtrl", "addObject_7", 15, 15, "cube")
+		makeControlAndConnect("posCtrl", "addObject_8", 15, 15, "cube")
+		makeControlAndConnect("posCtrl", "addObject_9", 15, 15, "cube")
+		
 		# add symmetry weapons controls
 		makeControlAndConnect("l_arm_limbB_end_skinJoint", "weapon_1", 10, 15, "cube")
 		if self.symWeapon_cb.isChecked():
@@ -1107,7 +1135,7 @@ class ConnectWindow(QtWidgets.QMainWindow, bakeWindow.Ui_MainWindow):
 		# fill list
 		for r in sorted(self.rigs):
 			self.rigs_comboBox.addItem(r)
-	
+	                                                                                                                                                                                                                                                                                                                                                                                                                    
 		# set current item
 		if curRig != "":
 			for x, name in enumerate(sorted(self.rigs)):

@@ -1245,6 +1245,11 @@ class ConnectWindow(QtWidgets.QMainWindow, bakeWindow.Ui_MainWindow):
 		skeletonRoot = self.skeletonRoot_lineEdit.text()
 		#joints = pm.listRelatives("Armature", children=1, type="joint", allDescendents=1)
 		joints = pm.listRelatives(skeletonRoot, children=1, type="joint", allDescendents=1)
+		
+		if cmds.objectType(skeletonRoot) == 'joint':
+			pm.delete(pm.PyNode(skeletonRoot), channels=1, unitlessAnimationCurves=False, hierarchy="none")
+			self.connect(pm.PyNode('skin_'+skeletonRoot), pm.PyNode(skeletonRoot))
+			
 		for j in joints:
 			orig_joints.append(j)	
 				
@@ -1253,10 +1258,10 @@ class ConnectWindow(QtWidgets.QMainWindow, bakeWindow.Ui_MainWindow):
 				name = j.name().split('|')[-1]
 				pm.delete(j, channels=1, unitlessAnimationCurves=False, hierarchy="none")
 				self.connect(pm.PyNode('skin_'+name), j)
-			except: print "miss in connectOrigSkeletonToRig ", j	
+			except: print "miss in connectOrigSkeletonToRig ", j
 			
 		# bake orig sceleton
-		return
+		#return
 		#cmds.select('Armature')
 		cmds.select(skeletonRoot)
 		mel.eval("string $minTime = `playbackOptions -q -minTime`;")

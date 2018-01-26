@@ -8,8 +8,8 @@ import maya.api.OpenMaya as om
 from functools import partial
 
 # import PySide.QtGui as QWidgets
-from PySide import QtCore, QtGui
-from Qt import QtWidgets#, QtGui, QtCore
+#from PySide import QtCore, QtGui
+from Qt import QtWidgets, QtCore, QtGui
 try:
 	from shiboken import wrapInstance
 except:
@@ -217,7 +217,12 @@ class MainWindow(QtWidgets.QMainWindow, mainWindow.Ui_Dialog):
 		try:
 			root = cmds.listRelatives(joints[0], parent=1, fullPath=1)[0].split("|")[1]
 			#root = cmds.rename(root, "skin_"+root)
-		except: root = joints[0]
+		except: 
+			try:
+				root = joints[0]
+			except:
+				cmds.warning("Can not find sceleton root")
+				return
 		
 		skin_root = cmds.group(root, n="skin_root")
 		for j in joints:
@@ -286,7 +291,7 @@ class MainWindow(QtWidgets.QMainWindow, mainWindow.Ui_Dialog):
 		jointName = btn.objectName().split('_btn')[0]		
 
 		# select saved joint on ctrl pressed
-		modifiers = QtGui.QApplication.keyboardModifiers()
+		modifiers = QtWidgets.QApplication.keyboardModifiers()
 		if modifiers == QtCore.Qt.ControlModifier:
 			savedJoint = self.buttons[jointName][0]
 			if savedJoint == "":
@@ -960,7 +965,7 @@ class MainWindow(QtWidgets.QMainWindow, mainWindow.Ui_Dialog):
 		fileName = cmds.file(q=1, expandName=1).split('/')[-1]
 		filePath = fullName.split(fileName)[0]		
 
-		filename = QtGui.QFileDialog.getSaveFileName(self, "Save file", filePath, "*.map")[0]
+		filename = QtWidgets.QFileDialog.getSaveFileName(self, "Save file", filePath, "*.map")[0]
 		print filename
 		
 		if filename == "":
@@ -984,7 +989,7 @@ class MainWindow(QtWidgets.QMainWindow, mainWindow.Ui_Dialog):
 		fileName = cmds.file(q=1, expandName=1).split('/')[-1]
 		filePath = fullName.split(fileName)[0]		
 
-		filename = QtGui.QFileDialog.getOpenFileName(self, "Save file", filePath, "*.map")[0]
+		filename = QtWidgets.QFileDialog.getOpenFileName(self, "Save file", filePath, "*.map")[0]
 		if filename == "":
 			return
 		
@@ -1052,10 +1057,10 @@ class ConnectWindow(QtWidgets.QMainWindow, bakeWindow.Ui_MainWindow):
 		def setText(text):
 			self.skeletonRoot_lineEdit.setText(text)
 		
-		menu = QtGui.QMenu(self)
+		menu = QtWidgets.QMenu(self)
 		
 		for m in ['Armature', 'skeleton']:
-			m_action = QtGui.QAction(self)
+			m_action = QtWidgets.QAction(self)
 			m_action.setText(m)
 			m_action.triggered.connect(partial(setText, m))
 			menu.addAction(m_action)	

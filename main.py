@@ -216,17 +216,17 @@ class MainWindow(QtWidgets.QMainWindow, mainWindow.Ui_Dialog):
 		
 		try:
 			root = cmds.listRelatives(joints[0], parent=1, fullPath=1)[0].split("|")[1]
-			#root = cmds.rename(root, "skin_"+root)
+			root = cmds.rename(root, "skin_"+root)
 		except: 
 			try:
 				root = joints[0]
 			except:
 				cmds.warning("Can not find sceleton root")
 				return
-		
+		#print "ROOT", root
 		skin_root = cmds.group(root, n="skin_root")
 		for j in joints:
-			print j
+			#print j
 			j = cmds.rename(j, "skin_"+j)
 
 		input_root = cmds.duplicate(skin_root, n="input_root")
@@ -455,12 +455,12 @@ class MainWindow(QtWidgets.QMainWindow, mainWindow.Ui_Dialog):
 
 		def updateVis():
 			for m in self.modules:
-				print m[:-4]
+				m_name = m.split('_rig')[0]
 				try:
 					if state == 0:
-						cmds.hide(m[:-4]+'_'+obj_type)
+						cmds.hide(m_name+'_'+obj_type)
 					else:
-						cmds.showHidden(m[:-4]+'_'+obj_type)
+						cmds.showHidden(m_name+'_'+obj_type)
 				except: pass
 
 		def updateTemplate():
@@ -1026,6 +1026,7 @@ class ConnectWindow(QtWidgets.QMainWindow, bakeWindow.Ui_MainWindow):
 		self.r_name = 'r'
 		self.data = {}
 		self.rigs = {}
+		self.root = ""
 		
 		self.bakeControls_btn.setVisible(False)
 		self.clearKeys_btn.setVisible(False)
@@ -1040,17 +1041,21 @@ class ConnectWindow(QtWidgets.QMainWindow, bakeWindow.Ui_MainWindow):
 			self.bakeControls_btn.setEnabled(0)
 			self.import_frame.setEnabled(1)
 		else:
-			try:
-				self.connectRig_btn.setEnabled(not cmds.getAttr('character.connected'))
-				self.bakeControls_btn.setEnabled(cmds.getAttr('character.connected') and not cmds.getAttr('character.backed'))
-				self.main_frame.setEnabled(cmds.getAttr('character.backed'))
-				self.import_frame.setEnabled(0)
-			except: pass
+			#try:
+			self.connectRig_btn.setEnabled(not cmds.getAttr('character.connected'))
+			self.bakeControls_btn.setEnabled(cmds.getAttr('character.connected') and not cmds.getAttr('character.backed'))
+			self.main_frame.setEnabled(cmds.getAttr('character.backed'))
+			self.import_frame.setEnabled(0)
+			#except: pass
 		
 		self.addMenu()	
 		self.load()
 		self.updateRigsList()
 		#self.resize(self.minimumSizeHint())
+		
+		if cmds.objExists('input_root'):
+			self.root = cmds.listRelatives('input_root')[0].split('input_')[-1]
+		
 
 	def addMenu(self):
 		
@@ -1178,6 +1183,8 @@ class ConnectWindow(QtWidgets.QMainWindow, bakeWindow.Ui_MainWindow):
 		cmds.hide('input_root')
 		cmds.hide('skin_root')
 		
+		self.root = cmds.listRelatives('input_root')[0].split('input_')[-1]
+		
 		utils.setUserAttr('character', 'connected', 0, 'bool')
 		utils.setUserAttr('character', 'backed', 0, 'bool')
 		
@@ -1225,7 +1232,8 @@ class ConnectWindow(QtWidgets.QMainWindow, bakeWindow.Ui_MainWindow):
 		mel.eval('bakeResults -simulation true -t $range  -sampleBy 1 -disableImplicitControl true -preserveOutsideKeys false -sparseAnimCurveBake false -removeBakedAttributeFromLayer false -bakeOnOverrideLayer false -minimizeRotation true -at "tx" -at "ty" -at "tz" -at "rx" -at "ry" -at "rz";')			
 
 		orig_joints = []
-		joints = pm.listRelatives("Armature", children=1, type="joint", allDescendents=1)
+						
+		joints = pm.listRelatives(self.root, children=1, type="joint", allDescendents=1)
 		for j in joints:
 			orig_joints.append(j)				
 
@@ -1237,7 +1245,7 @@ class ConnectWindow(QtWidgets.QMainWindow, bakeWindow.Ui_MainWindow):
 				#self.connect(pm.PyNode('skin_'+name), j)
 			except: print "miss in connect joints after bakeControls ", j	
 		
-		cmds.hide('Armature', 'Geometry')
+		cmds.hide(self.root, 'Geometry')
 		cmds.select(clear=1)
 		
 		self.bakeControls_btn.setEnabled(0)
@@ -1661,7 +1669,7 @@ class ConnectWindow(QtWidgets.QMainWindow, bakeWindow.Ui_MainWindow):
 	def hotExport(self):
 		logger.debug("hotExport")
 	
-		cmds.showHidden('Armature', 'Geometry')
+		cmds.showHidden(self.root, 'Geometry')
 		
 		meshes = pm.listRelatives('Geometry')
 		pm.parent(meshes, world=1)
@@ -1670,11 +1678,11 @@ class ConnectWindow(QtWidgets.QMainWindow, bakeWindow.Ui_MainWindow):
 		
 		app_dir = cmds.internalVar(userAppDir=True)
 		filePath = app_dir + 'projects/default/scenes/temporaryFbx.fbx'
-		cmds.select('Armature', meshes)
+		cmds.select(self.root, meshes)
 		mel.eval('file -force -options "v=0;" -typ "FBX export" -pr -es "%s";' %filePath)		
 	
 		pm.parent(meshes, 'Geometry')
-		cmds.hide('Armature', 'Geometry')
+		cmds.hide(self.root, 'Geometry')
 
 	def connect(self, src, tgt):   
 		#print "connect", src, tgt
@@ -1834,7 +1842,7 @@ class ConnectWindow(QtWidgets.QMainWindow, bakeWindow.Ui_MainWindow):
 				
 		# connect input sceleton -----------------------------------------
 		orig_joints = []
-		joints = pm.listRelatives("Armature", children=1, type="joint", allDescendents=1)
+		joints = pm.listRelatives(self.root, children=1, type="joint", allDescendents=1)
 		for j in joints:
 			orig_joints.append(j)				
 

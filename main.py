@@ -1112,7 +1112,7 @@ class ConnectWindow(QtWidgets.QMainWindow, bakeWindow.Ui_MainWindow):
 		filePath = fullName.split(fileName)[0]		
 		
 		# open select window 
-		rigPath = QtGui.QFileDialog.getOpenFileName(self, "import rig", filePath, "*.ma")[0]
+		rigPath = QtWidgets.QFileDialog.getOpenFileName(self, "import rig", filePath, "*.ma")[0]
 		if rigPath == "":
 			return		
 		

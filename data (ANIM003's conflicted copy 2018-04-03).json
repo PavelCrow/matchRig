@@ -1,11 +1,13 @@
 {
     "rigs": {
-        "match_rig_football_player": "C:/Users/Pavel/AppData/Roaming/Skype/My Skype Received Files/match_rig_football_player.ma", 
+        "match_rig_football_player": "C:/Users/pkorolev/AppData/Roaming/Skype/My Skype Received Files/match_rig_football_player.ma", 
+        "dialog_02_rig": "C:/Users/pkorolev/AppData/Roaming/Skype/My Skype Received Files/dialog_02_rig.ma", 
         "rig_state_3_matchRig": "E:/_ Archive/MyWork/Projects/Svetozar/ShadowFight3/rig_state_3_matchRig.ma", 
         "main_char_07_ArmJnt_matchrig": "C:/Users/pkorolev/AppData/Roaming/Skype/My Skype Received Files/main_char_07_ArmJnt_matchrig.ma", 
         "newGirl_matchRig": "C:/Users/Pavel/Dropbox/mayaScripts/matchRig/newGirl_matchRig.ma", 
         "temp2": "E:/_ Archive/MyWork/Projects/Svetozar/project_11x11/temp2.ma", 
-        "rig_03": "E:/_ Archive/MyWork/Projects/Svetozar/longAnim/rig_03.ma", 
+        "rig_04": "C:/Users/pkorolev/AppData/Roaming/Skype/My Skype Received Files/rig_04.ma", 
+        "rig_02": "C:/Users/pkorolev/AppData/Roaming/Skype/My Skype Received Files/rig_02.ma", 
         "main_char_07_aaaGrp_matchrig": "C:/Users/pkorolev/AppData/Roaming/Skype/My Skype Received Files/main_char_07_aaaGrp_matchrig.ma"
     }
 }

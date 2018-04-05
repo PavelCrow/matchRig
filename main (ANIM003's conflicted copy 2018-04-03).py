@@ -1221,7 +1221,7 @@ class ConnectWindow(QtWidgets.QMainWindow, bakeWindow.Ui_MainWindow):
 			cmds.delete('r_arm_2_ctrl_parentConstraint1')
 		except: pass
 		
-		#self.bakeControls()
+		self.bakeControls()
 
 	def bakeControls(self):
 		# bake controls
@@ -1361,7 +1361,7 @@ class ConnectWindow(QtWidgets.QMainWindow, bakeWindow.Ui_MainWindow):
 				for f in frames:
 					cmds.currentTime(f)
 					pk_selector_switchIKFK.switchIkFk()
-					#mel.eval('human_switchFkIk -sl')
+					mel.eval('human_switchFkIk -sl')
 
 			elif o in ['l_wrist', 'l_forearm', 'l_arm', 'r_wrist', 'r_forearm', 'r_arm']:
 				cmds.cutKey(side+'_hand')
@@ -1372,7 +1372,7 @@ class ConnectWindow(QtWidgets.QMainWindow, bakeWindow.Ui_MainWindow):
 				for f in frames:
 					cmds.currentTime(f)
 					pk_selector_switchIKFK.switchIkFk()
-					#mel.eval('human_switchFkIk -sl')
+					mel.eval('human_switchFkIk -sl')
 					
 			#elif o in ['l_knee', 'l_foot', 'l_heelIk', 'r_knee', 'r_foot', 'r_heelIk']:
 				#cmds.cutKey(side+'_upLeg')

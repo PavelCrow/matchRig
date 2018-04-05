@@ -70,7 +70,7 @@ def switchIkFk():
 		else :
 			ik_to_fk(limbType)
 			
-		mel.eval("selectorRefresh;")
+		#mel.eval("selectorRefresh;")
 
 def fk_to_ik(limbType):
 	print "fk to ik"

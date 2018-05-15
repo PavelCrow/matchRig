@@ -1221,7 +1221,7 @@ class ConnectWindow(QtWidgets.QMainWindow, bakeWindow.Ui_MainWindow):
 			cmds.delete('r_arm_2_ctrl_parentConstraint1')
 		except: pass
 		
-		#self.bakeControls()
+		self.bakeControls()
 
 	def bakeControls(self):
 		# bake controls

@@ -212,31 +212,34 @@ class MainWindow(QtWidgets.QMainWindow, mainWindow.Ui_Dialog):
 	def importRig(self):
 
 		# duplicate sceleton and rename it
-		joints = cmds.ls(type="joint")
+		joints = pm.ls(type="joint")
 		
 		try:
-			root = cmds.listRelatives(joints[0], parent=1, fullPath=1)[0].split("|")[1]
-			root = cmds.rename(root, "skin_"+root)
-		except: 
-			try:
+			par = pm.listRelatives(joints[0], parent=1, fullPath=1)
+			if len(par) == 0:
 				root = joints[0]
-			except:
-				cmds.warning("Can not find sceleton root")
-				return
-		#print "ROOT", root
-		skin_root = cmds.group(root, n="skin_root")
-		for j in joints:
-			#print j
-			j = cmds.rename(j, "skin_"+j)
+			else:
+				root = par[0]
+				root = pm.rename(root, "skin_"+root)
+		except: 
+			pm.warning("Can not find sceleton root")
+			return
 
-		input_root = cmds.duplicate(skin_root, n="input_root")
-		childs = cmds.listRelatives("input_root", children=1, allDescendents=1, f=1)
+		#print "ROOT", root
+		skin_root = pm.group(root, n="skin_root")
+		for j in joints:
+				#print j
+			short_name = j.split('|')[-1]
+			path = j.split(short_name)[0]
+			pm.rename(j, path+"skin_"+short_name)
+
+		input_root = pm.duplicate(skin_root, n="input_root")
+		childs = pm.listRelatives("input_root", children=1, allDescendents=1, f=1)
 		for c in childs:
 			#if cmds.objectType(c) == "joint":
-			cmds.rename(c, c.split("|")[-1].replace("skin_", "input_"))
-
-
-		cmds.hide("skin_root")
+			pm.rename(c, c.split("|")[-1].replace("skin_", "input_"))
+		
+		pm.hide("skin_root")
 
 
 		# import rig
@@ -577,7 +580,7 @@ class MainWindow(QtWidgets.QMainWindow, mainWindow.Ui_Dialog):
 		matchPos("foot", "l_heel_poser")
 
 	def connectRig(self):
-			
+		
 		def connect(src, tgt, con="par", sym=False, offset=False):
 			#print "connect ", src, tgt
 			srcJnt = self.buttons[src][0]
@@ -641,7 +644,7 @@ class MainWindow(QtWidgets.QMainWindow, mainWindow.Ui_Dialog):
 
 			# connect vector control to system		
 			cmds.pointConstraint(loc3, ctrl, mo=0)[0]
-
+			
 		# connect rig controls to input sceleton
 		connect("pelvis", "pelvis", "par", False)
 		connect("chest", "chest", "par", False)
@@ -729,10 +732,10 @@ class MainWindow(QtWidgets.QMainWindow, mainWindow.Ui_Dialog):
 				cmds.delete("l_"+n+"_ctrl_OFFSET")		
 			if cmds.objExists("r_"+n+"_ctrl_OFFSET"):
 				cmds.delete("r_"+n+"_ctrl_OFFSET")		
-
+		       
 		def makeControlAndConnect(rigJoint, inputJointName, scale=1, color=18, shape="circle"):
 			inputJoint = self.buttons[inputJointName][0]
-
+			#print rigJoint, inputJointName, inputJoint
 			if inputJoint == "":
 				return			
 
@@ -856,6 +859,7 @@ class MainWindow(QtWidgets.QMainWindow, mainWindow.Ui_Dialog):
 		
 		makeControlAndConnect("l_shoulder_joint_1", "acc_1", 10, 15, "cube")
 		makeControlAndConnect("r_shoulder_joint_1", "acc_1", 10, 15, "cube")
+		
 		
 		makeControlAndConnect("posCtrl", "addObject_1", 15, 15, "cube")
 		makeControlAndConnect("posCtrl", "addObject_2", 15, 15, "cube")

@@ -914,10 +914,10 @@ class MainWindow(QtWidgets.QMainWindow, mainWindow.Ui_Dialog):
 					
 			cmds.setAttr("%s.%s" %(control, "parent"), 0)
 	
-		addParentAttr('l_weapon_1_ctrl', ['l_arm_limbB_end_skinJoint', 'r_arm_limbB_end_skinJoint', 'head_joint', 'chest_joint', 'pelvis_joint', 'twoHanded'], 
-			          ['hand', 'r_hand', 'head', 'chest', 'pelvis', 'two handed'] )
-		addParentAttr('r_weapon_1_ctrl', ['r_arm_limbB_end_skinJoint', 'l_arm_limbB_end_skinJoint', 'head_joint', 'chest_joint', 'pelvis_joint', 'twoHanded'], 
-			          ['hand', 'l_hand', 'head', 'chest', 'pelvis', 'two handed'] )
+		addParentAttr('l_weapon_1_ctrl', ['l_arm_limbB_end_skinJoint', 'r_arm_limbB_end_skinJoint', 'head_joint', 'chest_joint', 'pelvis_joint', 'twoHanded', 'posCtrl'], 
+			          ['hand', 'r_hand', 'head', 'chest', 'pelvis', 'two handed', 'world'] )
+		addParentAttr('r_weapon_1_ctrl', ['r_arm_limbB_end_skinJoint', 'l_arm_limbB_end_skinJoint', 'head_joint', 'chest_joint', 'pelvis_joint', 'twoHanded', 'posCtrl'], 
+			          ['hand', 'l_hand', 'head', 'chest', 'pelvis', 'two handed', 'world'] )
 
 		cmds.parent('skin_root', 'input_root', 'character')
 		

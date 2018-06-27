@@ -1060,7 +1060,8 @@ class ConnectWindow(QtWidgets.QMainWindow, bakeWindow.Ui_MainWindow):
 		if cmds.objExists('input_root'):
 			self.root = cmds.listRelatives('input_root')[0].split('input_')[-1]
 		
-
+		self.alignTwoHanded_btn.setToolTip('Чтобы активировать двуручное оружие, \nнужно parent атрибут обоих рук установить на TwoHanded. \nЧтобы выровнять контрол двуручного оружия, нужно затем нажать на эту кнопку.')
+		
 	def addMenu(self):
 		
 		def setText(text):
@@ -1653,7 +1654,7 @@ class ConnectWindow(QtWidgets.QMainWindow, bakeWindow.Ui_MainWindow):
 		minTime = cmds.playbackOptions(q=1, minTime=1)
 		maxTime = cmds.playbackOptions(q=1, maxTime=1)
 		
-		for i in range(minTime, maxTime+1):
+		for i in range(int(minTime), int(maxTime+1)):
 			cmds.currentTime(i)		
 			self.alignTwoHanded()
 

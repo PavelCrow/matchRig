@@ -60,9 +60,9 @@ def compileUI():
 	print moduleName
 	modulePath = os.path.abspath(imp.find_module(moduleName)[1])
 	
-	pyfile = open(modulePath+'\\matchRig_mainWindow.py', 'w')
-	compileUi(modulePath+"\\matchRig_mainWindow.ui", pyfile, False, 4,False)
-	pyfile.close()
+	#pyfile = open(modulePath+'\\matchRig_mainWindow.py', 'w')
+	#compileUi(modulePath+"\\matchRig_mainWindow.ui", pyfile, False, 4,False)
+	#pyfile.close()
 
 	pyfile2 = open(modulePath+'\\matchRig_bakeWindow.py', 'w')
 	compileUi(modulePath+"\\matchRig_bakeWindow.ui", pyfile2, False, 4,False)

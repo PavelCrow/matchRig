@@ -25,8 +25,8 @@ import pk_selector_switchIKFK
 reload(pk_selector_switchIKFK)
 
 logger = logging.getLogger(__name__)
-#logger.setLevel(logging.INFO)
-logger.setLevel(logging.DEBUG)
+logger.setLevel(logging.INFO)
+#logger.setLevel(logging.DEBUG)
 
 
 
@@ -1033,10 +1033,9 @@ class ConnectWindow(QtWidgets.QMainWindow, bakeWindow.Ui_MainWindow):
 		self.root = ""
 		
 		self.bakeControls_btn.setVisible(False)
-		self.clearKeys_btn.setVisible(False)
-		self.exclude_groupBox.setVisible(False)
-		self.exclude_frame.setVisible(False)
-		self.exclude_groupBox.setChecked(False)
+		#self.exclude_groupBox.setVisible(False)
+		#self.exclude_frame.setVisible(False)
+		#self.exclude_groupBox.setChecked(False)
 		
 		
 		if not cmds.objExists('character'):
@@ -1061,6 +1060,8 @@ class ConnectWindow(QtWidgets.QMainWindow, bakeWindow.Ui_MainWindow):
 			self.root = cmds.listRelatives('input_root')[0].split('input_')[-1]
 		
 		self.alignTwoHanded_btn.setToolTip('Чтобы активировать двуручное оружие, \nнужно parent атрибут обоих рук установить на TwoHanded. \nЧтобы выровнять контрол двуручного оружия, нужно затем нажать на эту кнопку.')
+		self.hipToZero_btn.setToolTip('Анимация hip контрола переноситься на pelvis. \nПосле чего он не имеет анимации.')
+		self.pelvisRotateZero_btn.setToolTip('Rotate анимация pelvis контрола обнуляется. \nПосле чего он имеет только translate анимацию. Hip контрол корректирует кривые так, чтобы анимация не изменилась.')
 		
 	def addMenu(self):
 		
@@ -1084,11 +1085,13 @@ class ConnectWindow(QtWidgets.QMainWindow, bakeWindow.Ui_MainWindow):
 		self.bakeControls_btn.clicked.connect(self.bakeControls)
 		self.bakeSceleton_btn.clicked.connect(self.bakeSceleton)
 
-		self.add_btn.clicked.connect(self.addToExclude)
-		self.remove_btn.clicked.connect(self.removeFromExclude)
-		self.clear_btn.clicked.connect(self.clearList)		
+		#self.add_btn.clicked.connect(self.addToExclude)
+		#self.remove_btn.clicked.connect(self.removeFromExclude)
+		#self.clear_btn.clicked.connect(self.clearList)		
 
-		self.clearKeys_btn.clicked.connect(self.clear)
+		self.hipToZero_btn.clicked.connect( partial(self.pelvisHipConvert, True) )
+		self.pelvisRotateZero_btn.clicked.connect( partial(self.pelvisHipConvert, False) )
+		
 		self.export_btn.clicked.connect(self.hotExport)
 		self.import_btn.clicked.connect(self.hotImport)
 		self.addRig_btn.clicked.connect(self.addRig)
@@ -1101,7 +1104,7 @@ class ConnectWindow(QtWidgets.QMainWindow, bakeWindow.Ui_MainWindow):
 		
 		self.importRig_btn.clicked.connect(self.imporRig)
 		self.importDefaultFbx_btn.clicked.connect(self.importDefaultFbx)
-		self.exclude_groupBox.clicked.connect(self.switchExcludeList)
+		#self.exclude_groupBox.clicked.connect(self.switchExcludeList)
 		self.alignTwoHanded_btn.clicked.connect(self.alignTwoHanded)
 		self.alignTwoHandedRange_btn.clicked.connect(self.alignTwoHandedBake)
 
@@ -1868,3 +1871,66 @@ class ConnectWindow(QtWidgets.QMainWindow, bakeWindow.Ui_MainWindow):
 		filePath = app_dir + 'projects/default/scenes/temporaryFbx.fbx'		
 		cmds.file(filePath, pr=1, i=1, type="FBX", namespace="temporaryFbx", mergeNamespacesOnClash=False, options="v=0;", ra=True)
 		
+	def pelvisHipConvert(self, hipToZero):
+		
+		if not cmds.objExists('pelvis_SN|pelvis') or not cmds.objExists('hip') or not cmds.objExists('waist') or not cmds.objExists('chest_offset|chest'):
+			cmds.warning("Not exists controls: pelvis_SN|pelvis, hip, waist, chest_offset|chest")
+			return
+		
+		# create locators
+		pelvis = pm.PyNode('pelvis_SN|pelvis')
+		pelvis_l = pm.spaceLocator(n='pelvis_loc')
+		pelvis_con = pm.parentConstraint(pelvis, pelvis_l, mo=0)
+		
+		hip = pm.PyNode('hip')
+		hip_l = pm.spaceLocator(n='hip_loc')
+		hip_con = pm.parentConstraint(hip, hip_l, mo=0)
+		
+		chest = pm.PyNode('chest_offset|chest')
+		chest_l = pm.spaceLocator(n='chest_loc')
+		chest_con = pm.parentConstraint(chest, chest_l, mo=0)
+		
+		waist = pm.PyNode('waist')
+		waist_l = pm.spaceLocator(n='waist_loc')
+		waist_con = pm.parentConstraint(waist, waist_l, mo=0)
+		
+		pelvis_zero_l = pm.spaceLocator(n='pelvisZero_loc')
+		pelvis_zero_con = pm.parentConstraint(pelvis, pelvis_zero_l, mo=0)
+		pm.delete(pelvis_zero_con)
+		t = hip.t.get()
+		r = hip.r.get()
+		hip.t.set(0,0,0)
+		hip.r.set(0,0,0)
+		pelvis_zero_con = pm.parentConstraint(hip, pelvis_zero_l, mo=1)
+		hip.t.set(t)
+		hip.r.set(r)
+		
+		# bake locators
+		pm.select(pelvis_l, hip_l, chest_l, waist_l, pelvis_zero_l)
+		pm.mel.eval("string $minTime = `playbackOptions -q -minTime`;")
+		pm.mel.eval("string $maxTime = `playbackOptions -q -maxTime`;")
+		pm.mel.eval('string $range = $minTime + ":" + $maxTime;')
+		pm.mel.eval('bakeResults -simulation true -t $range -hierarchy below -sampleBy 1 -disableImplicitControl true -preserveOutsideKeys false -sparseAnimCurveBake false -removeBakedAttributeFromLayer false -bakeOnOverrideLayer false -minimizeRotation true -at "tx" -at "ty" -at "tz" -at "rx" -at "ry" -at "rz";')					
+		pm.delete(pelvis_con, hip_con, chest_con, waist_con, pelvis_zero_con)
+		
+		# connect controls
+		pm.select(pelvis, hip, chest, waist)
+		pm.cutKey(cl=1)
+		pm.select(clear=1)
+		waist_con = pm.parentConstraint(waist_l, waist, mo=0)
+		chest_con = pm.parentConstraint(chest_l, chest, mo=0)
+		hip_con = pm.parentConstraint(hip_l, hip, mo=0)
+		
+		if hipToZero:
+			pelvis_con = pm.parentConstraint(pelvis_zero_l, pelvis, mo=0)
+		else:
+			pelvis_con = pm.pointConstraint(pelvis_zero_l, pelvis, mo=0)
+			pelvis.r.set(0,0,0)
+		
+		# bake controls
+		pm.select(pelvis, hip, chest, waist)
+		pm.mel.eval('bakeResults -simulation true -t $range -hierarchy below -sampleBy 1 -disableImplicitControl true -preserveOutsideKeys false -sparseAnimCurveBake false -removeBakedAttributeFromLayer false -bakeOnOverrideLayer false -minimizeRotation true -at "tx" -at "ty" -at "tz" -at "rx" -at "ry" -at "rz";')					
+		pm.delete(pelvis_con, hip_con, chest_con, waist_con, pelvis_con)
+		pm.delete(pelvis_l, hip_l, chest_l, waist_l, pelvis_l, pelvis_zero_l)
+		
+		pm.select(clear=1)

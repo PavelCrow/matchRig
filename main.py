@@ -199,6 +199,7 @@ class MainWindow(QtWidgets.QMainWindow, mainWindow.Ui_Dialog):
 		self.match_btn.clicked.connect(self.match)
 		self.connect_btn.clicked.connect(self.connectRig)
 		self.importRig_btn.clicked.connect(self.importRig)
+		self.setRoot_btn.clicked.connect(self.setRoot)
 
 		self.sidesSet_btn.clicked.connect(self.setSidesNaming)
 		self.posersVis_cb.clicked.connect(partial(self.visToggle, self.posersVis_cb, 'posers'))
@@ -214,18 +215,11 @@ class MainWindow(QtWidgets.QMainWindow, mainWindow.Ui_Dialog):
 		# duplicate sceleton and rename it
 		joints = pm.ls(type="joint")
 		
-		try:
-			par = pm.listRelatives(joints[0], parent=1, fullPath=1)
-			if len(par) == 0:
-				root = joints[0]
-			else:
-				root = par[0]
-				root = pm.rename(root, "skin_"+root)
-		except: 
-			pm.warning("Can not find sceleton root")
+		root = self.root_lineEdit.text()
+		if root == '':
+			pm.warning("Set root")
 			return
 
-		#print "ROOT", root
 		skin_root = pm.group(root, n="skin_root")
 		for j in joints:
 				#print j
@@ -1018,6 +1012,12 @@ class MainWindow(QtWidgets.QMainWindow, mainWindow.Ui_Dialog):
 		utils.pyToAttr('character.r_side', self.r_name)
 		utils.pyToAttr('character.sidePos', self.sidePos)
 		utils.pyToAttr('character.rootJoint', self.buttons['pelvis'][0])		
+
+	def setRoot(self):
+		sel = cmds.ls(sl=1)
+		
+		if len(sel) == 1:
+			self.root_lineEdit.setText(sel[0])
 
 class ConnectWindow(QtWidgets.QMainWindow, bakeWindow.Ui_MainWindow):
 	def __init__(self, parent=mayaMainWindow()):

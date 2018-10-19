@@ -221,11 +221,13 @@ class MainWindow(QtWidgets.QMainWindow, mainWindow.Ui_Dialog):
 			return
 
 		skin_root = pm.group(root, n="skin_root")
+		
 		for j in joints:
 				#print j
 			short_name = j.split('|')[-1]
 			path = j.split(short_name)[0]
 			pm.rename(j, path+"skin_"+short_name)
+		cmds.rename(root, 'skin_'+root)
 
 		input_root = pm.duplicate(skin_root, n="input_root")
 		childs = pm.listRelatives("input_root", children=1, allDescendents=1, f=1)
@@ -1096,6 +1098,11 @@ class ConnectWindow(QtWidgets.QMainWindow, bakeWindow.Ui_MainWindow):
 		self.import_btn.clicked.connect(self.hotImport)
 		self.addRig_btn.clicked.connect(self.addRig)
 		self.removeRig_btn.clicked.connect(self.removeRig)
+		
+		self.matchToSet_btn.clicked.connect(self.matchSetTo)
+		self.matchFromSet_btn.clicked.connect(self.matchSetFrom)
+		self.matchToSet_btn.clicked.connect(self.matchSetTo)
+		self.matchBake_btn.clicked.connect(self.matchBake)
 
 		self.bakeIkFk_btn.clicked.connect(self.bakeIkFk)
 		self.switchIkFk_btn.clicked.connect(self.switchIkFk)
@@ -1414,6 +1421,8 @@ class ConnectWindow(QtWidgets.QMainWindow, bakeWindow.Ui_MainWindow):
 	
 	def switchIkFk(self):
 		logger.debug("switchIkFk")
+		
+		reload(pk_selector_switchIKFK)		
 
 		o = cmds.ls(sl=1)[0]
 
@@ -1422,9 +1431,9 @@ class ConnectWindow(QtWidgets.QMainWindow, bakeWindow.Ui_MainWindow):
 		elif o.split("_")[0] == 'r':
 			side = 'r'
 
-		if side == 'r' or side == 'l':
-			if o in ['l_hand', 'l_elbow', 'r_hand', 'r_elbow', 'r_wrist', 'l_wrist']:
-				pk_selector_switchIKFK.switchIkFk()	
+		#if side == 'r' or side == 'l':
+			#if o in ['l_hand', 'l_elbow', 'r_hand', 'r_elbow', 'r_wrist', 'l_wrist']:
+		pk_selector_switchIKFK.switchIkFk()	
 		
 	def switchParentRange(self):
 		sel = cmds.ls(sl=True)
@@ -1934,3 +1943,48 @@ class ConnectWindow(QtWidgets.QMainWindow, bakeWindow.Ui_MainWindow):
 		pm.delete(pelvis_l, hip_l, chest_l, waist_l, pelvis_l, pelvis_zero_l)
 		
 		pm.select(clear=1)
+
+	def matchSetFrom(self):
+		sel = cmds.ls(sl=True)
+	
+		if len(sel) == 0:
+			cmds.warning("select one source object for matching")
+			return
+		
+		o = sel[0]
+		
+		self.matchFrom_lineEdit.setText(o)
+
+	def matchSetTo(self):
+		sel = cmds.ls(sl=True)
+	
+		if len(sel) == 0:
+			cmds.warning("select one target object for matching")
+			return
+		
+		o = sel[0]
+		
+		self.matchTo_lineEdit.setText(o)
+		
+
+	def matchBake(self):
+		source = self.matchFrom_lineEdit.text()
+		target = self.matchTo_lineEdit.text()
+		
+		if not cmds.objExists(source) or not cmds.objExists(target):
+			cmds.warning("set source and target objects for matching")
+			return
+		
+		if source == target:
+			cmds.warning("source and target objects is the same")
+			return
+		
+		pm.select(target)
+		pm.cutKey(cl=1)
+		con = pm.parentConstraint(source, target, mo=0)
+
+		pm.mel.eval("string $minTime = `playbackOptions -q -minTime`;")
+		pm.mel.eval("string $maxTime = `playbackOptions -q -maxTime`;")
+		pm.mel.eval('string $range = $minTime + ":" + $maxTime;')
+		pm.mel.eval('bakeResults -simulation true -t $range -hierarchy below -sampleBy 1 -disableImplicitControl true -preserveOutsideKeys false -sparseAnimCurveBake false -removeBakedAttributeFromLayer false -bakeOnOverrideLayer false -minimizeRotation true -at "tx" -at "ty" -at "tz" -at "rx" -at "ry" -at "rz";')					
+		pm.delete(con)

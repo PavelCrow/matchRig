@@ -20,7 +20,7 @@ useMatrixSwitch = False
 
 def switchIkFk():
 	global char, sidePrefix, ikFkControl, armControls, legControls, useMatrixSwitch
-
+	
 	sels = cmds.ls(sl=True)
 	for sel in sels:
 		selObject = sel
@@ -54,7 +54,7 @@ def switchIkFk():
 			else:
 				print "Select control of arm or leg"
 				return
-	
+		
 		# Get current ikFk
 		if limbType == "head":
 			ikFk = cmds.getAttr(ikFkControl + ".ikFk")
@@ -75,7 +75,7 @@ def switchIkFk():
 def fk_to_ik(limbType):
 	print "fk to ik"
 	global char, sidePrefix, ikFkControl
-	print "QQQQ"
+	
 	def snapIkElbow(sourceA, sourceB, sourceC, target):
 		# Get pointPositions
 		aPos = cmds.xform(sourceA, t=1, q=1, worldSpace=1)
@@ -113,7 +113,7 @@ def fk_to_ik(limbType):
 		# Make vector as needed length and from b point and final Point elbow control
 		elbowV = ebNorm * 0.5 * acLen + b
 
-
+		#print sourceA, sourceB, sourceC, target
 
 
 
@@ -159,19 +159,21 @@ def fk_to_ik(limbType):
 		# Get sources and tragets
 		sourceElbowA = char + sidePrefix + "_" + "upLeg_ikFkSwitchHelper"
 		sourceElbowB = char + sidePrefix + "_" + "leg_ikFkSwitchHelper"
-		sourceElbowC = char + sidePrefix + "_" + "heel_ikFkSwitchHelper"
+		sourceElbowC = char + sidePrefix + "_" + "foot_ikFkSwitchHelper"
 		targetElbow = char + sidePrefix + "_" + "knee"
 
 		sourceFoot = char + sidePrefix + "_" + "foot_ikFkSwitchHelper"
 		targetFoot = char + sidePrefix + "_" + "foot"
 		if useMatrixSwitch:
-			if cmds.objExists(char + sidePrefix + "_" + "foot_fingers_ikFkSwitchHelper"):
-				sourceFingers = char + sidePrefix + "_" + "foot_fingers_ikFkSwitchHelper"
+			if cmds.objExists(char + sidePrefix + "_" + "toeIk_ikFkSwitchHelper"):
+				sourceFingers = char + sidePrefix + "_" + "toeIk_ikFkSwitchHelper"
 			else:
-				sourceFingers = char + sidePrefix + "_" + "toe_ikFkSwitchHelper"
+				sourceFingers = char + sidePrefix + "_" + "toeIk_ikFkSwitchHelper"
 		else:
-			sourceFingers = char + sidePrefix + "_" + "foot_fingers_ikFkSwitchHelper"
-		targetFingers = char + sidePrefix + "_" + "foot_fingers"
+			sourceFingers = char + sidePrefix + "_" + "toeIk_ikFkSwitchHelper"
+		targetFingers = char + sidePrefix + "_" + "toeIk"
+		if not cmds.objExists(targetFingers):
+			targetFingers = char + sidePrefix + "_" + "foot_fingers"
 
 		# Reset ankle
 		try:
@@ -181,6 +183,14 @@ def fk_to_ik(limbType):
 			cmds.setAttr(char + sidePrefix + "_" + "ankle.auto", 0)
 		except:
 			pass
+		
+		# Reset sphere
+		sph = char + sidePrefix + "_" + "foot_toe"
+		if cmds.objExists(sph):
+			cmds.setAttr(sph + ".rx", 0)
+			cmds.setAttr(sph + ".ry", 0)
+			cmds.setAttr(sph + ".rz", 0)
+
 
 		# Transforming
 		snap(sourceFoot, targetFoot)
@@ -219,7 +229,7 @@ def ik_to_fk(limbType):
 
 		# Set length
 		cmds.setAttr(ikFkControl + ".fkIk", 1)
-
+		
 		sourceLengthA = char + sidePrefix + "_" + "arm_limbA_ikJoint"
 		sourceLengthB = char + sidePrefix + "_" + "arm_limbB_ikJoint"
 		targetLength = char + sidePrefix + "_" + "arm_control"
@@ -242,11 +252,15 @@ def ik_to_fk(limbType):
 		targetUpLeg = char + sidePrefix + "_" + "upLeg"
 		sourceLeg = char + sidePrefix + "_" + "leg_ikFkSwitchHelper"
 		targetLeg = char + sidePrefix + "_" + "leg"
-		sourceHeel = char + sidePrefix + "_" + "heel_ikFkSwitchHelper"
-		targetHeel = char + sidePrefix + "_" + "heel"
-		sourceToe = char + sidePrefix + "_" + "toe_ikFkSwitchHelper"
-		targetToe = char + sidePrefix + "_" + "toe"
-
+		sourceHeel = char + sidePrefix + "_" + "heelFk_ikFkSwitchHelper"
+		targetHeel = char + sidePrefix + "_" + "heelFk"
+		if not cmds.objExists(targetHeel):
+			targetHeel = char + sidePrefix + "_" + "heel"
+		sourceToe = char + sidePrefix + "_" + "toeFk_ikFkSwitchHelper"
+		targetToe = char + sidePrefix + "_" + "toeFk"
+		if not cmds.objExists(targetToe):
+			targetToe = char + sidePrefix + "_" + "toe"
+			
 		# Transforming
 		snap(sourceUpLeg, targetUpLeg)
 		snap(sourceLeg, targetLeg)
@@ -291,7 +305,7 @@ def ik_to_fk(limbType):
 def snap(source, target):
 	
 	if useMatrixSwitch:
-		#print source, target
+		print "snap", source, target
 		# Get transform by local martix ----------------------------------------------
 		
 		targetParent = cmds.listRelatives( target, parent=True )

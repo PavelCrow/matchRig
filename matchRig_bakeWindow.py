@@ -2,12 +2,12 @@
 
 # Form implementation generated from reading ui file 'C:\Users\Pavel\Dropbox\mayaScripts\matchRig\matchRig_bakeWindow.ui'
 #
-# Created: Sun Jul 08 22:53:18 2018
-#      by: pyside-uic 0.2.14 running on PySide 1.2.0
+# Created: Mon Feb 25 12:10:17 2019
+#      by: pyside2-uic  running on PySide2 2.0.0~alpha0
 #
 # WARNING! All changes made in this file will be lost!
 
-from Qt import QtWidgets, QtGui, QtCore
+from PySide2 import QtCore, QtGui, QtWidgets
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -242,6 +242,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_6.setSpacing(2)
         self.horizontalLayout_6.setObjectName("horizontalLayout_6")
         self.matchFrom_lineEdit = QtWidgets.QLineEdit(self.groupBox_2)
+        self.matchFrom_lineEdit.setReadOnly(True)
         self.matchFrom_lineEdit.setObjectName("matchFrom_lineEdit")
         self.horizontalLayout_6.addWidget(self.matchFrom_lineEdit)
         self.matchFromSet_btn = QtWidgets.QToolButton(self.groupBox_2)
@@ -256,6 +257,7 @@ class Ui_MainWindow(object):
         self.matchFromSet_btn.setObjectName("matchFromSet_btn")
         self.horizontalLayout_6.addWidget(self.matchFromSet_btn)
         self.matchTo_lineEdit = QtWidgets.QLineEdit(self.groupBox_2)
+        self.matchTo_lineEdit.setReadOnly(True)
         self.matchTo_lineEdit.setObjectName("matchTo_lineEdit")
         self.horizontalLayout_6.addWidget(self.matchTo_lineEdit)
         self.matchToSet_btn = QtWidgets.QToolButton(self.groupBox_2)
@@ -356,33 +358,33 @@ class Ui_MainWindow(object):
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
-        MainWindow.setWindowTitle(QtWidgets.QApplication.translate("MainWindow", "Bake Match Rig", None))
-        self.label.setText(QtWidgets.QApplication.translate("MainWindow", "1. Open animation scene                                                      2. Import match rig                                                                        3. click Connect Rig and Bake Controls buttons                                          4. After edit animation, click Bake Sceleton", None))
-        self.addRig_btn.setText(QtWidgets.QApplication.translate("MainWindow", "+", None))
-        self.removeRig_btn.setText(QtWidgets.QApplication.translate("MainWindow", "-", None))
-        self.importRig_btn.setText(QtWidgets.QApplication.translate("MainWindow", "Import", None))
-        self.importDefaultFbx_btn.setText(QtWidgets.QApplication.translate("MainWindow", "Import Default FBX", None))
-        self.connectRig_btn.setText(QtWidgets.QApplication.translate("MainWindow", "Connect Rig and Bake", None))
-        self.bakeControls_btn.setText(QtWidgets.QApplication.translate("MainWindow", "Bake Controls", None))
-        self.switchIkFk_btn.setText(QtWidgets.QApplication.translate("MainWindow", "Switch Ik/Fk", None))
-        self.alignTwoHanded_btn.setText(QtWidgets.QApplication.translate("MainWindow", "Align TwoHanded", None))
-        self.alignTwoHandedRange_btn.setText(QtWidgets.QApplication.translate("MainWindow", "Range", None))
-        self.switchParent_btn.setText(QtWidgets.QApplication.translate("MainWindow", "Switch Parent", None))
-        self.bakeIkFk_btn.setText(QtWidgets.QApplication.translate("MainWindow", "Range", None))
-        self.switchParentRange_btn.setText(QtWidgets.QApplication.translate("MainWindow", "Range", None))
-        self.groupBox.setTitle(QtWidgets.QApplication.translate("MainWindow", "Convert Animation", None))
-        self.hipToZero_btn.setText(QtWidgets.QApplication.translate("MainWindow", "Hip to Zero", None))
-        self.pelvisRotateZero_btn.setText(QtWidgets.QApplication.translate("MainWindow", "Pelvis Rotate Zero", None))
-        self.groupBox_2.setTitle(QtWidgets.QApplication.translate("MainWindow", "Match Anmation", None))
-        self.matchFrom_lineEdit.setText(QtWidgets.QApplication.translate("MainWindow", "From..", None))
-        self.matchFromSet_btn.setText(QtWidgets.QApplication.translate("MainWindow", "Set", None))
-        self.matchTo_lineEdit.setText(QtWidgets.QApplication.translate("MainWindow", "To..", None))
-        self.matchToSet_btn.setText(QtWidgets.QApplication.translate("MainWindow", "Set", None))
-        self.matchBake_btn.setText(QtWidgets.QApplication.translate("MainWindow", "Match Bake", None))
-        self.label_2.setText(QtWidgets.QApplication.translate("MainWindow", "Skeleton Root", None))
-        self.skeletonRoot_lineEdit.setText(QtWidgets.QApplication.translate("MainWindow", "Armature", None))
-        self.setSceletonRoot_btn.setText(QtWidgets.QApplication.translate("MainWindow", "Set", None))
-        self.bakeSceleton_btn.setText(QtWidgets.QApplication.translate("MainWindow", "Bake Skeleton", None))
-        self.export_btn.setText(QtWidgets.QApplication.translate("MainWindow", "Hot Export", None))
-        self.import_btn.setText(QtWidgets.QApplication.translate("MainWindow", "Hot Import", None))
+        MainWindow.setWindowTitle(QtWidgets.QApplication.translate("MainWindow", "Bake Match Rig", None, -1))
+        self.label.setText(QtWidgets.QApplication.translate("MainWindow", "1. Open animation scene                                                      2. Import match rig                                                                        3. click Connect Rig and Bake Controls buttons                                          4. After edit animation, click Bake Sceleton", None, -1))
+        self.addRig_btn.setText(QtWidgets.QApplication.translate("MainWindow", "+", None, -1))
+        self.removeRig_btn.setText(QtWidgets.QApplication.translate("MainWindow", "-", None, -1))
+        self.importRig_btn.setText(QtWidgets.QApplication.translate("MainWindow", "Import", None, -1))
+        self.importDefaultFbx_btn.setText(QtWidgets.QApplication.translate("MainWindow", "Import Default FBX", None, -1))
+        self.connectRig_btn.setText(QtWidgets.QApplication.translate("MainWindow", "Connect Rig and Bake", None, -1))
+        self.bakeControls_btn.setText(QtWidgets.QApplication.translate("MainWindow", "Bake Controls", None, -1))
+        self.switchIkFk_btn.setText(QtWidgets.QApplication.translate("MainWindow", "Switch Ik/Fk", None, -1))
+        self.alignTwoHanded_btn.setText(QtWidgets.QApplication.translate("MainWindow", "Align TwoHanded", None, -1))
+        self.alignTwoHandedRange_btn.setText(QtWidgets.QApplication.translate("MainWindow", "Range", None, -1))
+        self.switchParent_btn.setText(QtWidgets.QApplication.translate("MainWindow", "Switch Parent", None, -1))
+        self.bakeIkFk_btn.setText(QtWidgets.QApplication.translate("MainWindow", "Range", None, -1))
+        self.switchParentRange_btn.setText(QtWidgets.QApplication.translate("MainWindow", "Range", None, -1))
+        self.groupBox.setTitle(QtWidgets.QApplication.translate("MainWindow", "Convert Animation", None, -1))
+        self.hipToZero_btn.setText(QtWidgets.QApplication.translate("MainWindow", "Hip to Zero", None, -1))
+        self.pelvisRotateZero_btn.setText(QtWidgets.QApplication.translate("MainWindow", "Pelvis Rotate Zero", None, -1))
+        self.groupBox_2.setTitle(QtWidgets.QApplication.translate("MainWindow", "Match Anmation", None, -1))
+        self.matchFrom_lineEdit.setText(QtWidgets.QApplication.translate("MainWindow", "From..", None, -1))
+        self.matchFromSet_btn.setText(QtWidgets.QApplication.translate("MainWindow", "Set", None, -1))
+        self.matchTo_lineEdit.setText(QtWidgets.QApplication.translate("MainWindow", "To..", None, -1))
+        self.matchToSet_btn.setText(QtWidgets.QApplication.translate("MainWindow", "Set", None, -1))
+        self.matchBake_btn.setText(QtWidgets.QApplication.translate("MainWindow", "Match Bake", None, -1))
+        self.label_2.setText(QtWidgets.QApplication.translate("MainWindow", "Skeleton Root", None, -1))
+        self.skeletonRoot_lineEdit.setText(QtWidgets.QApplication.translate("MainWindow", "Armature", None, -1))
+        self.setSceletonRoot_btn.setText(QtWidgets.QApplication.translate("MainWindow", "Set", None, -1))
+        self.bakeSceleton_btn.setText(QtWidgets.QApplication.translate("MainWindow", "Bake Skeleton", None, -1))
+        self.export_btn.setText(QtWidgets.QApplication.translate("MainWindow", "Hot Export", None, -1))
+        self.import_btn.setText(QtWidgets.QApplication.translate("MainWindow", "Hot Import", None, -1))
 

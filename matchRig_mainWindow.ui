@@ -69,7 +69,7 @@
      <bool>false</bool>
     </property>
    </widget>
-   <widget class="QToolButton" name="shoulder_btn">
+   <widget class="QPushButton" name="shoulder_btn">
     <property name="geometry">
      <rect>
       <x>225</x>
@@ -82,7 +82,7 @@
      <string>Set</string>
     </property>
    </widget>
-   <widget class="QToolButton" name="foot_btn">
+   <widget class="QPushButton" name="foot_btn">
     <property name="geometry">
      <rect>
       <x>260</x>
@@ -95,7 +95,7 @@
      <string>Set</string>
     </property>
    </widget>
-   <widget class="QToolButton" name="hip_btn">
+   <widget class="QPushButton" name="hip_btn">
     <property name="geometry">
      <rect>
       <x>225</x>
@@ -108,7 +108,7 @@
      <string>Set</string>
     </property>
    </widget>
-   <widget class="QToolButton" name="arm_btn">
+   <widget class="QPushButton" name="arm_btn">
     <property name="geometry">
      <rect>
       <x>290</x>
@@ -121,7 +121,7 @@
      <string>Set</string>
     </property>
    </widget>
-   <widget class="QToolButton" name="hand_btn">
+   <widget class="QPushButton" name="hand_btn">
     <property name="geometry">
      <rect>
       <x>315</x>
@@ -134,7 +134,7 @@
      <string>Set</string>
     </property>
    </widget>
-   <widget class="QToolButton" name="head_btn">
+   <widget class="QPushButton" name="head_btn">
     <property name="geometry">
      <rect>
       <x>185</x>
@@ -147,7 +147,7 @@
      <string>Set</string>
     </property>
    </widget>
-   <widget class="QToolButton" name="leg_btn">
+   <widget class="QPushButton" name="leg_btn">
     <property name="geometry">
      <rect>
       <x>250</x>
@@ -160,7 +160,7 @@
      <string>Set</string>
     </property>
    </widget>
-   <widget class="QToolButton" name="chest_btn">
+   <widget class="QPushButton" name="chest_btn">
     <property name="geometry">
      <rect>
       <x>184</x>
@@ -173,7 +173,7 @@
      <string>Set</string>
     </property>
    </widget>
-   <widget class="QToolButton" name="forearm_btn">
+   <widget class="QPushButton" name="forearm_btn">
     <property name="geometry">
      <rect>
       <x>262</x>
@@ -186,7 +186,7 @@
      <string>Set</string>
     </property>
    </widget>
-   <widget class="QToolButton" name="pelvis_btn">
+   <widget class="QPushButton" name="pelvis_btn">
     <property name="geometry">
      <rect>
       <x>183</x>
@@ -199,7 +199,7 @@
      <string>Set</string>
     </property>
    </widget>
-   <widget class="QToolButton" name="spine_4_btn">
+   <widget class="QPushButton" name="spine_4_btn">
     <property name="geometry">
      <rect>
       <x>188</x>
@@ -212,7 +212,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QToolButton" name="neck_btn">
+   <widget class="QPushButton" name="neck_btn">
     <property name="geometry">
      <rect>
       <x>184</x>
@@ -225,7 +225,7 @@
      <string>Set</string>
     </property>
    </widget>
-   <widget class="QToolButton" name="spine_3_btn">
+   <widget class="QPushButton" name="spine_3_btn">
     <property name="geometry">
      <rect>
       <x>188</x>
@@ -238,7 +238,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QToolButton" name="spine_2_btn">
+   <widget class="QPushButton" name="spine_2_btn">
     <property name="geometry">
      <rect>
       <x>188</x>
@@ -251,7 +251,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QToolButton" name="spine_1_btn">
+   <widget class="QPushButton" name="spine_1_btn">
     <property name="geometry">
      <rect>
       <x>188</x>
@@ -264,7 +264,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QToolButton" name="spine_5_btn">
+   <widget class="QPushButton" name="spine_5_btn">
     <property name="geometry">
      <rect>
       <x>188</x>
@@ -277,7 +277,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QToolButton" name="toe_btn">
+   <widget class="QPushButton" name="toe_btn">
     <property name="geometry">
      <rect>
       <x>250</x>
@@ -290,7 +290,7 @@
      <string>Set</string>
     </property>
    </widget>
-   <widget class="QToolButton" name="forearm_1_btn">
+   <widget class="QPushButton" name="forearm_1_btn">
     <property name="geometry">
      <rect>
       <x>302</x>
@@ -303,7 +303,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QToolButton" name="forearm_2_btn">
+   <widget class="QPushButton" name="forearm_2_btn">
     <property name="geometry">
      <rect>
       <x>302</x>
@@ -316,7 +316,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QToolButton" name="forearm_3_btn">
+   <widget class="QPushButton" name="forearm_3_btn">
     <property name="geometry">
      <rect>
       <x>302</x>
@@ -329,7 +329,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QToolButton" name="arm_3_btn">
+   <widget class="QPushButton" name="arm_3_btn">
     <property name="geometry">
      <rect>
       <x>324</x>
@@ -342,7 +342,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QToolButton" name="arm_1_btn">
+   <widget class="QPushButton" name="arm_1_btn">
     <property name="geometry">
      <rect>
       <x>324</x>
@@ -355,7 +355,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QToolButton" name="arm_2_btn">
+   <widget class="QPushButton" name="arm_2_btn">
     <property name="geometry">
      <rect>
       <x>324</x>
@@ -368,7 +368,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QToolButton" name="hip_3_btn">
+   <widget class="QPushButton" name="hip_3_btn">
     <property name="geometry">
      <rect>
       <x>260</x>
@@ -381,7 +381,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QToolButton" name="hip_2_btn">
+   <widget class="QPushButton" name="hip_2_btn">
     <property name="geometry">
      <rect>
       <x>260</x>
@@ -394,7 +394,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QToolButton" name="hip_1_btn">
+   <widget class="QPushButton" name="hip_1_btn">
     <property name="geometry">
      <rect>
       <x>260</x>
@@ -407,7 +407,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QToolButton" name="leg_3_btn">
+   <widget class="QPushButton" name="leg_3_btn">
     <property name="geometry">
      <rect>
       <x>286</x>
@@ -420,7 +420,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QToolButton" name="leg_1_btn">
+   <widget class="QPushButton" name="leg_1_btn">
     <property name="geometry">
      <rect>
       <x>286</x>
@@ -433,7 +433,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QToolButton" name="leg_2_btn">
+   <widget class="QPushButton" name="leg_2_btn">
     <property name="geometry">
      <rect>
       <x>286</x>
@@ -472,7 +472,7 @@
      <string>ctrl+click - Select</string>
     </property>
    </widget>
-   <widget class="QToolButton" name="reset_btn">
+   <widget class="QPushButton" name="reset_btn">
     <property name="geometry">
      <rect>
       <x>338</x>
@@ -504,7 +504,7 @@
      <bool>true</bool>
     </property>
    </widget>
-   <widget class="QToolButton" name="finger_1_1_btn">
+   <widget class="QPushButton" name="finger_1_1_btn">
     <property name="geometry">
      <rect>
       <x>290</x>
@@ -517,7 +517,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QToolButton" name="finger_1_2_btn">
+   <widget class="QPushButton" name="finger_1_2_btn">
     <property name="geometry">
      <rect>
       <x>290</x>
@@ -530,7 +530,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QToolButton" name="finger_1_3_btn">
+   <widget class="QPushButton" name="finger_1_3_btn">
     <property name="geometry">
      <rect>
       <x>290</x>
@@ -543,7 +543,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QToolButton" name="finger_2_3_btn">
+   <widget class="QPushButton" name="finger_2_3_btn">
     <property name="geometry">
      <rect>
       <x>318</x>
@@ -556,7 +556,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QToolButton" name="finger_2_2_btn">
+   <widget class="QPushButton" name="finger_2_2_btn">
     <property name="geometry">
      <rect>
       <x>318</x>
@@ -569,7 +569,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QToolButton" name="finger_2_1_btn">
+   <widget class="QPushButton" name="finger_2_1_btn">
     <property name="geometry">
      <rect>
       <x>318</x>
@@ -582,7 +582,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QToolButton" name="finger_3_3_btn">
+   <widget class="QPushButton" name="finger_3_3_btn">
     <property name="geometry">
      <rect>
       <x>338</x>
@@ -595,7 +595,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QToolButton" name="finger_3_2_btn">
+   <widget class="QPushButton" name="finger_3_2_btn">
     <property name="geometry">
      <rect>
       <x>338</x>
@@ -608,7 +608,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QToolButton" name="finger_3_1_btn">
+   <widget class="QPushButton" name="finger_3_1_btn">
     <property name="geometry">
      <rect>
       <x>338</x>
@@ -621,7 +621,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QToolButton" name="finger_4_1_btn">
+   <widget class="QPushButton" name="finger_4_1_btn">
     <property name="geometry">
      <rect>
       <x>358</x>
@@ -634,7 +634,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QToolButton" name="finger_5_1_btn">
+   <widget class="QPushButton" name="finger_5_1_btn">
     <property name="geometry">
      <rect>
       <x>378</x>
@@ -647,7 +647,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QToolButton" name="finger_4_2_btn">
+   <widget class="QPushButton" name="finger_4_2_btn">
     <property name="geometry">
      <rect>
       <x>358</x>
@@ -660,7 +660,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QToolButton" name="finger_4_3_btn">
+   <widget class="QPushButton" name="finger_4_3_btn">
     <property name="geometry">
      <rect>
       <x>358</x>
@@ -673,7 +673,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QToolButton" name="finger_5_3_btn">
+   <widget class="QPushButton" name="finger_5_3_btn">
     <property name="geometry">
      <rect>
       <x>378</x>
@@ -686,7 +686,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QToolButton" name="finger_5_2_btn">
+   <widget class="QPushButton" name="finger_5_2_btn">
     <property name="geometry">
      <rect>
       <x>378</x>
@@ -699,7 +699,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QToolButton" name="acc_1_btn">
+   <widget class="QPushButton" name="acc_1_btn">
     <property name="geometry">
      <rect>
       <x>244</x>
@@ -712,7 +712,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QToolButton" name="weapon_1_btn">
+   <widget class="QPushButton" name="weapon_1_btn">
     <property name="geometry">
      <rect>
       <x>364</x>
@@ -725,7 +725,7 @@
      <string>Wpn</string>
     </property>
    </widget>
-   <widget class="QToolButton" name="symWeapon_1_btn">
+   <widget class="QPushButton" name="symWeapon_1_btn">
     <property name="geometry">
      <rect>
       <x>20</x>
@@ -754,137 +754,7 @@
      <bool>true</bool>
     </property>
    </widget>
-   <widget class="QGroupBox" name="groupBox_2">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>460</y>
-      <width>81</width>
-      <height>91</height>
-     </rect>
-    </property>
-    <property name="title">
-     <string>Add Objects</string>
-    </property>
-    <widget class="QToolButton" name="addObject_6_btn">
-     <property name="geometry">
-      <rect>
-       <x>30</x>
-       <y>60</y>
-       <width>16</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-    </widget>
-    <widget class="QToolButton" name="addObject_4_btn">
-     <property name="geometry">
-      <rect>
-       <x>30</x>
-       <y>42</y>
-       <width>16</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-    </widget>
-    <widget class="QToolButton" name="addObject_2_btn">
-     <property name="geometry">
-      <rect>
-       <x>30</x>
-       <y>24</y>
-       <width>16</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-    </widget>
-    <widget class="QToolButton" name="addObject_3_btn">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>42</y>
-       <width>16</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-    </widget>
-    <widget class="QToolButton" name="addObject_5_btn">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>60</y>
-       <width>16</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-    </widget>
-    <widget class="QToolButton" name="addObject_1_btn">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>24</y>
-       <width>16</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-    </widget>
-    <widget class="QToolButton" name="addObject_9_btn">
-     <property name="geometry">
-      <rect>
-       <x>50</x>
-       <y>60</y>
-       <width>16</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-    </widget>
-    <widget class="QToolButton" name="addObject_8_btn">
-     <property name="geometry">
-      <rect>
-       <x>50</x>
-       <y>42</y>
-       <width>16</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-    </widget>
-    <widget class="QToolButton" name="addObject_7_btn">
-     <property name="geometry">
-      <rect>
-       <x>50</x>
-       <y>24</y>
-       <width>16</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-    </widget>
-   </widget>
-   <widget class="QToolButton" name="setRoot_btn">
+   <widget class="QPushButton" name="setRoot_btn">
     <property name="geometry">
      <rect>
       <x>335</x>
@@ -895,6 +765,12 @@
     </property>
     <property name="text">
      <string>Set Root</string>
+    </property>
+    <property name="default">
+     <bool>false</bool>
+    </property>
+    <property name="flat">
+     <bool>false</bool>
     </property>
    </widget>
    <widget class="QLineEdit" name="root_lineEdit">
@@ -912,6 +788,155 @@
     <property name="readOnly">
      <bool>true</bool>
     </property>
+   </widget>
+   <widget class="QFrame" name="frame_2">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>450</y>
+      <width>91</width>
+      <height>91</height>
+     </rect>
+    </property>
+    <widget class="QPushButton" name="addObject_6_btn">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>60</y>
+       <width>16</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="addObject_4_btn">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>42</y>
+       <width>16</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="addObject_2_btn">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>24</y>
+       <width>16</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="addObject_3_btn">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>42</y>
+       <width>16</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="addObject_5_btn">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>60</y>
+       <width>16</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="addObject_1_btn">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>24</y>
+       <width>16</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="addObject_9_btn">
+     <property name="geometry">
+      <rect>
+       <x>50</x>
+       <y>60</y>
+       <width>16</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="addObject_8_btn">
+     <property name="geometry">
+      <rect>
+       <x>50</x>
+       <y>42</y>
+       <width>16</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="addObject_7_btn">
+     <property name="geometry">
+      <rect>
+       <x>50</x>
+       <y>24</y>
+       <width>16</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_6">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>0</y>
+       <width>71</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Add Objects</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
+     </property>
+     <property name="margin">
+      <number>0</number>
+     </property>
+     <property name="indent">
+      <number>-1</number>
+     </property>
+    </widget>
    </widget>
   </widget>
   <widget class="QWidget" name="layoutWidget">
@@ -1078,6 +1103,9 @@
       <property name="text">
        <string>Set</string>
       </property>
+      <property name="autoRaise">
+       <bool>true</bool>
+      </property>
      </widget>
     </item>
    </layout>
@@ -1210,6 +1238,9 @@
       <property name="text">
        <string>Save..</string>
       </property>
+      <property name="autoRaise">
+       <bool>true</bool>
+      </property>
      </widget>
     </item>
     <item>
@@ -1222,6 +1253,9 @@
       </property>
       <property name="text">
        <string>Load..</string>
+      </property>
+      <property name="autoRaise">
+       <bool>true</bool>
       </property>
      </widget>
     </item>

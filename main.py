@@ -19,10 +19,10 @@ import os, imp, types, webbrowser, logging, inspect, traceback, io, json
 import utils
 import matchRig_mainWindow as mainWindow
 import matchRig_bakeWindow as bakeWindow
-reload(utils)
+#reload(utils)
 
-import pk_selector_switchIKFK
-reload(pk_selector_switchIKFK)
+import pk_nekki_switchIKFK
+reload(pk_nekki_switchIKFK)
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
@@ -43,13 +43,28 @@ def mayaMainWindow():
 	mainWindowPtr = omui.MQtUtil.mainWindow()
 	return wrapInstance(long(mainWindowPtr), QtWidgets.QWidget)
 
+def getSkeletonSize():
+	joints = cmds.ls(type="joint")
+
+	for j in joints:
+		y = cmds.xform(j, q=True, t=True, ws=True)[1]
+		if j == joints[0]:
+			min = y
+			max = y
+		else:
+			if y < min:
+				min = y
+			elif y > max:
+				max = y
+
+	return max - min
 
 class MainWindow(QtWidgets.QMainWindow, mainWindow.Ui_Dialog):
 	def __init__(self, parent=mayaMainWindow()):
 		super(MainWindow, self).__init__(parent)
 		self.setupUi(self)
 		logger.debug("Start " + inspect.stack()[0][3])
-
+		
 		moduleName = __name__.split('.')[0]
 		self.modulePath = os.path.abspath(imp.find_module(moduleName)[1])
 		self.back_btn.setIcon(QtGui.QIcon(self.modulePath+"/back.png"))
@@ -211,7 +226,9 @@ class MainWindow(QtWidgets.QMainWindow, mainWindow.Ui_Dialog):
 		self.load_btn.clicked.connect(self.loadMap)
 
 	def importRig(self):
-
+		# get sceleton size
+		size = getSkeletonSize() / 2.8
+		
 		# duplicate sceleton and rename it
 		joints = pm.ls(type="joint")
 		
@@ -257,6 +274,10 @@ class MainWindow(QtWidgets.QMainWindow, mainWindow.Ui_Dialog):
 		utils.pyToAttr('character.controlsVis', 1)
 		utils.pyToAttr('character.jointsVis', 1)
 		utils.pyToAttr('character.jointsTempl', 0)
+
+		cmds.setAttr("root_mainPoser.sx", size)
+		cmds.setAttr("root_mainPoser.sy", size)
+		cmds.setAttr("root_mainPoser.sz", size)
 		
 		self.initUI()
 
@@ -574,6 +595,20 @@ class MainWindow(QtWidgets.QMainWindow, mainWindow.Ui_Dialog):
 		cmds.setAttr("l_foot_mainPoser.rotateZ", 0)
 
 		matchPos("foot", "l_heel_poser")
+		
+		# orient hands
+		con = cmds.orientConstraint("l_arm_limbB_skinJoint", "l_hand", mo=0)
+		cmds.delete(con)
+		con = cmds.orientConstraint("r_arm_limbB_skinJoint", "r_hand", mo=0)
+		cmds.delete(con)
+		con = cmds.orientConstraint("l_arm_limbB_skinJoint", "l_wrist_group", mo=0)
+		cmds.delete(con)
+		con = cmds.orientConstraint("r_arm_limbB_skinJoint", "r_wrist_group", mo=0)
+		cmds.setAttr("r_wrist_group_orientConstraint1.offsetX", 180)
+		cmds.delete(con)
+		
+		# remove ikfk switchHelper foot constraint
+		cmds.delete("l_foot_ikFkSwitchHelper_matcher_orientConstraint")
 
 	def connectRig(self):
 		
@@ -1261,6 +1296,7 @@ class ConnectWindow(QtWidgets.QMainWindow, bakeWindow.Ui_MainWindow):
 			except: print "miss in connect joints after bakeControls ", j	
 		
 		cmds.hide(self.root, 'Geometry')
+		#cmds.showHidden("geo")
 		cmds.select(clear=1)
 		
 		self.bakeControls_btn.setEnabled(0)
@@ -1356,16 +1392,17 @@ class ConnectWindow(QtWidgets.QMainWindow, bakeWindow.Ui_MainWindow):
 			frames = cmds.keyframe(o+'.ry', q=1, timeChange=1)
 		#if type(frames) == types.NoneType:
 			#frames = cmds.keyframe(o+'.fkIk', q=1, timeChange=1)
-
+		#print frames, type(frames), type(frames) == types.NoneType
 		initFrame = cmds.currentTime(q=1)
-
+		
 		if o.split("_")[0] == 'l':
 			side = 'l'
 		elif o.split("_")[0] == 'r':
 			side = 'r'
 
 		if side == 'r' or side == 'l':
-			if o in ['l_hand', 'l_elbow', 'r_hand', 'r_elbow']:
+			if o.split("_")[-1] in ['hand', 'elbow']:
+				control = side + "_arm_control"
 				cmds.cutKey(side+'_wrist')
 				cmds.cutKey(side+'_forearm')
 				cmds.cutKey(side+'_arm')
@@ -1375,10 +1412,13 @@ class ConnectWindow(QtWidgets.QMainWindow, bakeWindow.Ui_MainWindow):
 
 				for f in frames:
 					cmds.currentTime(f)
-					pk_selector_switchIKFK.switchIkFk()
-					#mel.eval('human_switchFkIk -sl')
-
-			elif o in ['l_wrist', 'l_forearm', 'l_arm', 'r_wrist', 'r_forearm', 'r_arm']:
+					pk_nekki_switchIKFK.run()
+					cmds.setAttr(control + ".fkIk", 1)
+					
+				cmds.setAttr(control + ".fkIk", 0)
+				
+			elif o.split("_")[-1] in ['wrist', 'forearm', 'arm']:
+				control = side + "_arm_control"
 				cmds.cutKey(side+'_hand')
 				cmds.cutKey(side+'_elbow')
 				cmds.setKeyframe(side+'_hand')
@@ -1386,43 +1426,52 @@ class ConnectWindow(QtWidgets.QMainWindow, bakeWindow.Ui_MainWindow):
 
 				for f in frames:
 					cmds.currentTime(f)
-					pk_selector_switchIKFK.switchIkFk()
-					#mel.eval('human_switchFkIk -sl')
+					pk_nekki_switchIKFK.run()
+					cmds.setAttr(control + ".fkIk", 0)
 					
-			#elif o in ['l_knee', 'l_foot', 'l_heelIk', 'r_knee', 'r_foot', 'r_heelIk']:
-				#cmds.cutKey(side+'_upLeg')
-				#cmds.cutKey(side+'_leg')
-				#cmds.cutKey(side+'_heelFk')
-				#cmds.cutKey(side+'_toeFk')
-				#cmds.setKeyframe(side+'_upLeg')
-				#cmds.setKeyframe(side+'_leg')
-				#cmds.setKeyframe(side+'_heelFk')
-				#cmds.setKeyframe(side+'_toeFk')
+				cmds.setAttr(control + ".fkIk", 1)
+					
+			elif o.split("_")[-1]  in ['knee', 'foot', 'heelIk']:
+				control = side + "_leg_control"
+				cmds.cutKey(side+'_upLeg')
+				cmds.cutKey(side+'_leg')
+				cmds.cutKey(side+'_heelFk')
+				cmds.cutKey(side+'_toeFk')
+				cmds.setKeyframe(side+'_upLeg')
+				cmds.setKeyframe(side+'_leg')
+				cmds.setKeyframe(side+'_heelFk')
+				cmds.setKeyframe(side+'_toeFk')
 
-				#for f in frames:
-					#cmds.currentTime(f)
-					#pk_selector_switchIKFK.switchIkFk()
-					#mel.eval('human_switchFkIk -sl')
+				for f in frames:
+					cmds.currentTime(f)
+					pk_nekki_switchIKFK.run()
+					cmds.setAttr(control + ".fkIk", 1)
+					
+				cmds.setAttr(control + ".fkIk", 0)
+				print control
 
-			#elif o in ['l_upLeg', 'l_leg', 'l_heelFk', 'l_toeFk', 'r_upLeg', 'r_leg', 'r_heelFk', 'r_toeFk']:
-				#cmds.cutKey(side+'_knee')
-				#cmds.cutKey(side+'_foot')
-				#cmds.cutKey(side+'_toeIk')
-				#cmds.setKeyframe(side+'_knee')
-				#cmds.setKeyframe(side+'_foot')
-				#cmds.setKeyframe(side+'_toeIk')
+			elif o.split("_")[-1]  in ['upLeg', 'leg', 'heelFk', 'toeFk']:
+				control = side + "_leg_control"
+				cmds.cutKey(side+'_knee')
+				cmds.cutKey(side+'_foot')
+				cmds.cutKey(side+'_toeIk')
+				cmds.setKeyframe(side+'_knee')
+				cmds.setKeyframe(side+'_foot')
+				cmds.setKeyframe(side+'_toeIk')
 
-				#for f in frames:
-					#cmds.currentTime(f)
-					#pk_selector_switchIKFK.switchIkFk()
-					#mel.eval('human_switchFkIk -sl')
+				for f in frames:
+					cmds.currentTime(f)
+					pk_nekki_switchIKFK.run()
+					cmds.setAttr(control + ".fkIk", 0)
+					print f
 
-		mel.eval('human_switchFkIk -sl')
+				cmds.setAttr(control + ".fkIk", 1)
+				print control
+		#mel.eval('human_switchFkIk -sl')
+		#cmds.setAttr(control + ".fkIk", )
 	
 	def switchIkFk(self):
 		logger.debug("switchIkFk")
-		
-		reload(pk_selector_switchIKFK)		
 
 		o = cmds.ls(sl=1)[0]
 
@@ -1433,7 +1482,7 @@ class ConnectWindow(QtWidgets.QMainWindow, bakeWindow.Ui_MainWindow):
 
 		#if side == 'r' or side == 'l':
 			#if o in ['l_hand', 'l_elbow', 'r_hand', 'r_elbow', 'r_wrist', 'l_wrist']:
-		pk_selector_switchIKFK.switchIkFk()	
+		pk_nekki_switchIKFK.run()	
 		
 	def switchParentRange(self):
 		sel = cmds.ls(sl=True)
@@ -1669,7 +1718,6 @@ class ConnectWindow(QtWidgets.QMainWindow, bakeWindow.Ui_MainWindow):
 		for i in range(int(minTime), int(maxTime+1)):
 			cmds.currentTime(i)		
 			self.alignTwoHanded()
-
 		
 	def switchExcludeList(self):
 		logger.debug("switchExcludeList")
@@ -1966,7 +2014,6 @@ class ConnectWindow(QtWidgets.QMainWindow, bakeWindow.Ui_MainWindow):
 		
 		self.matchTo_lineEdit.setText(o)
 		
-
 	def matchBake(self):
 		source = self.matchFrom_lineEdit.text()
 		target = self.matchTo_lineEdit.text()

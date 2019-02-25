@@ -1,9 +1,6 @@
 {
     "rigs": {
-        "newGirl_matchRig": "C:/Users/Pavel/Dropbox/mayaScripts/matchRig/newGirl_matchRig.ma", 
-        "matchRig(2)": "C:/Users/pkorolev/AppData/Roaming/Skype/My Skype Received Files/matchRig(2).ma", 
-        "player_hi_03.11.2017": "C:/Users/pkorolev/AppData/Roaming/Skype/My Skype Received Files/player_hi_03.11.2017.ma", 
-        "matchRig(3)": "C:/Users/Pavel/AppData/Roaming/Skype/My Skype Received Files/matchRig(3).ma", 
-        "matchRig": "D:/My Documents/maya/projects/default/scenes/matchRig.ma"
+        "temp_matchRig": "E:/_ Archive/MyWork/Projects/Svetozar/ShadowFight3/temp_matchRig.ma", 
+        "matchRig": "C:/Users/Pavel/Downloads/matchRig.ma"
     }
 }

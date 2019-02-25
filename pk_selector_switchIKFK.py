@@ -7,6 +7,7 @@ import math, sys
 
 armControls = ["arm_control", "shoulder", "arm", "forearm", "wrist", "elbow", "hand", "paw", "paw_palm", "palm", "palmToe"]
 legControls = ["leg_control", "foot_fingers", "toeTip", "foot", "knee", "upLeg", "leg", "heel", "toe", "ankle"]
+arm2Controls = ["arm2_control", "arm2", "forearm2", "wrist2", "elbow2", "hand2"]
 char = ""
 sidePrefix = ""
 ikFkControl = ""
@@ -46,6 +47,9 @@ def switchIkFk():
 			if controlWithoutSidePrefix in armControls:
 				ikFkControl = char + sidePrefix + "_" + "arm_control"
 				limbType = "arm"
+			elif controlWithoutSidePrefix in arm2Controls:
+				ikFkControl = char + sidePrefix + "_" + "arm2_control"
+				limbType = "arm2"
 			
 			elif controlWithoutSidePrefix in legControls:
 				ikFkControl = char  + sidePrefix + "_" + "leg_control"
@@ -71,7 +75,7 @@ def switchIkFk():
 			ik_to_fk(limbType)
 			
 		#mel.eval("selectorRefresh;")
-
+		
 def fk_to_ik(limbType):
 	print "fk to ik"
 	global char, sidePrefix, ikFkControl
@@ -154,6 +158,25 @@ def fk_to_ik(limbType):
 		snapIkElbow(sourceElbowA, sourceElbowB, sourceElbowC, targetElbow)
 		
 		cmds.setAttr(ikFkControl + ".fkIk", 1)
+		
+	if limbType == "arm2":
+
+		# Get sources and tragets
+		sourceElbowA = char + sidePrefix + "_" + "arm2_limbA_skinJoint"
+		sourceElbowB = char + sidePrefix + "_" + "arm2_limbB_skinJoint"
+		sourceElbowC = char + sidePrefix + "_" + "arm2_limbB_end_skinJoint"
+		targetElbow = char + sidePrefix + "_" + "elbow2"
+
+		sourceHand = char + sidePrefix + "_" + "hand2_ikFkSwitchHelper"
+		targetHand = char + sidePrefix + "_" + "hand2"
+
+		# Transforming
+		if cmds.objExists(sourceHand):
+			snap(sourceHand, targetHand)
+
+		snapIkElbow(sourceElbowA, sourceElbowB, sourceElbowC, targetElbow)
+		
+		cmds.setAttr(ikFkControl + ".fkIk", 1)
 
 	if limbType == "leg":
 		# Get sources and tragets
@@ -213,7 +236,7 @@ def ik_to_fk(limbType):
 			#cmds.setAttr(ikFkControl + ".ikFk", 0)
 
 	if limbType == "arm":
-
+		
 		# Get sources and tragets
 		sourceArm = char + sidePrefix + "_" + "arm_ikFkSwitchHelper"
 		targetArm = char + sidePrefix + "_" + "arm"
@@ -246,17 +269,51 @@ def ik_to_fk(limbType):
 			angle = angle - 360
 			cmds.setAttr(targetForearm + ".rotateY", angle)
 
+	if limbType == "arm2":
+		
+		# Get sources and tragets
+		sourceArm = char + sidePrefix + "_" + "arm2_ikFkSwitchHelper"
+		targetArm = char + sidePrefix + "_" + "arm2"
+		sourceForearm = char + sidePrefix + "_" + "forearm2_ikFkSwitchHelper"
+		targetForearm = char + sidePrefix + "_" + "forearm2"
+		sourceWrist = char + sidePrefix + "_" + "wrist2_ikFkSwitchHelper"
+		targetWrist = char + sidePrefix + "_" + "wrist2"
+
+		# Transforming
+		snap(sourceArm, targetArm)
+		snap(sourceForearm, targetForearm)
+		snap(sourceWrist, targetWrist)
+
+		# Set length
+		cmds.setAttr(ikFkControl + ".fkIk", 1)
+		
+		sourceLengthA = char + sidePrefix + "_" + "arm2_limbA_ikJoint"
+		sourceLengthB = char + sidePrefix + "_" + "arm2_limbB_ikJoint"
+		targetLength = char + sidePrefix + "_" + "arm2_control"
+		if cmds.attributeQuery( 'lengthFactor1', node=targetLength, exists=True ):
+			l = cmds.getAttr(sourceLengthA + ".scaleX")
+			l2 = cmds.getAttr(sourceLengthB + ".scaleX")
+			cmds.setAttr(targetLength + ".lengthFactor1", l)
+			cmds.setAttr(targetLength + ".lengthFactor2", l2)
+		cmds.setAttr(ikFkControl + ".fkIk", 0)
+
+		# r_forearm fix
+		angle = cmds.getAttr(targetForearm + ".rotateY")
+		if (angle > 180):
+			angle = angle - 360
+			cmds.setAttr(targetForearm + ".rotateY", angle)
+
 	if limbType == "leg":
 		# Get sources and tragets
 		sourceUpLeg = char + sidePrefix + "_" + "upLeg_ikFkSwitchHelper"
 		targetUpLeg = char + sidePrefix + "_" + "upLeg"
 		sourceLeg = char + sidePrefix + "_" + "leg_ikFkSwitchHelper"
 		targetLeg = char + sidePrefix + "_" + "leg"
-		sourceHeel = char + sidePrefix + "_" + "heelFk_ikFkSwitchHelper"
+		sourceHeel = char + sidePrefix + "_" + "kneeEnd_ikFkSwitchHelper"
 		targetHeel = char + sidePrefix + "_" + "heelFk"
 		if not cmds.objExists(targetHeel):
 			targetHeel = char + sidePrefix + "_" + "heel"
-		sourceToe = char + sidePrefix + "_" + "toeFk_ikFkSwitchHelper"
+		sourceToe = char + sidePrefix + "_" + "toe_joint"
 		targetToe = char + sidePrefix + "_" + "toeFk"
 		if not cmds.objExists(targetToe):
 			targetToe = char + sidePrefix + "_" + "toe"
@@ -303,7 +360,7 @@ def ik_to_fk(limbType):
 			
 
 def snap(source, target):
-	
+	print useMatrixSwitch
 	if useMatrixSwitch:
 		print "snap", source, target
 		# Get transform by local martix ----------------------------------------------

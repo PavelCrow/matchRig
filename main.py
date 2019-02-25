@@ -1981,7 +1981,6 @@ class ConnectWindow(QtWidgets.QMainWindow, bakeWindow.Ui_MainWindow):
 			hip_con = pm.orientConstraint(hip_l, hip, mo=0)
 			pelvis_con = pm.pointConstraint(pelvisFromHip_l, pelvis, mo=0)
 			pelvis_con2 = pm.orientConstraint(pelvis_l, pelvis, mo=0)
-			return
 		elif state=="hipR":
 			hip.r.set(0,0,0)
 			hip_con = pm.pointConstraint(hip_l, hip, mo=0)
@@ -1995,7 +1994,7 @@ class ConnectWindow(QtWidgets.QMainWindow, bakeWindow.Ui_MainWindow):
 			pelvis.r.set(0,0,0)
 			hip_con = pm.parentConstraint(hip_l, hip, mo=0)
 			pelvis_con2 = pm.pointConstraint(pelvis_l, pelvis, mo=0)
-		print state
+
 		# bake controls
 		pm.select(pelvis, hip, chest, waist)
 		pm.mel.eval('bakeResults -simulation true -t $range -hierarchy below -sampleBy 1 -disableImplicitControl true -preserveOutsideKeys false -sparseAnimCurveBake false -removeBakedAttributeFromLayer false -bakeOnOverrideLayer false -minimizeRotation true -at "tx" -at "ty" -at "tz" -at "rx" -at "ry" -at "rz";')					

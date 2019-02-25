@@ -1954,6 +1954,12 @@ class ConnectWindow(QtWidgets.QMainWindow, bakeWindow.Ui_MainWindow):
 		waist_l = pm.spaceLocator(n='waist_loc')
 		waist_con = pm.parentConstraint(waist, waist_l, mo=0)
 
+		pelvisFromHip_l = pm.spaceLocator(n='pelvisFromHip_loc')
+		pm.parent(pelvisFromHip_l, pelvis)
+		pelvisFromHip_l.t.set(0,0,0)
+		pelvisFromHip_l.r.set(0,0,0)
+		pm.parent(pelvisFromHip_l, hip_l)
+		
 		# bake locators
 		pm.select(pelvis_l, hip_l, chest_l, waist_l)
 		pm.mel.eval("string $minTime = `playbackOptions -q -minTime`;")
@@ -1973,13 +1979,23 @@ class ConnectWindow(QtWidgets.QMainWindow, bakeWindow.Ui_MainWindow):
 		if state=="hipT":
 			hip.t.set(0,0,0)
 			hip_con = pm.orientConstraint(hip_l, hip, mo=0)
-			pelvis_con = pm.pointConstraint(hip_l, pelvis, mo=0)
+			pelvis_con = pm.pointConstraint(pelvisFromHip_l, pelvis, mo=0)
 			pelvis_con2 = pm.orientConstraint(pelvis_l, pelvis, mo=0)
 			return
+		elif state=="hipR":
+			hip.r.set(0,0,0)
+			hip_con = pm.pointConstraint(hip_l, hip, mo=0)
+			pelvis_con = pm.orientConstraint(pelvisFromHip_l, pelvis, mo=0)
+			pelvis_con2 = pm.pointConstraint(pelvis_l, pelvis, mo=0)
+		elif state=="pelvisT":
+			pelvis.t.set(0,0,0)
+			hip_con = pm.parentConstraint(hip_l, hip, mo=0)
+			pelvis_con2 = pm.orientConstraint(pelvis_l, pelvis, mo=0)
 		elif state=="pelvisR":
-			pelvis_con = pm.pointConstraint(pelvis_zero_l, pelvis, mo=0)
 			pelvis.r.set(0,0,0)
-		print state, 1
+			hip_con = pm.parentConstraint(hip_l, hip, mo=0)
+			pelvis_con2 = pm.pointConstraint(pelvis_l, pelvis, mo=0)
+		print state
 		# bake controls
 		pm.select(pelvis, hip, chest, waist)
 		pm.mel.eval('bakeResults -simulation true -t $range -hierarchy below -sampleBy 1 -disableImplicitControl true -preserveOutsideKeys false -sparseAnimCurveBake false -removeBakedAttributeFromLayer false -bakeOnOverrideLayer false -minimizeRotation true -at "tx" -at "ty" -at "tz" -at "rx" -at "ry" -at "rz";')					

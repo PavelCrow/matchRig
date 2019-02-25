@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>250</width>
-    <height>560</height>
+    <height>606</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -38,7 +38,7 @@
    <set>QMainWindow::AllowTabbedDocks|QMainWindow::AnimatedDocks</set>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QVBoxLayout" name="verticalLayout" stretch="0,0,0,0,0,0">
+   <layout class="QVBoxLayout" name="verticalLayout" stretch="0,0,0,0,0,0,0,0">
     <property name="spacing">
      <number>2</number>
     </property>
@@ -48,7 +48,7 @@
     <item>
      <widget class="QLabel" name="label">
       <property name="text">
-       <string>1. Open animation scene                                                      2. Import match rig                                                                        3. click Connect Rig and Bake Controls buttons                                          4. After edit animation, click Bake Sceleton</string>
+       <string>1. Open animation scene                                                      2. Import match rig                                                                        3. click Connect Rig and Bake Controls buttons                                                                  4. After edit animation, click Bake Sceleton</string>
       </property>
       <property name="wordWrap">
        <bool>true</bool>
@@ -243,6 +243,22 @@
      </layout>
     </item>
     <item>
+     <spacer name="verticalSpacer_2">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+      <property name="sizeType">
+       <enum>QSizePolicy::Fixed</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>5</width>
+        <height>5</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item>
      <widget class="QFrame" name="main_frame">
       <property name="frameShape">
        <enum>QFrame::NoFrame</enum>
@@ -250,7 +266,7 @@
       <property name="frameShadow">
        <enum>QFrame::Raised</enum>
       </property>
-      <layout class="QVBoxLayout" name="verticalLayout_2" stretch="0,0,0,0,0,0,0,0">
+      <layout class="QVBoxLayout" name="verticalLayout_2" stretch="0,0,0,0,0,0,0,0,0,0,0">
        <property name="spacing">
         <number>2</number>
        </property>
@@ -261,228 +277,22 @@
         <number>0</number>
        </property>
        <item>
-        <layout class="QGridLayout" name="gridLayout">
-         <property name="sizeConstraint">
-          <enum>QLayout::SetDefaultConstraint</enum>
+        <widget class="QFrame" name="ikfk_frame">
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
          </property>
-         <item row="1" column="0">
-          <widget class="QToolButton" name="switchIkFk_btn">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="minimumSize">
-            <size>
-             <width>50</width>
-             <height>24</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>1000</width>
-             <height>24</height>
-            </size>
-           </property>
-           <property name="text">
-            <string>Switch Ik/Fk</string>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="0">
-          <widget class="QToolButton" name="alignTwoHanded_btn">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="minimumSize">
-            <size>
-             <width>50</width>
-             <height>24</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>1000</width>
-             <height>24</height>
-            </size>
-           </property>
-           <property name="text">
-            <string>Align TwoHanded</string>
-           </property>
-           <property name="popupMode">
-            <enum>QToolButton::InstantPopup</enum>
-           </property>
-           <property name="autoRaise">
-            <bool>false</bool>
-           </property>
-           <property name="arrowType">
-            <enum>Qt::NoArrow</enum>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="1">
-          <widget class="QToolButton" name="alignTwoHandedRange_btn">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="minimumSize">
-            <size>
-             <width>50</width>
-             <height>24</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>1000</width>
-             <height>24</height>
-            </size>
-           </property>
-           <property name="text">
-            <string>Range</string>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="0">
-          <widget class="QToolButton" name="switchParent_btn">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="minimumSize">
-            <size>
-             <width>50</width>
-             <height>24</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>1000</width>
-             <height>24</height>
-            </size>
-           </property>
-           <property name="text">
-            <string>Switch Parent</string>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="1">
-          <widget class="QToolButton" name="bakeIkFk_btn">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="minimumSize">
-            <size>
-             <width>50</width>
-             <height>24</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>1000</width>
-             <height>24</height>
-            </size>
-           </property>
-           <property name="text">
-            <string>Range</string>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="1">
-          <widget class="QToolButton" name="switchParentRange_btn">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="minimumSize">
-            <size>
-             <width>50</width>
-             <height>24</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>1000</width>
-             <height>24</height>
-            </size>
-           </property>
-           <property name="text">
-            <string>Range</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <widget class="QGroupBox" name="groupBox">
-         <property name="title">
-          <string>Convert Animation</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
-         </property>
-         <property name="flat">
-          <bool>true</bool>
-         </property>
-         <property name="checkable">
-          <bool>false</bool>
-         </property>
-         <layout class="QHBoxLayout" name="horizontalLayout_4" stretch="1,1">
-          <property name="leftMargin">
-           <number>0</number>
+         <layout class="QGridLayout" name="gridLayout">
+          <property name="sizeConstraint">
+           <enum>QLayout::SetDefaultConstraint</enum>
           </property>
-          <property name="topMargin">
-           <number>4</number>
+          <property name="margin">
+           <number>2</number>
           </property>
-          <property name="rightMargin">
-           <number>0</number>
+          <property name="spacing">
+           <number>2</number>
           </property>
-          <property name="bottomMargin">
-           <number>0</number>
-          </property>
-          <item>
-           <widget class="QToolButton" name="hipToZero_btn">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="minimumSize">
-             <size>
-              <width>50</width>
-              <height>24</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>16777215</width>
-              <height>24</height>
-             </size>
-            </property>
-            <property name="text">
-             <string>Hip to Zero</string>
-            </property>
-            <property name="popupMode">
-             <enum>QToolButton::InstantPopup</enum>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QToolButton" name="pelvisRotateZero_btn">
+          <item row="1" column="0">
+           <widget class="QPushButton" name="switchIkFk_btn">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -502,10 +312,142 @@
              </size>
             </property>
             <property name="text">
-             <string>Pelvis Rotate Zero</string>
+             <string>Switch Ik/Fk</string>
             </property>
-            <property name="popupMode">
-             <enum>QToolButton::InstantPopup</enum>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QPushButton" name="switchParent_btn">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>50</width>
+              <height>24</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>1000</width>
+              <height>24</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Switch Parent</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0">
+           <widget class="QPushButton" name="alignTwoHanded_btn">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>50</width>
+              <height>24</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>1000</width>
+              <height>24</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Align TwoHanded</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QPushButton" name="bakeIkFk_btn">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>50</width>
+              <height>24</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>1000</width>
+              <height>24</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Range</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QPushButton" name="switchParentRange_btn">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>50</width>
+              <height>24</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>1000</width>
+              <height>24</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Range</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1">
+           <widget class="QPushButton" name="alignTwoHandedRange_btn">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>50</width>
+              <height>24</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>1000</width>
+              <height>24</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Range</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0" colspan="2">
+           <widget class="QLabel" name="label_4">
+            <property name="text">
+             <string>Switches</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
             </property>
            </widget>
           </item>
@@ -513,26 +455,194 @@
         </widget>
        </item>
        <item>
-        <widget class="QGroupBox" name="groupBox_2">
-         <property name="title">
-          <string>Match Anmation</string>
+        <spacer name="verticalSpacer_3">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
          </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
+         <property name="sizeType">
+          <enum>QSizePolicy::Fixed</enum>
          </property>
-         <property name="flat">
-          <bool>true</bool>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>5</width>
+           <height>5</height>
+          </size>
          </property>
-         <property name="checkable">
-          <bool>false</bool>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QFrame" name="frame">
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Plain</enum>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_4" stretch="0,0">
+          <property name="spacing">
+           <number>2</number>
+          </property>
+          <property name="margin">
+           <number>2</number>
+          </property>
+          <item>
+           <widget class="QLabel" name="label_3">
+            <property name="text">
+             <string>Convert to Zero</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_7">
+            <property name="spacing">
+             <number>2</number>
+            </property>
+            <item>
+             <widget class="QPushButton" name="hipTZero_btn">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>50</width>
+                <height>24</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>16777215</width>
+                <height>24</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>Hip T</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="hipRZero_btn">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>50</width>
+                <height>24</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>16777215</width>
+                <height>24</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>Hip R</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pelvisTZero_btn">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>50</width>
+                <height>24</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>1000</width>
+                <height>24</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>Pelvis T</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pelvisRZero_btn">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>50</width>
+                <height>24</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>1000</width>
+                <height>24</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>Pelvis R</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <spacer name="verticalSpacer_4">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Fixed</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>5</width>
+           <height>5</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QFrame" name="frame_2">
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_3">
           <property name="spacing">
            <number>2</number>
           </property>
           <property name="margin">
-           <number>0</number>
+           <number>2</number>
           </property>
+          <item>
+           <widget class="QLabel" name="label_5">
+            <property name="text">
+             <string>Match Anmation</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout_6">
             <property name="spacing">
@@ -549,7 +659,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QToolButton" name="matchFromSet_btn">
+             <widget class="QPushButton" name="matchFromSet_btn">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
                 <horstretch>0</horstretch>
@@ -570,9 +680,6 @@
               </property>
               <property name="text">
                <string>Set</string>
-              </property>
-              <property name="popupMode">
-               <enum>QToolButton::InstantPopup</enum>
               </property>
              </widget>
             </item>
@@ -587,7 +694,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QToolButton" name="matchToSet_btn">
+             <widget class="QPushButton" name="matchToSet_btn">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
                 <horstretch>0</horstretch>
@@ -609,15 +716,12 @@
               <property name="text">
                <string>Set</string>
               </property>
-              <property name="popupMode">
-               <enum>QToolButton::InstantPopup</enum>
-              </property>
              </widget>
             </item>
            </layout>
           </item>
           <item>
-           <widget class="QToolButton" name="matchBake_btn">
+           <widget class="QPushButton" name="matchBake_btn">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -639,16 +743,32 @@
             <property name="text">
              <string>Match Bake</string>
             </property>
-            <property name="popupMode">
-             <enum>QToolButton::InstantPopup</enum>
-            </property>
            </widget>
           </item>
          </layout>
         </widget>
        </item>
        <item>
+        <spacer name="verticalSpacer_5">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Fixed</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>5</width>
+           <height>5</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
         <widget class="Line" name="line_3">
+         <property name="lineWidth">
+          <number>1</number>
+         </property>
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
          </property>
@@ -770,6 +890,19 @@
        </item>
       </layout>
      </widget>
+    </item>
+    <item>
+     <spacer name="verticalSpacer">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>20</width>
+        <height>40</height>
+       </size>
+      </property>
+     </spacer>
     </item>
    </layout>
   </widget>

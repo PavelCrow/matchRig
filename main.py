@@ -1092,13 +1092,14 @@ class ConnectWindow(QtWidgets.QMainWindow, bakeWindow.Ui_MainWindow):
 		self.load()
 		self.updateRigsList()
 		#self.resize(self.minimumSizeHint())
+		self.setFixedSize(self.size())
 		
 		if cmds.objExists('input_root'):
 			self.root = cmds.listRelatives('input_root')[0].split('input_')[-1]
 		
 		self.alignTwoHanded_btn.setToolTip('Чтобы активировать двуручное оружие, \nнужно parent атрибут обоих рук установить на TwoHanded. \nЧтобы выровнять контрол двуручного оружия, нужно затем нажать на эту кнопку.')
-		self.hipToZero_btn.setToolTip('Анимация hip контрола переноситься на pelvis. \nПосле чего он не имеет анимации.')
-		self.pelvisRotateZero_btn.setToolTip('Rotate анимация pelvis контрола обнуляется. \nПосле чего он имеет только translate анимацию. Hip контрол корректирует кривые так, чтобы анимация не изменилась.')
+		self.hipTZero_btn.setToolTip('Анимация hip контрола переноситься на pelvis. \nПосле чего он не имеет анимации.')
+		self.pelvisRZero_btn.setToolTip('Rotate анимация pelvis контрола обнуляется. \nПосле чего он имеет только translate анимацию. Hip контрол корректирует кривые так, чтобы анимация не изменилась.')
 		
 	def addMenu(self):
 		
@@ -1126,8 +1127,10 @@ class ConnectWindow(QtWidgets.QMainWindow, bakeWindow.Ui_MainWindow):
 		#self.remove_btn.clicked.connect(self.removeFromExclude)
 		#self.clear_btn.clicked.connect(self.clearList)		
 
-		self.hipToZero_btn.clicked.connect( partial(self.pelvisHipConvert, True) )
-		self.pelvisRotateZero_btn.clicked.connect( partial(self.pelvisHipConvert, False) )
+		self.hipTZero_btn.clicked.connect( partial(self.pelvisHipConvert, "hipT") )
+		self.hipRZero_btn.clicked.connect( partial(self.pelvisHipConvert, "hipR") )
+		self.pelvisTZero_btn.clicked.connect( partial(self.pelvisHipConvert, "pelvisT") )
+		self.pelvisRZero_btn.clicked.connect( partial(self.pelvisHipConvert, "pelvisR") )
 		
 		self.export_btn.clicked.connect(self.hotExport)
 		self.import_btn.clicked.connect(self.hotImport)
@@ -1928,7 +1931,7 @@ class ConnectWindow(QtWidgets.QMainWindow, bakeWindow.Ui_MainWindow):
 		filePath = app_dir + 'projects/default/scenes/temporaryFbx.fbx'		
 		cmds.file(filePath, pr=1, i=1, type="FBX", namespace="temporaryFbx", mergeNamespacesOnClash=False, options="v=0;", ra=True)
 		
-	def pelvisHipConvert(self, hipToZero):
+	def pelvisHipConvert(self, state):
 		
 		if not cmds.objExists('pelvis_SN|pelvis') or not cmds.objExists('hip') or not cmds.objExists('waist') or not cmds.objExists('chest_offset|chest'):
 			cmds.warning("Not exists controls: pelvis_SN|pelvis, hip, waist, chest_offset|chest")
@@ -1950,25 +1953,14 @@ class ConnectWindow(QtWidgets.QMainWindow, bakeWindow.Ui_MainWindow):
 		waist = pm.PyNode('waist')
 		waist_l = pm.spaceLocator(n='waist_loc')
 		waist_con = pm.parentConstraint(waist, waist_l, mo=0)
-		
-		pelvis_zero_l = pm.spaceLocator(n='pelvisZero_loc')
-		pelvis_zero_con = pm.parentConstraint(pelvis, pelvis_zero_l, mo=0)
-		pm.delete(pelvis_zero_con)
-		t = hip.t.get()
-		r = hip.r.get()
-		hip.t.set(0,0,0)
-		hip.r.set(0,0,0)
-		pelvis_zero_con = pm.parentConstraint(hip, pelvis_zero_l, mo=1)
-		hip.t.set(t)
-		hip.r.set(r)
-		
+
 		# bake locators
-		pm.select(pelvis_l, hip_l, chest_l, waist_l, pelvis_zero_l)
+		pm.select(pelvis_l, hip_l, chest_l, waist_l)
 		pm.mel.eval("string $minTime = `playbackOptions -q -minTime`;")
 		pm.mel.eval("string $maxTime = `playbackOptions -q -maxTime`;")
 		pm.mel.eval('string $range = $minTime + ":" + $maxTime;')
 		pm.mel.eval('bakeResults -simulation true -t $range -hierarchy below -sampleBy 1 -disableImplicitControl true -preserveOutsideKeys false -sparseAnimCurveBake false -removeBakedAttributeFromLayer false -bakeOnOverrideLayer false -minimizeRotation true -at "tx" -at "ty" -at "tz" -at "rx" -at "ry" -at "rz";')					
-		pm.delete(pelvis_con, hip_con, chest_con, waist_con, pelvis_zero_con)
+		pm.delete(pelvis_con, hip_con, chest_con, waist_con)
 		
 		# connect controls
 		pm.select(pelvis, hip, chest, waist)
@@ -1976,19 +1968,24 @@ class ConnectWindow(QtWidgets.QMainWindow, bakeWindow.Ui_MainWindow):
 		pm.select(clear=1)
 		waist_con = pm.parentConstraint(waist_l, waist, mo=0)
 		chest_con = pm.parentConstraint(chest_l, chest, mo=0)
-		hip_con = pm.parentConstraint(hip_l, hip, mo=0)
+		#hip_con = pm.parentConstraint(hip_l, hip, mo=0)
 		
-		if hipToZero:
-			pelvis_con = pm.parentConstraint(pelvis_zero_l, pelvis, mo=0)
-		else:
+		if state=="hipT":
+			hip.t.set(0,0,0)
+			hip_con = pm.orientConstraint(hip_l, hip, mo=0)
+			pelvis_con = pm.pointConstraint(hip_l, pelvis, mo=0)
+			pelvis_con2 = pm.orientConstraint(pelvis_l, pelvis, mo=0)
+			return
+		elif state=="pelvisR":
 			pelvis_con = pm.pointConstraint(pelvis_zero_l, pelvis, mo=0)
 			pelvis.r.set(0,0,0)
-		
+		print state, 1
 		# bake controls
 		pm.select(pelvis, hip, chest, waist)
 		pm.mel.eval('bakeResults -simulation true -t $range -hierarchy below -sampleBy 1 -disableImplicitControl true -preserveOutsideKeys false -sparseAnimCurveBake false -removeBakedAttributeFromLayer false -bakeOnOverrideLayer false -minimizeRotation true -at "tx" -at "ty" -at "tz" -at "rx" -at "ry" -at "rz";')					
-		pm.delete(pelvis_con, hip_con, chest_con, waist_con, pelvis_con)
-		pm.delete(pelvis_l, hip_l, chest_l, waist_l, pelvis_l, pelvis_zero_l)
+		
+		pm.delete(hip_con, chest_con, waist_con)
+		pm.delete(pelvis_l, hip_l, chest_l, waist_l)
 		
 		pm.select(clear=1)
 

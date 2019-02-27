@@ -230,7 +230,8 @@ class MainWindow(QtWidgets.QMainWindow, mainWindow.Ui_Dialog):
 		size = getSkeletonSize() / 2.8
 		
 		# duplicate sceleton and rename it
-		joints = pm.ls(type="joint")
+		#joints = pm.ls(type="joint")
+		joints = pm.listRelatives(type="joint", allDescendents=1)
 		
 		root = self.root_lineEdit.text()
 		if root == '':
@@ -244,7 +245,8 @@ class MainWindow(QtWidgets.QMainWindow, mainWindow.Ui_Dialog):
 			short_name = j.split('|')[-1]
 			path = j.split(short_name)[0]
 			pm.rename(j, path+"skin_"+short_name)
-		cmds.rename(root, 'skin_'+root)
+		if cmds.objExists(root):
+			cmds.rename(root, 'skin_'+root)
 
 		input_root = pm.duplicate(skin_root, n="input_root")
 		childs = pm.listRelatives("input_root", children=1, allDescendents=1, f=1)

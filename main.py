@@ -76,7 +76,7 @@ class MainWindow(QtWidgets.QMainWindow, mainWindow.Ui_Dialog):
 		self.sidePos = ""
 		self.l_name = 'l'
 		self.r_name = 'r'
-
+		
 		self.buttons = {}
 		self.buttons["head"] = ["", self.head_btn]
 		self.buttons["neck"] = ["", self.neck_btn]
@@ -194,7 +194,7 @@ class MainWindow(QtWidgets.QMainWindow, mainWindow.Ui_Dialog):
 		self.addButtonsList.append(self.addObject_7_btn)
 		self.addButtonsList.append(self.addObject_8_btn)
 		self.addButtonsList.append(self.addObject_9_btn)
-
+		
 		self.connectSignals()
 
 		self.initUI()
@@ -396,7 +396,7 @@ class MainWindow(QtWidgets.QMainWindow, mainWindow.Ui_Dialog):
 				self.display_gb.setEnabled(True)
 				self.map_gb.setEnabled(True)				
 				self.symWeapon_cb.setEnabled(True)				
-
+			
 			self.load()
 			self.updateUI()
 
@@ -466,10 +466,10 @@ class MainWindow(QtWidgets.QMainWindow, mainWindow.Ui_Dialog):
 			utils.pyToAttr('character.r_side', self.r_name)			
 
 		filledButtons = utils.attrToPy('character.uiMatchButtons')
-
+		
 		for b in filledButtons:
 			self.buttons[b][0] = filledButtons[b]
-
+		
 	def visToggle(self, cb, obj_type):
 		logger.debug(traceback.extract_stack()[-1][2])
 
@@ -567,7 +567,7 @@ class MainWindow(QtWidgets.QMainWindow, mainWindow.Ui_Dialog):
 		def matchPos(src, tgt):
 			if src == "" or self.buttons[src][0] == "":
 				return
-			#print "matched ", src, tgt
+			print "match ", self.buttons[src][0], tgt
 			c = cmds.pointConstraint(self.buttons[src][0], tgt, mo=0)
 			cmds.delete(c)
 
@@ -614,6 +614,8 @@ class MainWindow(QtWidgets.QMainWindow, mainWindow.Ui_Dialog):
 
 	def connectRig(self):
 		
+		removeConstrains = False
+		
 		def connect(src, tgt, con="par", sym=False, offset=False):
 			#print "connect ", src, tgt
 			srcJnt = self.buttons[src][0]
@@ -635,11 +637,17 @@ class MainWindow(QtWidgets.QMainWindow, mainWindow.Ui_Dialog):
 			cmds.delete(constr)
 			
 			if con == "t":
-				cmds.pointConstraint(loc , tgt, mo=0)
+				con_ = cmds.pointConstraint(loc , tgt, mo=0)
+				if removeConstrains:
+					cmds.delete(con_)
 			elif con == "r":
-				cmds.orientConstraint(loc , tgt, mo=0)
+				con_ = cmds.orientConstraint(loc , tgt, mo=0)
+				if removeConstrains:
+					cmds.delete(con_)
 			else:
-				cmds.parentConstraint(loc , tgt, mo=0)
+				con_ = cmds.parentConstraint(loc , tgt, mo=0)
+				if removeConstrains:
+					cmds.delete(con_)
 
 		def connectVectorSystem(in0, in1, in2, ctrl, sym=False):
 
@@ -676,7 +684,9 @@ class MainWindow(QtWidgets.QMainWindow, mainWindow.Ui_Dialog):
 			cmds.setAttr(loc3+".tx", 20)
 
 			# connect vector control to system		
-			cmds.pointConstraint(loc3, ctrl, mo=0)[0]
+			con_ = cmds.pointConstraint(loc3, ctrl, mo=0)[0]
+			if removeConstrains:
+				cmds.delete(con_)
 			
 		# connect rig controls to input sceleton
 		connect("pelvis", "pelvis", "par", False)

@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'C:\Users\Pavel\Dropbox\mayaScripts\matchRig\matchRig_bakeWindow.ui'
 #
-# Created: Mon Feb 25 17:46:46 2019
+# Created: Fri Jul 19 17:55:15 2019
 #      by: pyside2-uic  running on PySide2 2.0.0~alpha0
 #
 # WARNING! All changes made in this file will be lost!
@@ -122,16 +122,7 @@ class Ui_MainWindow(object):
         self.verticalLayout.addLayout(self.horizontalLayout)
         spacerItem = QtWidgets.QSpacerItem(5, 5, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
         self.verticalLayout.addItem(spacerItem)
-        self.main_frame = QtWidgets.QFrame(self.centralwidget)
-        self.main_frame.setFrameShape(QtWidgets.QFrame.NoFrame)
-        self.main_frame.setFrameShadow(QtWidgets.QFrame.Raised)
-        self.main_frame.setObjectName("main_frame")
-        self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.main_frame)
-        self.verticalLayout_2.setSpacing(2)
-        self.verticalLayout_2.setSizeConstraint(QtWidgets.QLayout.SetMinAndMaxSize)
-        self.verticalLayout_2.setContentsMargins(0, 0, 0, 0)
-        self.verticalLayout_2.setObjectName("verticalLayout_2")
-        self.ikfk_frame = QtWidgets.QFrame(self.main_frame)
+        self.ikfk_frame = QtWidgets.QFrame(self.centralwidget)
         self.ikfk_frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.ikfk_frame.setObjectName("ikfk_frame")
         self.gridLayout = QtWidgets.QGridLayout(self.ikfk_frame)
@@ -203,7 +194,16 @@ class Ui_MainWindow(object):
         self.label_4.setAlignment(QtCore.Qt.AlignCenter)
         self.label_4.setObjectName("label_4")
         self.gridLayout.addWidget(self.label_4, 0, 0, 1, 2)
-        self.verticalLayout_2.addWidget(self.ikfk_frame)
+        self.verticalLayout.addWidget(self.ikfk_frame)
+        self.main_frame = QtWidgets.QFrame(self.centralwidget)
+        self.main_frame.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.main_frame.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.main_frame.setObjectName("main_frame")
+        self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.main_frame)
+        self.verticalLayout_2.setSpacing(2)
+        self.verticalLayout_2.setSizeConstraint(QtWidgets.QLayout.SetMinAndMaxSize)
+        self.verticalLayout_2.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout_2.setObjectName("verticalLayout_2")
         spacerItem1 = QtWidgets.QSpacerItem(5, 5, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
         self.verticalLayout_2.addItem(spacerItem1)
         self.frame = QtWidgets.QFrame(self.main_frame)
